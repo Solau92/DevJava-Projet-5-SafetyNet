@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SafetyNetApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SafetyNetApplication.class, args); 
+		SpringApplication.run(SafetyNetApplication.class, args);
 	}
 
 }
