@@ -14,4 +14,8 @@ public class Firestations {
 	
 	private List<Firestation> firestations;
 
+	public List<Firestation> getAllFirestations() {
+		return firestations;
+	}
+
 }

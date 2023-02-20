@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.saftynetalerts.model.Firestation;
-import com.safetynet.saftynetalerts.model.Person;
 
 public class JSONFirestationsDataReader implements IDataFirestationsReader {
 

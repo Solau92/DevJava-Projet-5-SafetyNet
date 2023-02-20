@@ -25,11 +25,6 @@ public class PersonService {
 		return persons.getPersonsByName(name);
 	}
 
-//	public Person savePerson(Person person) {
-//		Person savedPerson = persons.save(person);
-//		return savedPerson;
-//	}
-
 	public List<Person> getInhabitants(String address) {
 		return persons.getInhabitants(address);
 	}
@@ -42,4 +37,9 @@ public class PersonService {
 		return persons.getCommunityEmail(city);
 	}
 
+//	public Person savePerson(Person person) {
+//	Person savedPerson = persons.save(person);
+//	return savedPerson;
+//}
+	
 }
