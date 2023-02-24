@@ -11,13 +11,30 @@ import com.safetynet.saftynetalerts.repository.MedicalRecordsRepository;
 import lombok.Data;
 
 @Service
-public class MedicalRecordService {
+public class MedicalRecordService implements IMedicalRecordService {
 
 	@Autowired
 	private MedicalRecordsRepository medicalRecords;
 	
 	public List<MedicalRecord> getAllMedicalRecords() {
 		return medicalRecords.getAllMedicalRecords();
+	}
+
+	@Override
+	public MedicalRecord saveMedicalRecord(MedicalRecord medicalRecord) {
+		MedicalRecord medicalRecordSaved = medicalRecords.save(medicalRecord);
+		return medicalRecordSaved;
+	}
+
+	@Override
+	public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
+		MedicalRecord medicalRecordUpdated = medicalRecords.update(medicalRecord);
+		return medicalRecordUpdated;
+	}
+
+	@Override
+	public void deleteMedicalRecord(String firstName, String lastName) {
+		medicalRecords.deleteMedicalRecord(firstName, lastName); 
 	}
 
 }

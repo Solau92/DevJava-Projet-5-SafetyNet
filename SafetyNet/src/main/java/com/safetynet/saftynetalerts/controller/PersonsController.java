@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,7 @@ import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
+import com.safetynet.saftynetalerts.service.IPersonService;
 import com.safetynet.saftynetalerts.service.PersonService;
 
 import ch.qos.logback.classic.Logger;
@@ -31,47 +34,48 @@ import ch.qos.logback.classic.Logger;
 public class PersonsController {
 
 	@Autowired
-	private PersonService personService;
+	private IPersonService personService;
 
 //	public PersonsController(PersonsRepository persons) {
 //	}
 
 //	@GetMapping("/persons")
-//	public ResponseEntity<String> getPersons(){
-//		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Liste des personnes :" );
-//		}
+//	public List<Person> getPersons() {
+//		return personService.getAllPersons();
+//	}
 
 	@GetMapping("/persons")
-	public List<Person> getPersons() {
-		return personService.getAllPersons();
+	public ResponseEntity<List<Person>> getPersons() {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getAllPersons());
 	}
 
 	@GetMapping("/person")
 	public List<Person> getPersonsByName(@RequestParam("name") String name) {
 		return personService.getPersonsByName(name);
 	}
-	
+
 	@GetMapping("/personInfo")
-	public List<Person> getPersonsByFirstNameAndLastName(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public List<Person> getPersonsByFirstNameAndLastName(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName) {
 		return personService.getPersonsByFirstNameAndLastName(firstName, lastName);
 	}
-	
+
 	@GetMapping("/communityEmail")
 	public List<String> getCommunityEmail(@RequestParam("city") String city) {
 		return personService.getCommunityEmail(city);
 	}
-	
-	@GetMapping("/fire") // Rajouter numéro caserne 
+
+	@GetMapping("/fire") // Rajouter numéro caserne
 	public List<Person> getInhabitants(@RequestParam("address") String address) {
 		return personService.getInhabitants(address);
 	}
-	
+
 	// Fonctionne, mais paramètres de person dans le code...s
 //	@PostMapping("/person")
 //	public Person createPerson(@RequestBody Person person) {
 //		return personService.savePerson(person);
 //	}
-	
+
 //	@PostMapping("/person")
 //	public Person createPerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("address") String address) throws StreamWriteException, DatabindException, IOException {
 //		Person savePerson = new Person();
@@ -80,33 +84,48 @@ public class PersonsController {
 //		savePerson.setAddress(address);
 //		return personService.savePerson(savePerson);
 //	}
-	
-	@PostMapping("/person") 
-	public void addPerson(@RequestBody Person person) throws StreamWriteException, DatabindException, IOException{
-		personService.savePerson(person);		
-	}
-	
-//	@PostMapping("/person")
-//	public ResponseEntity<String> ajouterPersonne(@RequestBody Person person)
-//			throws StreamWriteException, DatabindException, IOException {
-//		if (Objects.isNull(person)) {
-//			return ResponseEntity.noContent().build();
-//		}
-//		Person personCreated = service.savePerson(person);
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/personInfo/firstName={firstName}&lastName={lastName}").buildAndExpand(person.getFirstName(),person.getLastName()).toUri();
-//		System.out.println(location);
-//		return ResponseEntity.created(location).build();
+
+//	@PostMapping("/person") 
+//	public Person addPerson(@RequestBody Person person) throws StreamWriteException, DatabindException, IOException{
+//		return personService.savePerson(person);		
 //	}
-//	
-	
+
+	@PostMapping("/person")
+	public ResponseEntity<String> createPerson(@RequestBody Person person)
+			throws StreamWriteException, DatabindException, IOException {
+		if (Objects.isNull(person)) {
+			return ResponseEntity.noContent().build();
+		}
+		Person personCreated = personService.savePerson(person);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+
+//	@PutMapping("/person")
+//	public Person updatePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody Person person) {
+//		return personService.updatePerson(person);
+//	}
+
 	@PutMapping("/person")
-	public void updatePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody Person person) {
-		personService.updatePerson(person);
+	public ResponseEntity<String> updatePerson(@RequestBody Person person) {
+		if (Objects.isNull(person)) {
+			return ResponseEntity.noContent().build();
+		}
+		Person personUpdated = personService.updatePerson(person);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
-	
+
+//	@DeleteMapping("/person")
+//	public void deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+//		personService.deletePerson(firstName, lastName);
+//	}
+
 	@DeleteMapping("/person")
-	public void deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public ResponseEntity<String> deletePerson(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName) {
+		// Si pas trouvé
+		// Else (trouvé) :
 		personService.deletePerson(firstName, lastName);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
-	
+
 }

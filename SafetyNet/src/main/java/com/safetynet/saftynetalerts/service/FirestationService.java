@@ -12,7 +12,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.Data;
 
 @Service
-public class FirestationService {
+public class FirestationService implements IFirestationService {
 	
 	/*
 	 * @PostConstruct public void getToto() {
@@ -25,6 +25,28 @@ public class FirestationService {
 	
 	public List<Firestation> getAllFirestations() {
 		return firestations.getAllFirestations();
+	}
+
+	@Override
+	public Firestation saveFirestation(Firestation firestation) {
+		Firestation firestationSaved = firestations.save(firestation);
+		return firestationSaved;
+	}
+
+	@Override
+	public Firestation updateFirestation(Firestation firestation) {
+		Firestation firestationUpdated = firestations.update(firestation);
+		return firestationUpdated;
+	}
+
+	@Override
+	public void deleteFirestationByAddress(String address) {
+		firestations.deleteFirestation(address);
+	}
+
+	@Override
+	public void deleteFirestationById(int stationId) {
+		firestations.deleteFirestation(stationId);		
 	}
 
 }

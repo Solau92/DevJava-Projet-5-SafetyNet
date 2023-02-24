@@ -14,7 +14,7 @@ import com.safetynet.saftynetalerts.repository.PersonsRepository;
 import lombok.Data;
 
 @Service
-public class PersonService {
+public class PersonService implements IPersonService {
 	
 	@Autowired 
 	private PersonsRepository persons;

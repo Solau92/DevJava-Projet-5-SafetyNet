@@ -12,4 +12,5 @@ public class Firestation {
 	
 	@JsonProperty("station")
 	private int idStation;
+
 }
