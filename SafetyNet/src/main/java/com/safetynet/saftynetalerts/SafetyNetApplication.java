@@ -9,9 +9,11 @@ import com.safetynet.saftynetalerts.repository.Firestations;
 import com.safetynet.saftynetalerts.repository.IDataFirestationsReader;
 import com.safetynet.saftynetalerts.repository.IDataMedicalRecordsReader;
 import com.safetynet.saftynetalerts.repository.IDataPersonsReader;
+import com.safetynet.saftynetalerts.repository.IDataPersonsWriter;
 import com.safetynet.saftynetalerts.repository.JSONFirestationsDataReader;
 import com.safetynet.saftynetalerts.repository.JSONMedicalRecordsDataReader;
 import com.safetynet.saftynetalerts.repository.JSONPersonsDataReader;
+import com.safetynet.saftynetalerts.repository.JSONPersonsDataWriter;
 import com.safetynet.saftynetalerts.repository.MedicalRecords;
 import com.safetynet.saftynetalerts.repository.Persons;
 
@@ -39,12 +41,12 @@ public class SafetyNetApplication implements CommandLineRunner {
 		// Persons //
 		IDataPersonsReader pReader = new JSONPersonsDataReader(filePath);
 		personsList.setPersons(pReader.readPersons());
-		
-		// Firestations 
+
+		// Firestations //
 		IDataFirestationsReader fsReader = new JSONFirestationsDataReader(filePath);
 		firestationsList.setFirestations(fsReader.readFirestations());
 		
-		// MedicalRecords 
+		// MedicalRecords //
 		IDataMedicalRecordsReader mrReader = new JSONMedicalRecordsDataReader(filePath);
 		medicalRecordsList.setMedicalRecords(mrReader.readMedicalRecords());
 
