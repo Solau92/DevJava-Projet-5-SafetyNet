@@ -1,9 +1,12 @@
 package com.safetynet.saftynetalerts.controller;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.model.Person;
-import com.safetynet.saftynetalerts.repository.Persons;
+import com.safetynet.saftynetalerts.repository.PersonsRepository;
 import com.safetynet.saftynetalerts.service.PersonService;
 
 import ch.qos.logback.classic.Logger;
@@ -29,8 +33,8 @@ public class PersonsController {
 	@Autowired
 	private PersonService personService;
 
-	public PersonsController(Persons persons) {
-	}
+//	public PersonsController(PersonsRepository persons) {
+//	}
 
 //	@GetMapping("/persons")
 //	public ResponseEntity<String> getPersons(){
@@ -81,6 +85,19 @@ public class PersonsController {
 	public void addPerson(@RequestBody Person person) throws StreamWriteException, DatabindException, IOException{
 		personService.savePerson(person);		
 	}
+	
+//	@PostMapping("/person")
+//	public ResponseEntity<String> ajouterPersonne(@RequestBody Person person)
+//			throws StreamWriteException, DatabindException, IOException {
+//		if (Objects.isNull(person)) {
+//			return ResponseEntity.noContent().build();
+//		}
+//		Person personCreated = service.savePerson(person);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/personInfo/firstName={firstName}&lastName={lastName}").buildAndExpand(person.getFirstName(),person.getLastName()).toUri();
+//		System.out.println(location);
+//		return ResponseEntity.created(location).build();
+//	}
+//	
 	
 	@PutMapping("/person")
 	public void updatePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody Person person) {

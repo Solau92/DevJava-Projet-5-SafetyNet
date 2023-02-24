@@ -9,17 +9,16 @@ import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.model.Person;
 
 import lombok.Data;
 
 @Repository
 @Data
-public class Persons {
+public class PersonsRepository {
 
 	private List<Person> persons;
-
-	private IDataPersonsWriter pWriter;
 
 //	@Autowired
 //	private IDataPersonsWriter

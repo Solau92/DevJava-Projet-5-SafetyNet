@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.safetynet.saftynetalerts.model.Person;
-import com.safetynet.saftynetalerts.repository.Persons;
+import com.safetynet.saftynetalerts.repository.PersonsRepository;
 import com.safetynet.saftynetalerts.service.PersonService;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,7 +25,7 @@ public class PersonServiceTest {
 	private static PersonService personService; 
 	
 	@Mock 
-	private static Persons persons;
+	private static PersonsRepository persons;
 	
 	@Test
 	void getAllPersonsTest() {

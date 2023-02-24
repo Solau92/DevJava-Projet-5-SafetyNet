@@ -9,16 +9,15 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.model.Person;
-import com.safetynet.saftynetalerts.repository.Persons;
+import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
 import lombok.Data;
 
-@Data
 @Service
 public class PersonService {
 	
 	@Autowired 
-	private Persons persons;
+	private PersonsRepository persons;
 	
 	public List<Person> getAllPersons() {
 		return persons.getAllPersons();

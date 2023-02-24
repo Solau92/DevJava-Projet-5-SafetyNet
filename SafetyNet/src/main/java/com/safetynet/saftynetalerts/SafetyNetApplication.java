@@ -5,29 +5,27 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.safetynet.saftynetalerts.repository.Firestations;
+import com.safetynet.saftynetalerts.repository.FirestationsRepository;
 import com.safetynet.saftynetalerts.repository.IDataFirestationsReader;
 import com.safetynet.saftynetalerts.repository.IDataMedicalRecordsReader;
 import com.safetynet.saftynetalerts.repository.IDataPersonsReader;
-import com.safetynet.saftynetalerts.repository.IDataPersonsWriter;
 import com.safetynet.saftynetalerts.repository.JSONFirestationsDataReader;
 import com.safetynet.saftynetalerts.repository.JSONMedicalRecordsDataReader;
 import com.safetynet.saftynetalerts.repository.JSONPersonsDataReader;
-import com.safetynet.saftynetalerts.repository.JSONPersonsDataWriter;
-import com.safetynet.saftynetalerts.repository.MedicalRecords;
-import com.safetynet.saftynetalerts.repository.Persons;
+import com.safetynet.saftynetalerts.repository.MedicalRecordsRepository;
+import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
 @SpringBootApplication
 public class SafetyNetApplication implements CommandLineRunner {
 
 	@Autowired
-	private Persons personsList;
+	private PersonsRepository personsList;
 	
 	@Autowired
-	private Firestations firestationsList;
+	private FirestationsRepository firestationsList;
 	
 	@Autowired
-	private MedicalRecords medicalRecordsList;
+	private MedicalRecordsRepository medicalRecordsList;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SafetyNetApplication.class, args);

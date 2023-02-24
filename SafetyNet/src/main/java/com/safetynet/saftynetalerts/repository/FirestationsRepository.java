@@ -3,14 +3,15 @@ package com.safetynet.saftynetalerts.repository;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.safetynet.saftynetalerts.model.Firestation;
 
 import lombok.Data;
 
-@Component
+@Repository
 @Data
-public class Firestations {
+public class FirestationsRepository {
 	
 	private List<Firestation> firestations;
 
