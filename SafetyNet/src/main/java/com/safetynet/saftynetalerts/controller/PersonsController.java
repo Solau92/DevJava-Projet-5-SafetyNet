@@ -44,30 +44,13 @@ public class PersonsController {
 //		return personService.getAllPersons();
 //	}
 
+	/////////////////////////////
+	// CRUD 
+	/////////////////////////////
+	
 	@GetMapping("/persons")
 	public ResponseEntity<List<Person>> getPersons() {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getAllPersons());
-	}
-
-	@GetMapping("/person")
-	public List<Person> getPersonsByName(@RequestParam("name") String name) {
-		return personService.getPersonsByName(name);
-	}
-
-	@GetMapping("/personInfo")
-	public List<Person> getPersonsByFirstNameAndLastName(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName) {
-		return personService.getPersonsByFirstNameAndLastName(firstName, lastName);
-	}
-
-	@GetMapping("/communityEmail")
-	public List<String> getCommunityEmail(@RequestParam("city") String city) {
-		return personService.getCommunityEmail(city);
-	}
-
-	@GetMapping("/fire") // Rajouter numéro caserne
-	public List<Person> getInhabitants(@RequestParam("address") String address) {
-		return personService.getInhabitants(address);
 	}
 
 	// Fonctionne, mais paramètres de person dans le code...s
@@ -128,4 +111,33 @@ public class PersonsController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
 
+	/////////////////////////////
+	// URL 
+	/////////////////////////////
+	
+	@GetMapping("/person")
+	public List<Person> getPersonsByName(@RequestParam("name") String name) {
+		return personService.getPersonsByName(name);
+	}
+	
+	@GetMapping("/personByAddress")
+	public List<Person> getPersonsByAddress(@RequestParam("address") String address) {
+		return personService.getPersonsByAddress(address);
+	}
+
+	@GetMapping("/personInfo")
+	public List<Person> getPersonsByFirstNameAndLastName(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName) {
+		return personService.getPersonsByFirstNameAndLastName(firstName, lastName);
+	}
+
+	@GetMapping("/communityEmail")
+	public List<String> getCommunityEmail(@RequestParam("city") String city) {
+		return personService.getCommunityEmail(city);
+	}
+
+//	@GetMapping("/fire") // Rajouter numéro caserne
+//	public List<Person> getInhabitants(@RequestParam("address") String address) {
+//		return personService.getPersonsByAddress(address);
+//	}
 }

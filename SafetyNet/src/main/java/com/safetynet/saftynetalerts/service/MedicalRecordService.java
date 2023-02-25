@@ -36,5 +36,16 @@ public class MedicalRecordService implements IMedicalRecordService {
 	public void deleteMedicalRecord(String firstName, String lastName) {
 		medicalRecords.deleteMedicalRecord(firstName, lastName); 
 	}
+	
+	@Override
+	public boolean isPersonAdult(String firstName, String lastName) {
+		return medicalRecords.isPersonAdult(firstName, lastName);
+	}
+	
+	@Override
+	public MedicalRecord getMedicalRecordByFirstNameAndLastName(String firstName, String lastName) {
+		return medicalRecords.getMedicalRecordByFirstNameAndLastName(firstName, lastName);
+	}
+
 
 }

@@ -11,8 +11,6 @@ import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
-import lombok.Data;
-
 @Service
 public class PersonService implements IPersonService {
 	
@@ -27,8 +25,8 @@ public class PersonService implements IPersonService {
 		return persons.getPersonsByName(name);
 	}
 
-	public List<Person> getInhabitants(String address) {
-		return persons.getInhabitants(address);
+	public List<Person> getPersonsByAddress(String address) {
+		return persons.getPersonsByAddress(address);
 	}
 
 	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) {
@@ -51,5 +49,9 @@ public class PersonService implements IPersonService {
 
 	public void deletePerson(String firstName, String lastName) {
 		persons.deletePerson(firstName, lastName);
+	}
+
+	public List<Person> getPersonByLastNameAndAddress(String lastName, String address) {
+		return persons.getPersonByLastNameAndAddress(lastName, address);
 	}
 }

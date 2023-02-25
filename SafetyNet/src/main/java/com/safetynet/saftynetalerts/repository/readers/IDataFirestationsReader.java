@@ -1,14 +1,15 @@
-package com.safetynet.saftynetalerts.repository;
+package com.safetynet.saftynetalerts.repository.readers;
 
 import java.io.IOException;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.model.Person;
 
-public interface IDataPersonsReader {
+public interface IDataFirestationsReader {
 
-	List<Person> readPersons() throws IOException;
+	List<Firestation> readFirestations() throws IOException;
 
 }

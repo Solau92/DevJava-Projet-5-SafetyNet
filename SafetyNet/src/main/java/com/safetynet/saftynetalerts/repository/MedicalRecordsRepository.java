@@ -1,5 +1,7 @@
 package com.safetynet.saftynetalerts.repository;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -42,5 +44,32 @@ public class MedicalRecordsRepository {
 				medicalRecords.remove(medicalRecords.get(i));
 			}
 		}
+	}
+
+	public boolean isPersonAdult(String firstName, String lastName) {
+
+		for (MedicalRecord medicalRecord : medicalRecords) {
+			
+			if(medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)) {
+				if (ChronoUnit.YEARS.between(medicalRecord.getBirthdate(), LocalDate.now()) > 18) {
+					return true;
+				} else {
+					return false;
+				}
+			}			
+		}
+		// Voir ? 
+		return true;
+	}
+
+	public MedicalRecord getMedicalRecordByFirstNameAndLastName(String firstName, String lastName) {
+		
+		for(MedicalRecord mr : medicalRecords) {
+			if(mr.getFirstName().equals(firstName) && mr.getLastName().equals(lastName)) {
+				return mr;
+			}
+		}	
+		// Voir ?
+		return null;
 	}
 }

@@ -6,14 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
-import com.safetynet.saftynetalerts.repository.IDataFirestationsReader;
-import com.safetynet.saftynetalerts.repository.IDataMedicalRecordsReader;
-import com.safetynet.saftynetalerts.repository.IDataPersonsReader;
-import com.safetynet.saftynetalerts.repository.JSONFirestationsDataReader;
-import com.safetynet.saftynetalerts.repository.JSONMedicalRecordsDataReader;
-import com.safetynet.saftynetalerts.repository.JSONPersonsDataReader;
 import com.safetynet.saftynetalerts.repository.MedicalRecordsRepository;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
+import com.safetynet.saftynetalerts.repository.readers.IDataFirestationsReader;
+import com.safetynet.saftynetalerts.repository.readers.IDataMedicalRecordsReader;
+import com.safetynet.saftynetalerts.repository.readers.IDataPersonsReader;
+import com.safetynet.saftynetalerts.repository.readers.JSONFirestationsDataReader;
+import com.safetynet.saftynetalerts.repository.readers.JSONMedicalRecordsDataReader;
+import com.safetynet.saftynetalerts.repository.readers.JSONPersonsDataReader;
 
 @SpringBootApplication
 public class SafetyNetApplication implements CommandLineRunner {

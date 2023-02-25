@@ -13,7 +13,7 @@ public interface IPersonService {
 	
 	public List<Person> getPersonsByName(String name);
 
-	public List<Person> getInhabitants(String address);
+	public List<Person> getPersonsByAddress(String address);
 
 	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName);
 

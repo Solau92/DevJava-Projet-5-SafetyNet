@@ -47,7 +47,8 @@ public class PersonsRepository {
 		return personsByName;
 	}
 
-	public List<Person> getInhabitants(String address) {
+	public List<Person> getPersonsByAddress(String address) {
+		
 		List<Person> inhabitants = new ArrayList<Person>();
 
 		for (Person p : persons) {
@@ -105,6 +106,17 @@ public class PersonsRepository {
 			}
 		}
 		
+	}
+
+	public List<Person> getPersonByLastNameAndAddress(String lastName, String address) {
+		List<Person> personsByFirstNameAndAddress = new ArrayList<Person>();
+
+		for (Person p : persons) {
+			if (p.getLastName().equals(lastName) && p.getAddress().equals(address)) {
+				personsByFirstNameAndAddress.add(p);
+			}
+		}
+		return personsByFirstNameAndAddress;
 	}
 
 }

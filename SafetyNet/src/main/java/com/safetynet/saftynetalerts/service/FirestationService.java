@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.model.Firestation;
+import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -47,6 +48,11 @@ public class FirestationService implements IFirestationService {
 	@Override
 	public void deleteFirestationById(int stationId) {
 		firestations.deleteFirestation(stationId);		
+	}
+	
+	@Override
+	public List<String> getAddressesWithId(int stationId) {
+		return firestations.getAddressesWithId(stationId);
 	}
 
 }

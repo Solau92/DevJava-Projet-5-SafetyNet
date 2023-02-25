@@ -6,14 +6,17 @@ import com.safetynet.saftynetalerts.model.Firestation;
 
 public interface IFirestationService {
 
-	public List<Firestation> getAllFirestations();
+	List<Firestation> getAllFirestations();
 	
-	public Firestation saveFirestation(Firestation firestation);
+	Firestation saveFirestation(Firestation firestation);
 	
-	public Firestation updateFirestation(Firestation firestation);
+	Firestation updateFirestation(Firestation firestation);
 	
-	public void deleteFirestationByAddress(String adress);
+	void deleteFirestationByAddress(String adress);
 	
-	public void deleteFirestationById(int stationId);
+	void deleteFirestationById(int stationId);
+	
+	List<String> getAddressesWithId(int stationId);
+
 
 }

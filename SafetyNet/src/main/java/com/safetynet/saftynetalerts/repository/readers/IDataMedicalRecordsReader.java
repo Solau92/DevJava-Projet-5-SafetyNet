@@ -1,4 +1,4 @@
-package com.safetynet.saftynetalerts.repository;
+package com.safetynet.saftynetalerts.repository.readers;
 
 import java.io.IOException;
 import java.util.List;

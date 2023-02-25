@@ -14,4 +14,8 @@ public interface IMedicalRecordService {
 
 	public void deleteMedicalRecord(String firstName, String lastName);
 
+	boolean isPersonAdult(String firstName, String lastName);
+
+	MedicalRecord getMedicalRecordByFirstNameAndLastName(String firstName, String lastName);
+
 }
