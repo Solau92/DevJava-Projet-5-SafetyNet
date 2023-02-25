@@ -34,7 +34,7 @@ public class SafetyNetApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		String filePath = "./src/main/resources/data.json";
+		String filePath = "./src/main/resources/data.json"; 
 
 		// Persons //
 		IDataPersonsReader pReader = new JSONPersonsDataReader(filePath);

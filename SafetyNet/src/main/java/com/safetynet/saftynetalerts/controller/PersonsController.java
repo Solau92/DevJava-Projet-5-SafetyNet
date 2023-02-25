@@ -118,7 +118,7 @@ public class PersonsController {
 //	public void deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 //		personService.deletePerson(firstName, lastName);
 //	}
-
+ 
 	@DeleteMapping("/person")
 	public ResponseEntity<String> deletePerson(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName) {
