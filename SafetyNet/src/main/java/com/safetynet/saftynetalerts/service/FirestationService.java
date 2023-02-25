@@ -55,4 +55,8 @@ public class FirestationService implements IFirestationService {
 		return firestations.getAddressesWithId(stationId);
 	}
 
+	@Override
+	public int getIdWithAddress(String address) {
+		return firestations.getIdWithAddress(address);
+	}
 }

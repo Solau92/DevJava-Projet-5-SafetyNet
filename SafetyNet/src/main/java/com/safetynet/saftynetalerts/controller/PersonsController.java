@@ -125,11 +125,11 @@ public class PersonsController {
 		return personService.getPersonsByAddress(address);
 	}
 
-	@GetMapping("/personInfo")
-	public List<Person> getPersonsByFirstNameAndLastName(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName) {
-		return personService.getPersonsByFirstNameAndLastName(firstName, lastName);
-	}
+//	@GetMapping("/personInfo")
+//	public List<Person> getPersonsByFirstNameAndLastName(@RequestParam("firstName") String firstName,
+//			@RequestParam("lastName") String lastName) {
+//		return personService.getPersonsByFirstNameAndLastName(firstName, lastName);
+//	}
 
 	@GetMapping("/communityEmail")
 	public List<String> getCommunityEmail(@RequestParam("city") String city) {

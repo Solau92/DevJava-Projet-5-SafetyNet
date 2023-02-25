@@ -18,4 +18,6 @@ public interface IMedicalRecordService {
 
 	MedicalRecord getMedicalRecordByFirstNameAndLastName(String firstName, String lastName);
 
+	List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName);
+
 }

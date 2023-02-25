@@ -18,5 +18,7 @@ public interface IFirestationService {
 	
 	List<String> getAddressesWithId(int stationId);
 
+	int getIdWithAddress(String address);
+
 
 }

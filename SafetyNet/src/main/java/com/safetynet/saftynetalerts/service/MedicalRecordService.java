@@ -42,10 +42,16 @@ public class MedicalRecordService implements IMedicalRecordService {
 		return medicalRecords.isPersonAdult(firstName, lastName);
 	}
 	
+	// Gère pas le cas où plusiuers : voir où est utilisé 
+	// TODO 
 	@Override
 	public MedicalRecord getMedicalRecordByFirstNameAndLastName(String firstName, String lastName) {
 		return medicalRecords.getMedicalRecordByFirstNameAndLastName(firstName, lastName);
 	}
 
+	@Override
+	public List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName) {
+		return medicalRecords.getMedicalRecordsByFirstNameAndLastName(firstName, lastName);
+	}
 
 }

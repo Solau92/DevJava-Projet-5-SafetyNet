@@ -63,4 +63,13 @@ public class FirestationsRepository {
 		return addressesList;
 	}
 
+	public int getIdWithAddress(String address) {
+		for (Firestation f : firestations) {
+			if(f.getAdress().equals(address)) {
+				return f.getIdStation();
+			}
+		}
+		return 0;
+	}
+
 }
