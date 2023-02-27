@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.safetynet.saftynetalerts.model.Firestation;
+import com.safetynet.saftynetalerts.model.FirestationSpot;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
 
@@ -24,19 +24,19 @@ public class FirestationService implements IFirestationService {
 	@Autowired
 	private FirestationsRepository firestations;
 	
-	public List<Firestation> getAllFirestations() {
+	public List<FirestationSpot> getAllFirestations() {
 		return firestations.getAllFirestations();
 	}
 
 	@Override
-	public Firestation saveFirestation(Firestation firestation) {
-		Firestation firestationSaved = firestations.save(firestation);
+	public FirestationSpot saveFirestation(FirestationSpot firestation) {
+		FirestationSpot firestationSaved = firestations.save(firestation);
 		return firestationSaved;
 	}
 
 	@Override
-	public Firestation updateFirestation(Firestation firestation) {
-		Firestation firestationUpdated = firestations.update(firestation);
+	public FirestationSpot updateFirestation(FirestationSpot firestation) {
+		FirestationSpot firestationUpdated = firestations.update(firestation);
 		return firestationUpdated;
 	}
 

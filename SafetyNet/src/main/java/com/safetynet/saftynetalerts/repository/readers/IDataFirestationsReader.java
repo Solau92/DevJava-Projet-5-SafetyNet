@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.safetynet.saftynetalerts.model.Firestation;
+import com.safetynet.saftynetalerts.model.FirestationSpot;
 import com.safetynet.saftynetalerts.model.Person;
 
 public interface IDataFirestationsReader {
 
-	List<Firestation> readFirestations() throws IOException;
+	List<FirestationSpot> readFirestations() throws IOException;
 
 }

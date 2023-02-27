@@ -29,8 +29,8 @@ public class MedicalRecordsController {
 	private IMedicalRecordService medicalRecordsService;
 
 	@GetMapping("/medicalRecords")
-	public List<MedicalRecord> getMedicalRecords() {
-		return medicalRecordsService.getAllMedicalRecords();
+	public ResponseEntity<List<MedicalRecord>> getMedicalRecords() {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicalRecordsService.getAllMedicalRecords());
 	}
 
 	@PostMapping("/medicalRecord")
@@ -50,7 +50,7 @@ public class MedicalRecordsController {
 			return ResponseEntity.noContent().build();
 		}
 		MedicalRecord medicalRecordUpdated = medicalRecordsService.updateMedicalRecord(medicalRecord);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
 
 	@DeleteMapping("/medicalRecord")

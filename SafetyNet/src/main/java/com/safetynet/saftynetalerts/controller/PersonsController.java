@@ -53,40 +53,16 @@ public class PersonsController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getAllPersons());
 	}
 
-	// Fonctionne, mais paramètres de person dans le code...s
-//	@PostMapping("/person")
-//	public Person createPerson(@RequestBody Person person) {
-//		return personService.savePerson(person);
-//	}
-
-//	@PostMapping("/person")
-//	public Person createPerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestParam("address") String address) throws StreamWriteException, DatabindException, IOException {
-//		Person savePerson = new Person();
-//		savePerson.setFirstName(firstName);
-//		savePerson.setLastName(lastName);
-//		savePerson.setAddress(address);
-//		return personService.savePerson(savePerson);
-//	}
-
-//	@PostMapping("/person") 
-//	public Person addPerson(@RequestBody Person person) throws StreamWriteException, DatabindException, IOException{
-//		return personService.savePerson(person);		
-//	}
-
 	@PostMapping("/person")
 	public ResponseEntity<String> createPerson(@RequestBody Person person)
 			throws StreamWriteException, DatabindException, IOException {
 		if (Objects.isNull(person)) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		Person personCreated = personService.savePerson(person);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
-
-//	@PutMapping("/person")
-//	public Person updatePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody Person person) {
-//		return personService.updatePerson(person);
-//	}
 
 	@PutMapping("/person")
 	public ResponseEntity<String> updatePerson(@RequestBody Person person) {
@@ -116,9 +92,18 @@ public class PersonsController {
 	/////////////////////////////
 	
 	@GetMapping("/person")
-	public List<Person> getPersonsByName(@RequestParam("name") String name) {
-		return personService.getPersonsByName(name);
+	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) {	
+		ResponseEntity<List<Person>> response = ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));
+		if ((response.getBody()).isEmpty() ) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(personService.getPersonsByLastName(lastName));
+		}
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));
 	}
+
+	// ??????????? refaire avec responseentity ????????????????????
+//	public List<Person> getPersonsByName(@RequestParam("name") String name) {
+//		return personService.getPersonsByName(name);
+//	}
 	
 	@GetMapping("/personByAddress")
 	public List<Person> getPersonsByAddress(@RequestParam("address") String address) {

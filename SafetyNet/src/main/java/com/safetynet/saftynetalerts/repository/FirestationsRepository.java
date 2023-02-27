@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.safetynet.saftynetalerts.model.Firestation;
+import com.safetynet.saftynetalerts.model.FirestationSpot;
 
 import lombok.Data;
 
@@ -14,21 +14,21 @@ import lombok.Data;
 @Data
 public class FirestationsRepository {
 
-	private List<Firestation> firestations;
+	private List<FirestationSpot> firestations;
 
-	public List<Firestation> getAllFirestations() {
+	public List<FirestationSpot> getAllFirestations() {
 		return firestations;
 	}
 
-	public Firestation save(Firestation firestation) {
+	public FirestationSpot save(FirestationSpot firestation) {
 		firestations.add(firestation);
 		return firestation;
 	}
 
-	public Firestation update(Firestation firestation) {
+	public FirestationSpot update(FirestationSpot firestation) {
 
 		for (int i = 0; i < firestations.size(); i++) {
-			if (firestation.getAdress().equals(firestations.get(i).getAdress())) {
+			if (firestation.getAddress().equals(firestations.get(i).getAddress())) {
 				firestations.remove(firestations.get(i));
 			}
 		}
@@ -38,7 +38,7 @@ public class FirestationsRepository {
 
 	public void deleteFirestation(String address) {
 		for (int i = 0; i < firestations.size(); i++) {
-			if (firestations.get(i).getAdress().equals(address)) {
+			if (firestations.get(i).getAddress().equals(address)) {
 				firestations.remove(firestations.get(i));
 			}
 		}
@@ -55,17 +55,17 @@ public class FirestationsRepository {
 
 	public List<String> getAddressesWithId(int stationId) {
 		List<String> addressesList = new ArrayList<String>();
-		for (Firestation f : firestations) {
-			if(f.getIdStation() == stationId) {
-				addressesList.add(f.getAdress());
+		for (FirestationSpot f : firestations) {
+			if (f.getIdStation() == stationId) {
+				addressesList.add(f.getAddress());
 			}
 		}
 		return addressesList;
 	}
 
 	public int getIdWithAddress(String address) {
-		for (Firestation f : firestations) {
-			if(f.getAdress().equals(address)) {
+		for (FirestationSpot f : firestations) {
+			if (f.getAddress().equals(address)) {
 				return f.getIdStation();
 			}
 		}

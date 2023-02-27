@@ -2,15 +2,15 @@ package com.safetynet.saftynetalerts.service;
 
 import java.util.List;
 
-import com.safetynet.saftynetalerts.model.Firestation;
+import com.safetynet.saftynetalerts.model.FirestationSpot;
 
 public interface IFirestationService {
 
-	List<Firestation> getAllFirestations();
+	List<FirestationSpot> getAllFirestations();
 	
-	Firestation saveFirestation(Firestation firestation);
+	FirestationSpot saveFirestation(FirestationSpot firestation);
 	
-	Firestation updateFirestation(Firestation firestation);
+	FirestationSpot updateFirestation(FirestationSpot firestation);
 	
 	void deleteFirestationByAddress(String adress);
 	

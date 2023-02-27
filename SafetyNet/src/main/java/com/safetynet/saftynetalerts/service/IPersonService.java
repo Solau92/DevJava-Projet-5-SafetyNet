@@ -11,7 +11,7 @@ public interface IPersonService {
 
 	public List<Person> getAllPersons();
 	
-	public List<Person> getPersonsByName(String name);
+	public List<Person> getPersonsByLastName(String lastName);
 
 	public List<Person> getPersonsByAddress(String address);
 

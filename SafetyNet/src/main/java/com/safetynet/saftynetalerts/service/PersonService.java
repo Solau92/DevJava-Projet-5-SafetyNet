@@ -21,8 +21,8 @@ public class PersonService implements IPersonService {
 		return persons.getAllPersons();
 	}
 	
-	public List<Person> getPersonsByName(String name) {
-		return persons.getPersonsByName(name);
+	public List<Person> getPersonsByLastName(String lastName) {
+		return persons.getPersonsByLastName(lastName);
 	}
 
 	public List<Person> getPersonsByAddress(String address) {

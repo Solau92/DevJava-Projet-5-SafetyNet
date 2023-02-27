@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
-import com.safetynet.saftynetalerts.model.Firestation;
+import com.safetynet.saftynetalerts.model.FirestationSpot;
 import com.safetynet.saftynetalerts.model.Person;
 
 import lombok.Data;
@@ -35,12 +35,12 @@ public class PersonsRepository {
 		return persons;
 	}
 
-	public List<Person> getPersonsByName(String name) {
+	public List<Person> getPersonsByLastName(String lastName) {
 
 		List<Person> personsByName = new ArrayList<Person>();
 
 		for (Person p : persons) {
-			if (p.getLastName().equals(name)) {
+			if (p.getLastName().equals(lastName)) {
 				personsByName.add(p);
 			}
 		}
@@ -88,7 +88,7 @@ public class PersonsRepository {
 	public Person update(Person person) {
 
 		for (int i = 0 ; i < persons.size() ; i++) {
-			if (persons.get(i).getFirstName().equals(person.getFirstName()) && persons.get(i).getLastName().equals(person.getLastName())) {
+			if (persons.get(i).getFirstName().toLowerCase().equals(person.getFirstName().toLowerCase()) && persons.get(i).getLastName().toLowerCase().equals(person.getLastName().toLowerCase())) {
 				persons.remove(persons.get(i));
 			}
 		}
@@ -101,7 +101,7 @@ public class PersonsRepository {
 		 * for (Person p : persons) { persons.remove(p); }
 		 */
 		for (int i = 0 ; i < persons.size() ; i++) {
-			if (persons.get(i).getFirstName().equals(firstName) && persons.get(i).getLastName().equals(lastName)) {
+			if (persons.get(i).getFirstName().toLowerCase().equals(firstName.toLowerCase()) && persons.get(i).getLastName().toLowerCase().equals(lastName.toLowerCase())) {
 				persons.remove(persons.get(i));
 			}
 		}
@@ -112,7 +112,7 @@ public class PersonsRepository {
 		List<Person> personsByFirstNameAndAddress = new ArrayList<Person>();
 
 		for (Person p : persons) {
-			if (p.getLastName().equals(lastName) && p.getAddress().equals(address)) {
+			if (p.getLastName().toLowerCase().equals(lastName.toLowerCase()) && p.getAddress().toLowerCase().equals(address.toLowerCase())) {
 				personsByFirstNameAndAddress.add(p);
 			}
 		}

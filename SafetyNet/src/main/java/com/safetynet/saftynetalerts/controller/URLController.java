@@ -1,6 +1,7 @@
 package com.safetynet.saftynetalerts.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
+import com.safetynet.saftynetalerts.model.DTOFirestationPerson;
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.service.IURLChildAlertService;
 import com.safetynet.saftynetalerts.service.IURLFireService;
 import com.safetynet.saftynetalerts.service.IURLFirestationService;
+import com.safetynet.saftynetalerts.service.IURLFloodService;
 import com.safetynet.saftynetalerts.service.IURLPersonInfoService;
 import com.safetynet.saftynetalerts.service.IURLPhoneAlertService;
 import com.safetynet.saftynetalerts.service.URLFireService;
@@ -39,9 +42,17 @@ public class URLController {
 	@Autowired
 	private IURLPersonInfoService URLPersonInfoService;
 	
+//	@Autowired
+//	private IURLFloodService URLFloodService;	
 	
 	@GetMapping("/firestation")
 	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId) {
+		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFirestationService.getFirestation(stationId));	
+		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();				
+		if(list.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(URLFirestationService.getFirestation(stationId));
+
+		}		
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFirestationService.getFirestation(stationId));
 	}
 	
@@ -64,6 +75,11 @@ public class URLController {
 	public ResponseEntity<List<DTOPersonInfo>> getPersonInfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLPersonInfoService.getPersonInfo(firstName, lastName));
 	}
+	
+//	@GetMapping("/flood/")
+//	public ResponseEntity<List<DTOFlood>> getFlood(@RequestParam("stations") List<Integer> stationIdList) {
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFloodService.getFlood(stationIdList));
+//	}
 	
  
 }
