@@ -23,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.safetynet.saftynetalerts.exception.NotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
 import com.safetynet.saftynetalerts.service.IPersonService;
@@ -92,13 +93,17 @@ public class PersonsController {
 	/////////////////////////////
 	
 	@GetMapping("/person")
-	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) {	
-		ResponseEntity<List<Person>> response = ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));
-		if ((response.getBody()).isEmpty() ) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(personService.getPersonsByLastName(lastName));
-		}
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));
-	}
+	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) throws NotFoundException {			
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));		
+	}	
+	
+//	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) throws NotFoundException {	
+//		ResponseEntity<List<Person>> response = ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));
+//		if ((response.getBody()).isEmpty() ) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(personService.getPersonsByLastName(lastName));
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));
+//	}
 
 	// ??????????? refaire avec responseentity ????????????????????
 //	public List<Person> getPersonsByName(@RequestParam("name") String name) {

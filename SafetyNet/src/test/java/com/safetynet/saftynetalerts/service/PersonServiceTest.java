@@ -1,4 +1,4 @@
-package com.safetynet.saftynetalerts;
+package com.safetynet.saftynetalerts.service;
 
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.times;

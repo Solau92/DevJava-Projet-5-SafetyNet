@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.safetynet.saftynetalerts.exception.NotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
@@ -21,8 +22,13 @@ public class PersonService implements IPersonService {
 		return persons.getAllPersons();
 	}
 	
-	public List<Person> getPersonsByLastName(String lastName) {
-		return persons.getPersonsByLastName(lastName);
+	// essai exception 
+	public List<Person> getPersonsByLastName(String lastName) throws NotFoundException {
+		List<Person> list = persons.getPersonsByLastName(lastName);
+		if (list.isEmpty()) {
+			throw new NotFoundException();
+		}
+		return list;
 	}
 
 	public List<Person> getPersonsByAddress(String address) {

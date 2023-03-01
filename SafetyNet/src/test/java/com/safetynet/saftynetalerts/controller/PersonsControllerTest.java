@@ -1,4 +1,4 @@
-package com.safetynet.saftynetalerts;
+package com.safetynet.saftynetalerts.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;

@@ -1,8 +1,6 @@
 package com.safetynet.saftynetalerts.controller;
 
 import java.util.List;
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +16,8 @@ import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.service.IURLChildAlertService;
 import com.safetynet.saftynetalerts.service.IURLFireService;
 import com.safetynet.saftynetalerts.service.IURLFirestationService;
-import com.safetynet.saftynetalerts.service.IURLFloodService;
 import com.safetynet.saftynetalerts.service.IURLPersonInfoService;
 import com.safetynet.saftynetalerts.service.IURLPhoneAlertService;
-import com.safetynet.saftynetalerts.service.URLFireService;
-import com.safetynet.saftynetalerts.service.URLPersonInfoService;
 
 @RestController
 public class URLController {

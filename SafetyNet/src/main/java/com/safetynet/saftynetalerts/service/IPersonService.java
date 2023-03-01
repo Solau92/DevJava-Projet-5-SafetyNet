@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.safetynet.saftynetalerts.exception.NotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 
 public interface IPersonService {
 
 	public List<Person> getAllPersons();
 	
-	public List<Person> getPersonsByLastName(String lastName);
+	public List<Person> getPersonsByLastName(String lastName) throws NotFoundException;
 
 	public List<Person> getPersonsByAddress(String address);
 
