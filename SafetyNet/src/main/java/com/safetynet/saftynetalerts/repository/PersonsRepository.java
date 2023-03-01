@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.safetynet.saftynetalerts.exception.NotFoundException;
 import com.safetynet.saftynetalerts.model.FirestationSpot;
 import com.safetynet.saftynetalerts.model.Person;
 
@@ -85,14 +86,22 @@ public class PersonsRepository {
 		return person;
 	}
 
-	public Person update(Person person) {
+	public Person update(Person person) throws NotFoundException {
 
+		boolean personFound = false;
+		
 		for (int i = 0 ; i < persons.size() ; i++) {
 			if (persons.get(i).getFirstName().toLowerCase().equals(person.getFirstName().toLowerCase()) && persons.get(i).getLastName().toLowerCase().equals(person.getLastName().toLowerCase())) {
 				persons.remove(persons.get(i));
+				personFound = true;
 			}
 		}
-		persons.add(person);
+		if(personFound) {
+			persons.add(person);
+
+		} else {
+			throw new NotFoundException();
+		}
 		return person;
 	}
 

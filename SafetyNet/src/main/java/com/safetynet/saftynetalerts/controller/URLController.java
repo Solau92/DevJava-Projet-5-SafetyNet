@@ -12,69 +12,72 @@ import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
 import com.safetynet.saftynetalerts.model.DTOFirestationPerson;
+import com.safetynet.saftynetalerts.model.DTOFlood;
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.service.IURLChildAlertService;
 import com.safetynet.saftynetalerts.service.IURLFireService;
 import com.safetynet.saftynetalerts.service.IURLFirestationService;
 import com.safetynet.saftynetalerts.service.IURLPersonInfoService;
 import com.safetynet.saftynetalerts.service.IURLPhoneAlertService;
+import com.safetynet.saftynetalerts.service.URLFloodService;
 
 @RestController
 public class URLController {
-	
+
 	@Autowired
 	private IURLPhoneAlertService URLPhoneAlertService;
-	
+
 	@Autowired
 	private IURLFirestationService URLFirestationService;
-	
+
 	@Autowired
 	private IURLChildAlertService URLChildAlertService;
-	
+
 	@Autowired
 	private IURLFireService URLFireService;
-	
+
 	@Autowired
 	private IURLPersonInfoService URLPersonInfoService;
-	
+
 //	@Autowired
 //	private IURLFloodService URLFloodService;	
-	
+
 	@GetMapping("/firestation")
 	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId) {
-		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFirestationService.getFirestation(stationId));	
-		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();				
-		if(list.isEmpty()) {
+		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED)
+				.body(URLFirestationService.getFirestation(stationId));
+		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();
+		if (list.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(URLFirestationService.getFirestation(stationId));
 
-		}		
+		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFirestationService.getFirestation(stationId));
 	}
-	
+
 	@GetMapping("/childAlert")
 	public ResponseEntity<List<DTOChildAlert>> getChildAlert(@RequestParam("address") String address) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLChildAlertService.getChildAlert(address));
 	}
-	
+
 	@GetMapping("/phoneAlert")
 	public ResponseEntity<List<String>> getPhoneAlert(@RequestParam("firestation") int stationId) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLPhoneAlertService.getPhoneAlert(stationId));
 	}
-	
+
 	@GetMapping("/fire")
 	public ResponseEntity<DTOFire> getFire(@RequestParam("address") String address) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFireService.getFire(address));
 	}
-	
+
 	@GetMapping("/personInfo")
-	public ResponseEntity<List<DTOPersonInfo>> getPersonInfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
+	public ResponseEntity<List<DTOPersonInfo>> getPersonInfo(@RequestParam("firstName") String firstName,
+			@RequestParam("lastName") String lastName) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLPersonInfoService.getPersonInfo(firstName, lastName));
 	}
-	
+
 //	@GetMapping("/flood/")
 //	public ResponseEntity<List<DTOFlood>> getFlood(@RequestParam("stations") List<Integer> stationIdList) {
 //		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFloodService.getFlood(stationIdList));
 //	}
-	
- 
+
 }

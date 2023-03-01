@@ -10,7 +10,7 @@ import com.safetynet.saftynetalerts.model.Person;
 
 public interface IPersonService {
 
-	public List<Person> getAllPersons();
+	public List<Person> getAllPersons() throws NotFoundException;
 	
 	public List<Person> getPersonsByLastName(String lastName) throws NotFoundException;
 
@@ -22,7 +22,7 @@ public interface IPersonService {
 
 	public Person savePerson(Person person) throws StreamWriteException, DatabindException, IOException;
 
-	public Person updatePerson(Person person);
+	public Person updatePerson(Person person) throws NotFoundException;
 
 	public void deletePerson(String firstName, String lastName);
 

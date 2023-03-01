@@ -1,11 +1,13 @@
 package com.safetynet.saftynetalerts.model;
 
+import java.util.Map;
+
 import lombok.Data;
 
 @Data
 public class DTOFlood {
 	
 //	// address / family
-//	private Map<String, DTOFloodFamily> floodAddresses;
+	private Map<String, DTOFloodFamily> floodAddresses;
 
 }

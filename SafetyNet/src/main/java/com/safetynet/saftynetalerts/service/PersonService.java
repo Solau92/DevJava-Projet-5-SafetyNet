@@ -18,11 +18,16 @@ public class PersonService implements IPersonService {
 	@Autowired 
 	private PersonsRepository persons;
 	
-	public List<Person> getAllPersons() {
+	// Essai exception 
+	public List<Person> getAllPersons() throws NotFoundException {
+		List<Person> list = persons.getAllPersons();
+		if(list.isEmpty()) {
+			throw new NotFoundException();
+		}
 		return persons.getAllPersons();
 	}
 	
-	// essai exception 
+	// Essai exception 
 	public List<Person> getPersonsByLastName(String lastName) throws NotFoundException {
 		List<Person> list = persons.getPersonsByLastName(lastName);
 		if (list.isEmpty()) {
@@ -48,7 +53,7 @@ public class PersonService implements IPersonService {
 		return savedPerson;		
 	}
 
-	public Person updatePerson(Person person) {
+	public Person updatePerson(Person person) throws NotFoundException {
 		Person updatedPerson = persons.update(person);
 		return updatedPerson;	
 	}
