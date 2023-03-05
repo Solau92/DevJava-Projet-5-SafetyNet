@@ -23,7 +23,7 @@ public class MedicalRecordsControllerTest {
 	private MockMvc mockMvc;
 	
 	@Test
-	public void getMedicalRecordsTest() throws Exception {
+	void getMedicalRecordsTest() throws Exception {
 		
 		mockMvc.perform(get("/medicalRecords"))
 		.andExpect(status().isAccepted())
@@ -32,7 +32,7 @@ public class MedicalRecordsControllerTest {
 	}
 
 	@Test
-	public void postMedicalRecored_Ok_Test() throws Exception {
+	void postMedicalRecored_Ok_Test() throws Exception {
 		mockMvc.perform(post("/medicalRecord")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\r\n"
@@ -52,7 +52,7 @@ public class MedicalRecordsControllerTest {
 	}
 	
 	@Test
-	public void putMedicalRecord_Ok_Test() throws Exception {
+	void putMedicalRecord_Ok_Test() throws Exception {
 		mockMvc.perform(put("/medicalRecord")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\r\n"
@@ -72,7 +72,7 @@ public class MedicalRecordsControllerTest {
 	}
 	
 	@Test
-	public void deletMedicalRecord_Ok_Test() throws Exception {
+	void deletMedicalRecord_Ok_Test() throws Exception {
 		mockMvc.perform(delete("/medicalRecord")
 				.param("firstName", "firstName")
 				.param("lastName", "lastName"))

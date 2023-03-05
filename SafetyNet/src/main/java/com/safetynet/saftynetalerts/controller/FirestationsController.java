@@ -3,7 +3,6 @@ package com.safetynet.saftynetalerts.controller;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,8 +19,11 @@ import com.safetynet.saftynetalerts.service.IFirestationService;
 @RestController
 public class FirestationsController {
 	
-	@Autowired
-	private IFirestationService firestationService;
+	private final IFirestationService firestationService;
+	
+	public FirestationsController(IFirestationService firestationService) {
+		this.firestationService = firestationService;
+	}
 	
 	@GetMapping("/firestations")
 	public ResponseEntity<List<FirestationSpot>> getFirestations() {	

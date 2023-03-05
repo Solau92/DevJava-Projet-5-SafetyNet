@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,8 +22,7 @@ import com.safetynet.saftynetalerts.service.IPersonService;
 @RestController
 public class PersonsController {
 
-//	@Autowired
-	private IPersonService personService;
+	private final IPersonService personService;
 	
 	public PersonsController(IPersonService personService) {
 		this.personService = personService;

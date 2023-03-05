@@ -24,6 +24,12 @@ public class URLFloodService { //implements IURLFloodService {
 	@Autowired
 	private IMedicalRecordService medicalRecordService;
 	
+	public URLFloodService(IPersonService personService, IFirestationService firestationService, IMedicalRecordService medicalRecordService) {
+		this.personService = personService;
+		this.firestationService = firestationService;
+		this.medicalRecordService = medicalRecordService;				
+	}
+	
 //	@Override
 	public List<DTOFlood> getFlood(List<Integer> stationIdList)  {
 

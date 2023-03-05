@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.model.DTOChildAlert;
@@ -15,11 +14,14 @@ import com.safetynet.saftynetalerts.model.Person;
 @Service
 public class URLChildAlertService implements IURLChildAlertService {
 
-	@Autowired
-	private PersonService personService;
+	private final PersonService personService;
 
-	@Autowired
-	private MedicalRecordService medicalRecordService;
+	private final MedicalRecordService medicalRecordService;
+	
+	public URLChildAlertService(PersonService personService, MedicalRecordService medicalRecordService) {
+		this.personService = personService;
+		this.medicalRecordService = medicalRecordService;
+	}
 
 	@Override
 	public List<DTOChildAlert> getChildAlert(String address) {

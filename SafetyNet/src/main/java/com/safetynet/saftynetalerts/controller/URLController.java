@@ -1,7 +1,6 @@
 package com.safetynet.saftynetalerts.controller;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,35 +11,37 @@ import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
 import com.safetynet.saftynetalerts.model.DTOFirestationPerson;
-import com.safetynet.saftynetalerts.model.DTOFlood;
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.service.IURLChildAlertService;
 import com.safetynet.saftynetalerts.service.IURLFireService;
 import com.safetynet.saftynetalerts.service.IURLFirestationService;
 import com.safetynet.saftynetalerts.service.IURLPersonInfoService;
 import com.safetynet.saftynetalerts.service.IURLPhoneAlertService;
-import com.safetynet.saftynetalerts.service.URLFloodService;
 
 @RestController
 public class URLController {
 
-	@Autowired
-	private IURLPhoneAlertService URLPhoneAlertService;
+	private final IURLPhoneAlertService URLPhoneAlertService;
 
-	@Autowired
-	private IURLFirestationService URLFirestationService;
+	private final IURLFirestationService URLFirestationService;
 
-	@Autowired
-	private IURLChildAlertService URLChildAlertService;
+	private final IURLChildAlertService URLChildAlertService;
 
-	@Autowired
-	private IURLFireService URLFireService;
+	private final IURLFireService URLFireService;
 
-	@Autowired
-	private IURLPersonInfoService URLPersonInfoService;
+	private final IURLPersonInfoService URLPersonInfoService;
 
-//	@Autowired
 //	private IURLFloodService URLFloodService;	
+
+	public URLController(IURLPhoneAlertService URLPhoneAlertService, IURLFirestationService URLFirestationService,
+			IURLChildAlertService URLChildAlertService, IURLFireService URLFireService,
+			IURLPersonInfoService URLPersonInfoService) {
+		this.URLPhoneAlertService = URLPhoneAlertService;
+		this.URLFirestationService = URLFirestationService;
+		this.URLChildAlertService = URLChildAlertService;
+		this.URLFireService = URLFireService;
+		this.URLPersonInfoService = URLPersonInfoService;
+	}
 
 	@GetMapping("/firestation")
 	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId) {

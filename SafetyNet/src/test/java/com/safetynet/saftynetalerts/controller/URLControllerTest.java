@@ -17,14 +17,14 @@ public class URLControllerTest {
 	private MockMvc mockMvc;
 	
 	@Test
-	public void getFirestation_Ok_Test() throws Exception {	
+	void getFirestation_Ok_Test() throws Exception {	
 		mockMvc.perform(get("/firestation")
 				.param("stationNumber", "1"))
 		.andExpect(status().isAccepted());
 	}
 	
 	@Test
-	public void getFirestation_NotFound_Test() throws Exception {	
+	void getFirestation_NotFound_Test() throws Exception {	
 		mockMvc.perform(get("/firestation")
 				.param("stationNumber", "0"))
 		.andExpect(status().isNotFound());
@@ -32,28 +32,28 @@ public class URLControllerTest {
 	}
 	
 	@Test
-	public void getChildAlert_Ok_Test() throws Exception {	
+	void getChildAlert_Ok_Test() throws Exception {	
 		mockMvc.perform(get("/childAlert")
 				.param("address", "1509 Culver St"))
 		.andExpect(status().isAccepted());
 	}
 	
 	@Test
-	public void getPhoneAlert_Ok_Test() throws Exception {	
+	void getPhoneAlert_Ok_Test() throws Exception {	
 		mockMvc.perform(get("/phoneAlert")
 				.param("firestation", "1"))
 		.andExpect(status().isAccepted());
 	}
 	
 	@Test
-	public void getFire_Ok_Test() throws Exception {	
+	void getFire_Ok_Test() throws Exception {	
 		mockMvc.perform(get("/fire")
 				.param("address", "1509 Culver St"))
 		.andExpect(status().isAccepted());
 	}
 	
 	@Test
-	public void getPersonInfo_Ok_Test() throws Exception {	
+	void getPersonInfo_Ok_Test() throws Exception {	
 		mockMvc.perform(get("/personInfo")
 				.param("firstName", "John")
 				.param("lastName", "Boyd"))

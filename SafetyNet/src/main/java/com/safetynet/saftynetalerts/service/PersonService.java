@@ -15,14 +15,17 @@ import com.safetynet.saftynetalerts.repository.PersonsRepository;
 @Service
 public class PersonService implements IPersonService {
 	
-	@Autowired 
-	private PersonsRepository persons;
+	private static PersonsRepository persons;
+	
+	public PersonService(PersonsRepository persons) {
+		this.persons = persons;
+	}
 	
 	// Essai exception 
 	public List<Person> getAllPersons() throws NotFoundException {
 		List<Person> list = persons.getAllPersons();
 		if(list.isEmpty()) {
-			throw new NotFoundException();
+			throw new NotFoundException("was not found in memory");
 		}
 		return persons.getAllPersons();
 	}
@@ -31,7 +34,7 @@ public class PersonService implements IPersonService {
 	public List<Person> getPersonsByLastName(String lastName) throws NotFoundException {
 		List<Person> list = persons.getPersonsByLastName(lastName);
 		if (list.isEmpty()) {
-			throw new NotFoundException();
+			throw new NotFoundException(lastName + " was not found in memory");
 		}
 		return list;
 	}

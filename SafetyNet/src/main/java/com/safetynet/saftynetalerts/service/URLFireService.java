@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.model.DTOFire;
@@ -16,15 +15,18 @@ import com.safetynet.saftynetalerts.model.Person;
 @Service
 public class URLFireService implements IURLFireService {
 
-	@Autowired
-	private IPersonService personService;
+	private final IPersonService personService;
 	
-	@Autowired
-	private IFirestationService firestationService;
+	private final IFirestationService firestationService;
 	
-	@Autowired
-	private IMedicalRecordService medicalRecordService;
+	private final IMedicalRecordService medicalRecordService;
 
+	public URLFireService(IPersonService personService, IFirestationService firestationService, IMedicalRecordService medicalRecordService) {
+		this.personService = personService;
+		this.firestationService = firestationService;
+		this.medicalRecordService = medicalRecordService;
+	}
+	
 	@Override
 	public DTOFire getFire(String address) {
 		

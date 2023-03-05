@@ -2,15 +2,10 @@ package com.safetynet.saftynetalerts.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.model.FirestationSpot;
-import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
-
-import jakarta.annotation.PostConstruct;
-import lombok.Data;
 
 @Service
 public class FirestationService implements IFirestationService {
@@ -21,8 +16,11 @@ public class FirestationService implements IFirestationService {
 	 * }
 	 */
 
-	@Autowired
-	private FirestationsRepository firestations;
+	private static FirestationsRepository firestations;
+	
+	public FirestationService(FirestationsRepository firestations) {
+		this.firestations = firestations;
+	}
 	
 	public List<FirestationSpot> getAllFirestations() {
 		return firestations.getAllFirestations();

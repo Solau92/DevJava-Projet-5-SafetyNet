@@ -100,7 +100,7 @@ public class PersonsRepository {
 			persons.add(person);
 
 		} else {
-			throw new NotFoundException();
+			throw new NotFoundException("message");
 		}
 		return person;
 	}

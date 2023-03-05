@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
@@ -15,11 +14,14 @@ import com.safetynet.saftynetalerts.model.Person;
 @Service
 public class URLPersonInfoService implements IURLPersonInfoService {
 
-	@Autowired
-	private PersonService personService;
+	private final IPersonService personService;
 
-	@Autowired
-	private MedicalRecordService medicalRecordService;
+	private final IMedicalRecordService medicalRecordService;
+	
+	public URLPersonInfoService(IPersonService personService, IMedicalRecordService medicalRecordService) {
+		this.personService = personService;
+		this.medicalRecordService = medicalRecordService;
+	}
 
 	@Override
 	public List<DTOPersonInfo> getPersonInfo(String firstName, String lastName) {
@@ -47,6 +49,12 @@ public class URLPersonInfoService implements IURLPersonInfoService {
 				}
 			}
 		}
+		
+		/*
+		 * personsList.stream().map(person -> { MedicalRecord record =
+		 * medicalService.getMedicalRecordForAPerson(person); return
+		 * DTOPErsonInfoFactory.makeDto(person, record); })
+		 */
 		
 		return personsInfoList;
 	}

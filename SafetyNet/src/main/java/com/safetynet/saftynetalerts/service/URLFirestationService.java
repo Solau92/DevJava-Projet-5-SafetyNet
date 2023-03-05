@@ -16,15 +16,18 @@ import com.safetynet.saftynetalerts.model.Person;
 @Service
 public class URLFirestationService implements IURLFirestationService {
 
-	@Autowired
-	private PersonService personService;
+	private final IPersonService personService;
 
-	@Autowired
-	private FirestationService firestationService;
+	private final IFirestationService firestationService;
 
-	@Autowired
-	private MedicalRecordService medicalRecordService;
+	private final IMedicalRecordService medicalRecordService;
 
+	public URLFirestationService(IPersonService personService, IMedicalRecordService medicalRecordService, IFirestationService firestationService) {
+		this.personService = personService;
+		this.medicalRecordService = medicalRecordService;
+		this.firestationService = firestationService;
+	}
+	
 	@Override
 	public DTOFirestation getFirestation(int stationId) {
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,15 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
-import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.service.IMedicalRecordService;
-import com.safetynet.saftynetalerts.service.MedicalRecordService;
 
 @RestController
 public class MedicalRecordsController {
 
-	@Autowired
-	private IMedicalRecordService medicalRecordsService;
+	private final IMedicalRecordService medicalRecordsService;
+	
+	public MedicalRecordsController(IMedicalRecordService medicalRecordsService) {
+		this.medicalRecordsService = medicalRecordsService;
+	}
 
 	@GetMapping("/medicalRecords")
 	public ResponseEntity<List<MedicalRecord>> getMedicalRecords() {

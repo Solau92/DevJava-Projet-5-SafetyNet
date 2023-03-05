@@ -23,7 +23,7 @@ public class FirestationsControllerTest {
 	private MockMvc mockMvc;
 	
 	@Test
-	public void getFirestationsTest() throws Exception {
+	void getFirestationsTest() throws Exception {
 		mockMvc.perform(get("/firestations"))
 		.andExpect(status().isAccepted())
 		.andExpect(jsonPath("$[0].address", is("1509 Culver St")))
@@ -31,7 +31,7 @@ public class FirestationsControllerTest {
 	}
 	
 	@Test
-	public void postFirestation_Ok_Test() throws Exception {
+	void postFirestation_Ok_Test() throws Exception {
 		mockMvc.perform(post("/firestation")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\r\n"
@@ -42,7 +42,7 @@ public class FirestationsControllerTest {
 	}
 	
 	@Test
-	public void putFirestation_Ok_Test() throws Exception {
+	void putFirestation_Ok_Test() throws Exception {
 		mockMvc.perform(put("/firestation")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\r\n"
@@ -53,7 +53,7 @@ public class FirestationsControllerTest {
 	}
 	
 	@Test
-	public void deleteFirestation_Ok_Test() throws Exception {
+	void deleteFirestation_Ok_Test() throws Exception {
 		mockMvc.perform(delete("/firestation")
 				.param("address", "address"))
 		.andExpect(status().isAccepted());

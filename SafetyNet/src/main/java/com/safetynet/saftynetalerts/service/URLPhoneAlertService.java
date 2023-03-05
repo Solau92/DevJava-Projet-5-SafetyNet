@@ -11,11 +11,14 @@ import com.safetynet.saftynetalerts.model.Person;
 @Service
 public class URLPhoneAlertService implements IURLPhoneAlertService {
 
-	@Autowired
-	private PersonService personService;
+	private final IPersonService personService;
 
-	@Autowired
-	private FirestationService firestationService;
+	private final IFirestationService firestationService;
+	
+	public URLPhoneAlertService(IPersonService personService, IFirestationService firestationService) {
+		this.personService = personService;
+		this.firestationService = firestationService;
+	}
 
 	@Override
 	public List<String> getPhoneAlert(int stationId) {
