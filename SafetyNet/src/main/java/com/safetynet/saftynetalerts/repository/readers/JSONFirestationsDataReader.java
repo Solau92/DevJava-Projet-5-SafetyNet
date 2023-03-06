@@ -26,9 +26,8 @@ public class JSONFirestationsDataReader implements IDataFirestationsReader {
 		JsonNode firestationsNode = objectMapper.readTree(file).get("firestations");
 
 		ObjectMapper objectMapper2 = new ObjectMapper();
-		List<FirestationSpot> listFirestations = objectMapper2.readValue(firestationsNode.toString(), new TypeReference<List<FirestationSpot>>() {});
 		
-		return listFirestations;
+		return objectMapper2.readValue(firestationsNode.toString(), new TypeReference<List<FirestationSpot>>() {});
 	}
 
 }

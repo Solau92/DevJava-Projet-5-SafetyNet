@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
+import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
+import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFlood;
 import com.safetynet.saftynetalerts.model.DTOFloodPerson;
@@ -28,7 +31,7 @@ public class URLFloodService implements IURLFloodService {
 	}
 	
 	@Override
-	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException  {
+	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException, FirestationNotFoundException  {
 
 		List<DTOFlood> dtoFloodList = new ArrayList<DTOFlood>();
 		
@@ -42,6 +45,7 @@ public class URLFloodService implements IURLFloodService {
 			List<String> address = firestationService.getAddressesWithId(i);		
 			addressesList.addAll(address);		// J'ai ma liste de toutes les adresses 
 
+			//TODO : résoudre : chaque adresse apparait plusieurs fois...
 		
 //		 Pour chaque adresse, récupérer la liste des foyers (DTOFloodFamily)
 		for (String s : addressesList) {
@@ -67,10 +71,10 @@ public class URLFloodService implements IURLFloodService {
 					dtoPerson.setLastName(p.getLastName());
 					dtoPerson.setPhone(p.getPhone());
 
-					MedicalRecord medicalRecord = medicalRecordService.getMedicalRecordByFirstNameAndLastName(p.getFirstName(), p.getLastName());
-					dtoPerson.setAge(ChronoUnit.YEARS.between(medicalRecord.getBirthdate(), LocalDate.now()));
-					dtoPerson.setAllergies(medicalRecord.getAllergies());
-					dtoPerson.setMedications(medicalRecord.getMedications());
+					List<MedicalRecord> medicalRecords = medicalRecordService.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+					dtoPerson.setAge(ChronoUnit.YEARS.between(medicalRecords.get(0).getBirthdate(), LocalDate.now()));
+					dtoPerson.setAllergies(medicalRecords.get(0).getAllergies());
+					dtoPerson.setMedications(medicalRecords.get(0).getMedications());
 					
 					// Et l'ajouter à la liste 
 					dtoFlood.getFamilyList().get(p.getLastName()).add(dtoPerson);

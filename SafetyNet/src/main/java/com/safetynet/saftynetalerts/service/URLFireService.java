@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
+import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
+import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirePerson;
@@ -29,7 +32,7 @@ public class URLFireService implements IURLFireService {
 	}
 	
 	@Override
-	public DTOFire getFire(String address) throws PersonNotFoundException {
+	public DTOFire getFire(String address) throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException, FirestationNotFoundException {
 		
 		DTOFire dtoFire = new DTOFire();
 		List<DTOFirePerson> firePersonsList = new ArrayList<DTOFirePerson>();
@@ -40,14 +43,15 @@ public class URLFireService implements IURLFireService {
 		// Ajout éléments dossier médical 
 		for (Person p : personsList) {
 			
-			MedicalRecord medicalRecord = medicalRecordService.getMedicalRecordByFirstNameAndLastName(p.getFirstName(), p.getLastName());
-			DTOFirePerson DTOPerson = new DTOFirePerson();
-			DTOPerson.setLastName(address);
-			DTOPerson.setPhone(p.getPhone());
-			DTOPerson.setAge(ChronoUnit.YEARS.between(medicalRecord.getBirthdate(), LocalDate.now()));
-			DTOPerson.setMedications(medicalRecord.getMedications());
-			DTOPerson.setAllergies(medicalRecord.getAllergies());
-			firePersonsList.add(DTOPerson);			
+			List<MedicalRecord> medicalRecord = medicalRecordService.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+			
+			DTOFirePerson dTOPerson = new DTOFirePerson();
+			dTOPerson.setLastName(p.getLastName());
+			dTOPerson.setPhone(p.getPhone());
+			dTOPerson.setAge(ChronoUnit.YEARS.between(medicalRecord.get(0).getBirthdate(), LocalDate.now()));
+			dTOPerson.setMedications(medicalRecord.get(0).getMedications());
+			dTOPerson.setAllergies(medicalRecord.get(0).getAllergies());
+			firePersonsList.add(dTOPerson);			
 		}
 		
 		dtoFire.setPersonsInBuilding(firePersonsList);

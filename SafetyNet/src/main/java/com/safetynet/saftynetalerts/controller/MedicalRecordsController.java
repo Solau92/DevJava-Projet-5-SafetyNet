@@ -1,9 +1,6 @@
 package com.safetynet.saftynetalerts.controller;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.exc.StreamWriteException;
-import com.fasterxml.jackson.databind.DatabindException;
+import com.safetynet.saftynetalerts.exception.MedicalRecordAlreadyExistsException;
+import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 import com.safetynet.saftynetalerts.service.IMedicalRecordService;
 
@@ -29,33 +26,26 @@ public class MedicalRecordsController {
 	}
 
 	@GetMapping("/medicalRecords")
-	public ResponseEntity<List<MedicalRecord>> getMedicalRecords() {
+	public ResponseEntity<List<MedicalRecord>> getMedicalRecords() throws MedicalRecordNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicalRecordsService.getAllMedicalRecords());
 	}
 
 	@PostMapping("/medicalRecord")
-	public ResponseEntity<String> createMedicalRecord(@RequestBody MedicalRecord medicalRecord)
-			throws StreamWriteException, DatabindException, IOException {
-		if (Objects.isNull(medicalRecord)) {
-			return ResponseEntity.noContent().build();
-		}
-		MedicalRecord medicalRecordCreated = medicalRecordsService.saveMedicalRecord(medicalRecord);
+	public ResponseEntity<String> createMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordAlreadyExistsException {
+		medicalRecordsService.saveMedicalRecord(medicalRecord);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@PutMapping("/medicalRecord")
-	public ResponseEntity<String> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord)
-			throws StreamWriteException, DatabindException, IOException {
-		if (Objects.isNull(medicalRecord)) {
-			return ResponseEntity.noContent().build();
-		}
-		MedicalRecord medicalRecordUpdated = medicalRecordsService.updateMedicalRecord(medicalRecord);
+	public ResponseEntity<String> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordNotFoundException {
+		medicalRecordsService.updateMedicalRecord(medicalRecord);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
 
 	@DeleteMapping("/medicalRecord")
 	public ResponseEntity<String> deleteMedicalRecord(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lalstName) {
+			@RequestParam("lastName") String lastName) throws MedicalRecordNotFoundException {
+		medicalRecordsService.deleteMedicalRecord(firstName, lastName);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 
 	}

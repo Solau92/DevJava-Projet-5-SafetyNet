@@ -1,8 +1,6 @@
 package com.safetynet.saftynetalerts.service;
 
 import java.io.IOException;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
@@ -20,24 +18,28 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class ObjectsCreator implements IObjectsCreator {
 
-	@Autowired
-	private PersonsRepository personsList;
+	private final PersonsRepository personsList;
 	
-	@Autowired
-	private FirestationsRepository firestationsList;
+	private final FirestationsRepository firestationsList;
 	
-	@Autowired
-	private MedicalRecordsRepository medicalRecordsList;
+	private final MedicalRecordsRepository medicalRecordsList;
 
 	String filePath = "./src/main/resources/data.json"; 
+	
+	public ObjectsCreator(PersonsRepository personsList, FirestationsRepository firestationsList, MedicalRecordsRepository medicalRecordsList) {
+		this.personsList = personsList;
+		this.firestationsList = firestationsList;
+		this.medicalRecordsList = medicalRecordsList;
+	}
 
+	@Override
 	@PostConstruct
 	public void run() throws IOException {
 		
 		// Persons //
 		IDataPersonsReader pReader = new JSONPersonsDataReader(filePath);
 		personsList.setPersons(pReader.readPersons());
-
+		
 		// Firestations //
 		IDataFirestationsReader fsReader = new JSONFirestationsDataReader(filePath);
 		firestationsList.setFirestations(fsReader.readFirestations());
@@ -46,6 +48,5 @@ public class ObjectsCreator implements IObjectsCreator {
 		IDataMedicalRecordsReader mrReader = new JSONMedicalRecordsDataReader(filePath);
 		medicalRecordsList.setMedicalRecords(mrReader.readMedicalRecords());
 	}
-
 
 }

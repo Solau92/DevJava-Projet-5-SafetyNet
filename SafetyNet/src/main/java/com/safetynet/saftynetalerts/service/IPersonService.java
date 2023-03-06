@@ -1,11 +1,9 @@
 package com.safetynet.saftynetalerts.service;
 
-import java.io.IOException;
 import java.util.List;
 
-import com.fasterxml.jackson.core.exc.StreamWriteException;
-import com.fasterxml.jackson.databind.DatabindException;
-import com.safetynet.saftynetalerts.exception.NotFoundException;
+import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
+import com.safetynet.saftynetalerts.exception.PersonAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 
@@ -17,14 +15,14 @@ public interface IPersonService {
 
 	public List<Person> getPersonsByAddress(String address) throws PersonNotFoundException;
 
-	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) throws PersonNotFoundException;
+	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) throws PersonNotFoundException, MoreThanOnePersonFoundException;
 
 	public List<String> getCommunityEmail(String city);
 
-	public Person savePerson(Person person) throws StreamWriteException, DatabindException, IOException;
+	public Person savePerson(Person person) throws PersonAlreadyExistsException;
 
-	public Person updatePerson(Person person) throws NotFoundException;
+	public Person updatePerson(Person person) throws PersonNotFoundException;
 
-	public void deletePerson(String firstName, String lastName);
+	public void deletePerson(String firstName, String lastName) throws PersonNotFoundException;
 
 }

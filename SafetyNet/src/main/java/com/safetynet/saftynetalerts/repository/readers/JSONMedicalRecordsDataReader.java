@@ -25,9 +25,8 @@ public class JSONMedicalRecordsDataReader implements IDataMedicalRecordsReader {
 		JsonNode medicalRecordsNode = objectMapper.readTree(file).get("medicalrecords");
 
 		ObjectMapper objectMapper2 = new ObjectMapper();
-		List<MedicalRecord> listMedicalRecords = objectMapper2.readValue(medicalRecordsNode.toString(), new TypeReference<List<MedicalRecord>>() {});
 		
-		return listMedicalRecords;
+		return objectMapper2.readValue(medicalRecordsNode.toString(), new TypeReference<List<MedicalRecord>>() {});
 	}
 
 }

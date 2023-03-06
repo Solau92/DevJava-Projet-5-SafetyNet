@@ -3,7 +3,6 @@ package com.safetynet.saftynetalerts.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.safetynet.saftynetalerts.model.FirestationSpot;
@@ -42,7 +41,6 @@ public class FirestationsRepository {
 				firestations.remove(firestations.get(i));
 			}
 		}
-
 	}
 
 	public void deleteFirestation(int stationId) {
@@ -70,6 +68,14 @@ public class FirestationsRepository {
 			}
 		}
 		return 0;
+	}
+
+	public List<String> getAllAddresses() {
+		List<String> addressesList = new ArrayList<String>();
+		for (FirestationSpot f : firestations) {
+			addressesList.add(f.getAddress());
+		}
+		return addressesList;
 	}
 
 }

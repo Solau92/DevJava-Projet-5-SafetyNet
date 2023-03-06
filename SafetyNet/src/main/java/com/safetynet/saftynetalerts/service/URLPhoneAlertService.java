@@ -3,9 +3,9 @@ package com.safetynet.saftynetalerts.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 
@@ -22,7 +22,7 @@ public class URLPhoneAlertService implements IURLPhoneAlertService {
 	}
 
 	@Override
-	public List<String> getPhoneAlert(int stationId) throws PersonNotFoundException {
+	public List<String> getPhoneAlert(int stationId) throws PersonNotFoundException, FirestationNotFoundException {
 	
 		List<String> phoneList = new ArrayList<String>();
 		List<String> addressesList = new ArrayList<String>();

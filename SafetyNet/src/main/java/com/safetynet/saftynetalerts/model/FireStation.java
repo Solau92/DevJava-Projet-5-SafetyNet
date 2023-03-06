@@ -15,6 +15,4 @@ public class FireStation {
 	@JsonProperty("addresses")
 	private List<String> addresses;
 	
-
-
 }
