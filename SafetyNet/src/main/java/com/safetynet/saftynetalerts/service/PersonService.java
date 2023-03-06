@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.exception.NotFoundException;
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
@@ -22,19 +23,19 @@ public class PersonService implements IPersonService {
 	}
 	
 	// Essai exception 
-	public List<Person> getAllPersons() throws NotFoundException {
+	public List<Person> getAllPersons() throws PersonNotFoundException {
 		List<Person> list = persons.getAllPersons();
 		if(list.isEmpty()) {
-			throw new NotFoundException("was not found in memory");
+			throw new PersonNotFoundException("was not found in memory");
 		}
 		return persons.getAllPersons();
 	}
 	
 	// Essai exception 
-	public List<Person> getPersonsByLastName(String lastName) throws NotFoundException {
+	public List<Person> getPersonsByLastName(String lastName) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByLastName(lastName);
 		if (list.isEmpty()) {
-			throw new NotFoundException(lastName + " was not found in memory");
+			throw new PersonNotFoundException(lastName + " was not found in memory");
 		}
 		return list;
 	}

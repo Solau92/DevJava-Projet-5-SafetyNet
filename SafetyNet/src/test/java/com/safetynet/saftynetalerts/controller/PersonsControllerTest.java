@@ -24,7 +24,7 @@ public class PersonsControllerTest {
 	private MockMvc mockMvc;
 	
 	@Test
-	public void getPersonsTest() throws Exception {
+	void getPersonsTest() throws Exception {
 		mockMvc.perform(get("/persons"))
 		.andExpect(status().isAccepted())
 		.andExpect(jsonPath("$[0].firstName", is("John")))
@@ -32,7 +32,7 @@ public class PersonsControllerTest {
 	}
 	
 	@Test
-	public void postPerson_Ok_Test() throws Exception {
+	void postPerson_Ok_Test() throws Exception {
 		JSONObject toto = new JSONObject();
 		toto.put("firstname", "toto");
 		String jsonContent = toto.toString();
@@ -59,7 +59,7 @@ public class PersonsControllerTest {
 //	}
 	
 	@Test
-	public void putPerson_Ok_Test() throws Exception {
+	void putPerson_Ok_Test() throws Exception {
 		mockMvc.perform(put("/person")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\r\n"
@@ -75,7 +75,7 @@ public class PersonsControllerTest {
 	}
 	
 	@Test
-	public void deletPerson_Ok_Test() throws Exception {
+	void deletPerson_Ok_Test() throws Exception {
 		mockMvc.perform(delete("/person")
 				.param("firstName", "firstName")
 				.param("lastName", "lastName"))
@@ -83,28 +83,28 @@ public class PersonsControllerTest {
 	}
 	
 	@Test
-	public void getPersonByLastName_Ok_Test() throws Exception {
+	void getPersonByLastName_Ok_Test() throws Exception {
 		mockMvc.perform(get("/person")
 				.param("lastName", "Boyd"))
 		.andExpect(status().isAccepted());
 	}
 	
 	@Test
-	public void getPersonByLastName_NotFound_Test() throws Exception {
+	void getPersonByLastName_NotFound_Test() throws Exception {
 		mockMvc.perform(get("/person")
 				.param("lastName", "lastName"))
 		.andExpect(status().isNotFound());
 	}
 	
 	@Test
-	public void getPersonByAddress_Ok_Test() throws Exception {
+	void getPersonByAddress_Ok_Test() throws Exception {
 		mockMvc.perform(get("/personByAddress")
 				.param("address", "address"))
 		.andExpect(status().isOk());
 	}
 	
 	@Test
-	public void getCommunityEmail_Ok_Test() throws Exception {
+	void getCommunityEmail_Ok_Test() throws Exception {
 		mockMvc.perform(get("/communityEmail")
 				.param("city", "city"))
 		.andExpect(status().isOk());

@@ -13,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.safetynet.saftynetalerts.exception.NotFoundException;
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 
 @ControllerAdvice
 public class AdviceController extends ResponseEntityExceptionHandler {
@@ -34,11 +35,10 @@ public class AdviceController extends ResponseEntityExceptionHandler {
 //		return new ResponseEntity<>(new NotFoundException(), HttpStatus.NOT_FOUND);
 //	}
 	
-	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<Object> notFoundExceptionHandler(NotFoundException nfex, WebRequest request) {
+	@ExceptionHandler(PersonNotFoundException.class)
+	public ResponseEntity<Object> personNotFoundExceptionHandler(PersonNotFoundException nfex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("timestamp", LocalDateTime.now());
-		body.put("message", nfex.getMessage());
+		body.put("message : ", nfex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 

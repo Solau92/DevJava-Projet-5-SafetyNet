@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFirePerson;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
 import com.safetynet.saftynetalerts.model.DTOFirestationPerson;
@@ -29,7 +30,7 @@ public class URLFirestationService implements IURLFirestationService {
 	}
 	
 	@Override
-	public DTOFirestation getFirestation(int stationId) {
+	public DTOFirestation getFirestation(int stationId) throws PersonNotFoundException {
 
 		DTOFirestation DTOFirestation = new DTOFirestation();
 		List<String> addressesList = new ArrayList<String>();

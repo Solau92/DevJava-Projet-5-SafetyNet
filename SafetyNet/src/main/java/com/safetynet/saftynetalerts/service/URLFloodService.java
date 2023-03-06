@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFlood;
 import com.safetynet.saftynetalerts.model.DTOFloodPerson;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
@@ -27,7 +28,7 @@ public class URLFloodService implements IURLFloodService {
 	}
 	
 	@Override
-	public List<DTOFlood> getFlood(List<Integer> stationIdList)  {
+	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException  {
 
 		List<DTOFlood> dtoFloodList = new ArrayList<DTOFlood>();
 		
@@ -80,10 +81,8 @@ public class URLFloodService implements IURLFloodService {
 				// j'ajoute ma DTOFlood à la liste
 				dtoFloodList.add(dtoFlood);
 				}
-			
 		}		
-			
-			
+						
 		return dtoFloodList;
 	}
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 import com.safetynet.saftynetalerts.model.Person;
@@ -24,7 +25,7 @@ public class URLPersonInfoService implements IURLPersonInfoService {
 	}
 
 	@Override
-	public List<DTOPersonInfo> getPersonInfo(String firstName, String lastName) {
+	public List<DTOPersonInfo> getPersonInfo(String firstName, String lastName) throws PersonNotFoundException {
 
 		List<DTOPersonInfo> personsInfoList = new ArrayList<DTOPersonInfo>();
 		

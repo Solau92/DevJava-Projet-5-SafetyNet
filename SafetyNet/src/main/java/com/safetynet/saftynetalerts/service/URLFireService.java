@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirePerson;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
@@ -28,7 +29,7 @@ public class URLFireService implements IURLFireService {
 	}
 	
 	@Override
-	public DTOFire getFire(String address) {
+	public DTOFire getFire(String address) throws PersonNotFoundException {
 		
 		DTOFire dtoFire = new DTOFire();
 		List<DTOFirePerson> firePersonsList = new ArrayList<DTOFirePerson>();

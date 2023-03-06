@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.safetynet.saftynetalerts.exception.NotFoundException;
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.service.IPersonService;
 
@@ -29,7 +30,7 @@ public class PersonsController {
 	}
 	
 	@GetMapping("/persons")
-	public ResponseEntity<List<Person>> getPersons() throws NotFoundException {
+	public ResponseEntity<List<Person>> getPersons() throws PersonNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getAllPersons());
 	}
 
@@ -70,13 +71,13 @@ public class PersonsController {
 
 	// Essai exception 
 	@GetMapping("/person")
-	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) throws NotFoundException {			
+	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) throws PersonNotFoundException {			
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));		
 	}	
 	
 	
 	@GetMapping("/personByAddress")
-	public List<Person> getPersonsByAddress(@RequestParam("address") String address) {
+	public List<Person> getPersonsByAddress(@RequestParam("address") String address) throws PersonNotFoundException {
 		return personService.getPersonsByAddress(address);
 	}
 

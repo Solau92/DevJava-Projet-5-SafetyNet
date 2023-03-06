@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
@@ -47,7 +48,7 @@ public class URLController {
 	}
 
 	@GetMapping("/firestation")
-	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId) {
+	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId) throws PersonNotFoundException {
 		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED)
 				.body(URLFirestationService.getFirestation(stationId));
 		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();
@@ -64,23 +65,23 @@ public class URLController {
 	}
 
 	@GetMapping("/phoneAlert")
-	public ResponseEntity<List<String>> getPhoneAlert(@RequestParam("firestation") int stationId) {
+	public ResponseEntity<List<String>> getPhoneAlert(@RequestParam("firestation") int stationId) throws PersonNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLPhoneAlertService.getPhoneAlert(stationId));
 	}
 
 	@GetMapping("/fire")
-	public ResponseEntity<DTOFire> getFire(@RequestParam("address") String address) {
+	public ResponseEntity<DTOFire> getFire(@RequestParam("address") String address) throws PersonNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFireService.getFire(address));
 	}
 
 	@GetMapping("/personInfo")
 	public ResponseEntity<List<DTOPersonInfo>> getPersonInfo(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName) {
+			@RequestParam("lastName") String lastName) throws PersonNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLPersonInfoService.getPersonInfo(firstName, lastName));
 	}
 
 	@GetMapping("/flood/stations")
-	public ResponseEntity<List<DTOFlood>> getFlood(@RequestParam("stations") List<Integer> stationIdList) {
+	public ResponseEntity<List<DTOFlood>> getFlood(@RequestParam("stations") List<Integer> stationIdList) throws PersonNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(URLFloodService.getFlood(stationIdList));
 	}
 	
