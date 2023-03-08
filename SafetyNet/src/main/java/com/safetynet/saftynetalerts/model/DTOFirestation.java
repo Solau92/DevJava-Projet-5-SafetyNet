@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class DTOFirestation {
 
-	@JsonProperty("firestationPersons")
+	@JsonProperty("Persons")
 	private List<DTOFirestationPerson> firestationPersons;
 	
 	@JsonProperty("numberOfAdults")

@@ -1,6 +1,7 @@
 package com.safetynet.saftynetalerts.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,9 @@ import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PersonService implements IPersonService {
 	
@@ -38,6 +42,7 @@ public class PersonService implements IPersonService {
 	public List<Person> getPersonsByAddress(String address) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByAddress(address);
 		if(list.isEmpty()) {
+			log.error("Nobody found at this address : {}", address);
 			throw new PersonNotFoundException("Nobody found at this address : " + address);
 		}
 		return list;
@@ -47,13 +52,14 @@ public class PersonService implements IPersonService {
 		List<Person> list = persons.getPersonsByFirstNameAndLastName(firstName, lastName);
 		if(list.isEmpty()) {
 			throw new PersonNotFoundException(firstName + " " + lastName + " was not found");
-		} else if(list.size() > 1) {
-			throw new MoreThanOnePersonFoundException("There's more than one " + firstName + " " + lastName);
+//		} else if(list.size() > 1) {
+//			throw new MoreThanOnePersonFoundException("There's more than one " + firstName + " " + lastName);
 		}
 		return list;
 	}
 
-	public List<String> getCommunityEmail(String city) {
+	// Quelles erreurs ? 
+	public Set<String> getCommunityEmail(String city) {
 		return persons.getCommunityEmail(city);
 	}
 
@@ -81,8 +87,8 @@ public class PersonService implements IPersonService {
 		}	
 	}
 
-	public List<Person> getPersonByLastNameAndAddress(String lastName, String address) throws PersonNotFoundException {
-		List<Person> list = persons.getPersonByLastNameAndAddress(lastName, address);
+	public List<Person> getPersonsByLastNameAndAddress(String lastName, String address) throws PersonNotFoundException {
+		List<Person> list = persons.getPersonsByLastNameAndAddress(lastName, address);
 		if(list.isEmpty()) {
 			throw new PersonNotFoundException(lastName + " was not found at this address : " + address);
 		}

@@ -55,7 +55,7 @@ public class MedicalRecordsRepository {
 	}
 
 	public List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName) {
-		List<MedicalRecord> medicalRecordsList = new ArrayList<MedicalRecord>();
+		List<MedicalRecord> medicalRecordsList = new ArrayList<>();
 		for (MedicalRecord mr : medicalRecords) {
 			if (mr.getFirstName().equalsIgnoreCase(firstName) && mr.getLastName().equalsIgnoreCase(lastName)) {
 				medicalRecordsList.add(mr);

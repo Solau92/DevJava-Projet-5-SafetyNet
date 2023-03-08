@@ -25,9 +25,8 @@ public class FirestationsRepository {
 	}
 
 	public FirestationSpot update(FirestationSpot firestation) {
-
 		for (int i = 0; i < firestations.size(); i++) {
-			if (firestation.getAddress().equals(firestations.get(i).getAddress())) {
+			if (firestation.getAddress().equalsIgnoreCase(firestations.get(i).getAddress())) {
 				firestations.remove(firestations.get(i));
 			}
 		}
@@ -37,7 +36,7 @@ public class FirestationsRepository {
 
 	public void deleteFirestation(String address) {
 		for (int i = 0; i < firestations.size(); i++) {
-			if (firestations.get(i).getAddress().equals(address)) {
+			if (firestations.get(i).getAddress().equalsIgnoreCase(address)) {
 				firestations.remove(firestations.get(i));
 			}
 		}
@@ -52,7 +51,7 @@ public class FirestationsRepository {
 	}
 
 	public List<String> getAddressesWithId(int stationId) {
-		List<String> addressesList = new ArrayList<String>();
+		List<String> addressesList = new ArrayList<>();
 		for (FirestationSpot f : firestations) {
 			if (f.getIdStation() == stationId) {
 				addressesList.add(f.getAddress());
@@ -71,7 +70,7 @@ public class FirestationsRepository {
 	}
 
 	public List<String> getAllAddresses() {
-		List<String> addressesList = new ArrayList<String>();
+		List<String> addressesList = new ArrayList<>();
 		for (FirestationSpot f : firestations) {
 			addressesList.add(f.getAddress());
 		}

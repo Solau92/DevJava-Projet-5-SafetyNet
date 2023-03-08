@@ -19,8 +19,6 @@ public interface IMedicalRecordService {
 
 	boolean isPersonAdult(String firstName, String lastName) throws MedicalRecordNotFoundException;
 
-//	MedicalRecord getMedicalRecordByFirstNameAndLastName(String firstName, String lastName) throws MedicalRecordNotFoundException;
-
 	List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName) throws MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException;
 
 }

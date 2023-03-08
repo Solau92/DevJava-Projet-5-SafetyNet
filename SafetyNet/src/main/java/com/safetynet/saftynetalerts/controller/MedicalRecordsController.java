@@ -31,15 +31,13 @@ public class MedicalRecordsController {
 	}
 
 	@PostMapping("/medicalRecord")
-	public ResponseEntity<String> createMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordAlreadyExistsException {
-		medicalRecordsService.saveMedicalRecord(medicalRecord);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<MedicalRecord> createMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordAlreadyExistsException {
+		return ResponseEntity.status(HttpStatus.CREATED).body(medicalRecordsService.saveMedicalRecord(medicalRecord));
 	}
 
 	@PutMapping("/medicalRecord")
-	public ResponseEntity<String> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordNotFoundException {
-		medicalRecordsService.updateMedicalRecord(medicalRecord);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+	public ResponseEntity<MedicalRecord> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordNotFoundException {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicalRecordsService.updateMedicalRecord(medicalRecord));
 	}
 
 	@DeleteMapping("/medicalRecord")

@@ -16,7 +16,7 @@ public interface IFirestationService {
 	
 	void deleteFirestationByAddress(String adress) throws FirestationNotFoundException;
 	
-	void deleteFirestationById(int stationId);
+//	void deleteFirestationById(int stationId);
 	
 	List<String> getAddressesWithId(int stationId) throws FirestationNotFoundException;
 

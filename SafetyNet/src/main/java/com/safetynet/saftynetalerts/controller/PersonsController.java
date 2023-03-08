@@ -1,6 +1,8 @@
 package com.safetynet.saftynetalerts.controller;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,15 +32,13 @@ public class PersonsController {
 	}
 
 	@PostMapping("/person")
-	public ResponseEntity<String> createPerson(@RequestBody Person person) throws PersonAlreadyExistsException {
-		personService.savePerson(person);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<Person> createPerson(@RequestBody Person person) throws PersonAlreadyExistsException {
+		return ResponseEntity.status(HttpStatus.CREATED).body(personService.savePerson(person));
 	}
 
 	@PutMapping("/person")
-	public ResponseEntity<String> updatePerson(@RequestBody Person person) throws PersonNotFoundException {
-		personService.updatePerson(person);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+	public ResponseEntity<Person> updatePerson(@RequestBody Person person) throws PersonNotFoundException {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.updatePerson(person));
 	}
  
 	@DeleteMapping("/person")
@@ -54,13 +54,13 @@ public class PersonsController {
 	}		
 	
 	@GetMapping("/personByAddress")
-	public List<Person> getPersonsByAddress(@RequestParam("address") String address) throws PersonNotFoundException {
-		return personService.getPersonsByAddress(address);
+	public ResponseEntity<List<Person>> getPersonsByAddress(@RequestParam("address") String address) throws PersonNotFoundException {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByAddress(address));
 	}
 
 	@GetMapping("/communityEmail")
-	public List<String> getCommunityEmail(@RequestParam("city") String city) {
-		return personService.getCommunityEmail(city);
+	public ResponseEntity<Set<String>> getCommunityEmail(@RequestParam("city") String city) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getCommunityEmail(city));
 	}
 
 }

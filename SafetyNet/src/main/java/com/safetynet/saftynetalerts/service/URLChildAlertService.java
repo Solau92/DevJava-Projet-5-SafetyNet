@@ -50,7 +50,7 @@ public class URLChildAlertService implements IURLChildAlertService {
 				dTOChild.setAge(ChronoUnit.YEARS.between(medicalRecords.get(0).getBirthdate(), LocalDate.now()));
 
 				// Membres de la famille
-				List<Person> familyMembers = personService.getPersonByLastNameAndAddress(p.getLastName(),
+				List<Person> familyMembers = personService.getPersonsByLastNameAndAddress(p.getLastName(),
 						p.getAddress());
 
 				// Enlever l'enfant de la liste

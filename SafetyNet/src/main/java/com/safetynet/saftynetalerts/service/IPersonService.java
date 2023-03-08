@@ -1,6 +1,7 @@
 package com.safetynet.saftynetalerts.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
 import com.safetynet.saftynetalerts.exception.PersonAlreadyExistsException;
@@ -17,7 +18,7 @@ public interface IPersonService {
 
 	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) throws PersonNotFoundException, MoreThanOnePersonFoundException;
 
-	public List<String> getCommunityEmail(String city);
+	public Set<String> getCommunityEmail(String city);
 
 	public Person savePerson(Person person) throws PersonAlreadyExistsException;
 

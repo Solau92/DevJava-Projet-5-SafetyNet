@@ -1,6 +1,8 @@
 package com.safetynet.saftynetalerts.controller;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,7 +73,7 @@ public class URLController {
 	}
 
 	@GetMapping("/phoneAlert")
-	public ResponseEntity<List<String>> getPhoneAlert(@RequestParam("firestation") int stationId)
+	public ResponseEntity<Set<String>> getPhoneAlert(@RequestParam("firestation") int stationId)
 			throws PersonNotFoundException, FirestationNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLPhoneAlertService.getPhoneAlert(stationId));
 	}

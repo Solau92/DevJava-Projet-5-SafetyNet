@@ -73,8 +73,8 @@ public class MedicalRecordService implements IMedicalRecordService {
 		List<MedicalRecord> list = medicalRecords.getMedicalRecordsByFirstNameAndLastName(firstName, lastName);
 		if (list.isEmpty()) {
 			throw new MedicalRecordNotFoundException(firstName + " " + lastName + "'s medical record was not found");
-		} else if (list.size() > 1) {
-			throw new MoreThanOneMedicalRecordFoundException("There's more than one medical record for " + firstName + " " + lastName);
+//		} else if (list.size() > 1) {
+//			throw new MoreThanOneMedicalRecordFoundException("There's more than one medical record for " + firstName + " " + lastName);
 		}
 		return list;
 	}

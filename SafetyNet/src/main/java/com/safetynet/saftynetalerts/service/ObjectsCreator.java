@@ -1,6 +1,8 @@
 package com.safetynet.saftynetalerts.service;
 
 import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
@@ -23,13 +25,17 @@ public class ObjectsCreator implements IObjectsCreator {
 	private final FirestationsRepository firestationsList;
 	
 	private final MedicalRecordsRepository medicalRecordsList;
+	
+//	private final String filePath;
+	@Value("${com.safetynet.saftynetalerts.path}")
+	private String filePath;
 
-	String filePath = "./src/main/resources/data.json"; 
 	
 	public ObjectsCreator(PersonsRepository personsList, FirestationsRepository firestationsList, MedicalRecordsRepository medicalRecordsList) {
 		this.personsList = personsList;
 		this.firestationsList = firestationsList;
 		this.medicalRecordsList = medicalRecordsList;
+//		this.filePath = filePathProperties.getPath();
 	}
 
 	@Override

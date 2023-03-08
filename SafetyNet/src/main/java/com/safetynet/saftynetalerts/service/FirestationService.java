@@ -56,11 +56,11 @@ public class FirestationService implements IFirestationService {
 		}
 	}
 
-	// TODO : voir si je garde
-	@Override
-	public void deleteFirestationById(int stationId) {
-		firestations.deleteFirestation(stationId);
-	}
+//	// TODO : voir si je garde
+//	@Override
+//	public void deleteFirestationById(int stationId) {
+//		firestations.deleteFirestation(stationId);
+//	}
 
 	
 	@Override

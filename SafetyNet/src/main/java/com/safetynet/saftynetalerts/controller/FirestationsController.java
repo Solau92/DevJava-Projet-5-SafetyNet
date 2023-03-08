@@ -31,15 +31,13 @@ public class FirestationsController {
 	}
 	
 	@PostMapping("/firestation")
-	public ResponseEntity<String> createFirestation(@RequestBody FirestationSpot firestation) throws FirestationAlreadyExistsException {
-		firestationService.saveFirestation(firestation);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+	public ResponseEntity<FirestationSpot> createFirestation(@RequestBody FirestationSpot firestation) throws FirestationAlreadyExistsException {
+		return ResponseEntity.status(HttpStatus.CREATED).body(firestationService.saveFirestation(firestation));
 	}
 	
 	@PutMapping("/firestation")
-	public ResponseEntity<String> updateFirestation(@RequestBody FirestationSpot firestation) throws FirestationNotFoundException {
-		firestationService.updateFirestation(firestation);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+	public ResponseEntity<FirestationSpot> updateFirestation(@RequestBody FirestationSpot firestation) throws FirestationNotFoundException {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(firestationService.updateFirestation(firestation));
 	}
 	
 	@DeleteMapping("/firestation")
@@ -48,18 +46,10 @@ public class FirestationsController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();	
 	}
 	
-	// TODO : voir si je garde
-	@DeleteMapping("/firestation/byId")
-	public ResponseEntity<String> deleteFirestationById(@RequestParam("stationId") int stationId) { 
-		firestationService.deleteFirestationById(stationId);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).build();	
-	}
-	
-//	@DeleteMapping("/firestation")
-//	public ResponseEntity<String> deleteFirestationById(@RequestParam("station") int idStation) {
-//		// Si pas trouvé 
-//		// Else (trouvé) : 
-//		firestationService.deleteFirestationById(idStation);
+//	// TODO : voir si je garde
+//	@DeleteMapping("/firestation/byId")
+//	public ResponseEntity<String> deleteFirestationById(@RequestParam("stationId") int stationId) { 
+//		firestationService.deleteFirestationById(stationId);
 //		return ResponseEntity.status(HttpStatus.ACCEPTED).build();	
 //	}
 	

@@ -1,7 +1,9 @@
 package com.safetynet.saftynetalerts.repository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,9 +22,9 @@ public class PersonsRepository {
 	}
 
 	public List<Person> getPersonsByLastName(String lastName) {
-		List<Person> personsByName = new ArrayList<Person>();
+		List<Person> personsByName = new ArrayList<>();
 		for (Person p : persons) {
-			if (p.getLastName().equals(lastName)) {
+			if (p.getLastName().equalsIgnoreCase(lastName)) {
 				personsByName.add(p);
 			}
 		}
@@ -30,9 +32,9 @@ public class PersonsRepository {
 	}
 
 	public List<Person> getPersonsByAddress(String address) {
-		List<Person> inhabitants = new ArrayList<Person>();
+		List<Person> inhabitants = new ArrayList<>();
 		for (Person p : persons) {
-			if (p.getAddress().equals(address)) {
+			if (p.getAddress().equalsIgnoreCase(address)) {
 				inhabitants.add(p);
 			}
 		}
@@ -40,19 +42,19 @@ public class PersonsRepository {
 	}
 
 	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) {
-		List<Person> personsByFirstNameAndLastName = new ArrayList<Person>();
+		List<Person> personsByFirstNameAndLastName = new ArrayList<>();
 		for (Person p : persons) {
-			if (p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)) {
+			if (p.getFirstName().equalsIgnoreCase(firstName) && p.getLastName().equalsIgnoreCase(lastName)) {
 				personsByFirstNameAndLastName.add(p);
 			}
 		}
 		return personsByFirstNameAndLastName;
 	}
 
-	public List<String> getCommunityEmail(String city) {
-		List<String> communityEmail = new ArrayList<String>();
+	public Set<String> getCommunityEmail(String city) {
+		Set<String> communityEmail = new HashSet<>();
 		for (Person p : persons) {
-			if (p.getCity().equals(city)) {
+			if (p.getCity().equalsIgnoreCase(city)) {
 				communityEmail.add(p.getEmail());
 			}
 		}
@@ -82,8 +84,8 @@ public class PersonsRepository {
 		}		
 	}
 
-	public List<Person> getPersonByLastNameAndAddress(String lastName, String address) {
-		List<Person> personsByFirstNameAndAddress = new ArrayList<Person>();
+	public List<Person> getPersonsByLastNameAndAddress(String lastName, String address) {
+		List<Person> personsByFirstNameAndAddress = new ArrayList<>();
 		for (Person p : persons) {
 			if (p.getLastName().equalsIgnoreCase(lastName) && p.getAddress().equalsIgnoreCase(address)) {
 				personsByFirstNameAndAddress.add(p);

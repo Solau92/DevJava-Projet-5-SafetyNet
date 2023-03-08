@@ -1,7 +1,9 @@
 package com.safetynet.saftynetalerts.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -22,14 +24,13 @@ public class URLPhoneAlertService implements IURLPhoneAlertService {
 	}
 
 	@Override
-	public List<String> getPhoneAlert(int stationId) throws PersonNotFoundException, FirestationNotFoundException {
+	public Set<String> getPhoneAlert(int stationId) throws PersonNotFoundException, FirestationNotFoundException {
 	
-		List<String> phoneList = new ArrayList<String>();
-		List<String> addressesList = new ArrayList<String>();
+		Set<String> phoneList = new HashSet<String>();
 		List<Person> personsList = new ArrayList<Person>();
 
 		// Avec la stationId --> liste d'adresses
-		addressesList = firestationService.getAddressesWithId(stationId);
+		List<String>addressesList = firestationService.getAddressesWithId(stationId);
 
 		// liste d'adresse --> liste de personnes
 		for (String s : addressesList) {
