@@ -16,7 +16,9 @@ import com.safetynet.saftynetalerts.exception.PersonAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.service.IPersonService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 public class PersonsController {
 
@@ -28,38 +30,45 @@ public class PersonsController {
 	
 	@GetMapping("/persons")
 	public ResponseEntity<List<Person>> getPersons() throws PersonNotFoundException {
+		log.info("Request : get all Persons");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getAllPersons());
 	}
 
 	@PostMapping("/person")
 	public ResponseEntity<Person> createPerson(@RequestBody Person person) throws PersonAlreadyExistsException {
+		log.info("Request : save person named {} {}", person.getFirstName(), person.getLastName());
 		return ResponseEntity.status(HttpStatus.CREATED).body(personService.savePerson(person));
 	}
 
 	@PutMapping("/person")
 	public ResponseEntity<Person> updatePerson(@RequestBody Person person) throws PersonNotFoundException {
+		log.info("Request : update person named {} {}", person.getFirstName(), person.getLastName());
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.updatePerson(person));
 	}
  
 	@DeleteMapping("/person")
-	public ResponseEntity<String> deletePerson(@RequestParam("firstName") String firstName,
+	public ResponseEntity<Void> deletePerson(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName) throws PersonNotFoundException {
+		log.info("Request : delete person named {} {}", firstName, lastName);
 		personService.deletePerson(firstName, lastName);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
 	
 	@GetMapping("/person")
 	public ResponseEntity<List<Person>> getPersonsByLastName(@RequestParam("lastName") String lastName) throws PersonNotFoundException {			
+		log.info("Request : get Person by name : {}", lastName);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByLastName(lastName));		
 	}		
 	
 	@GetMapping("/personByAddress")
 	public ResponseEntity<List<Person>> getPersonsByAddress(@RequestParam("address") String address) throws PersonNotFoundException {
+		log.info("Request : get Person by address : {}", address);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getPersonsByAddress(address));
 	}
 
 	@GetMapping("/communityEmail")
 	public ResponseEntity<Set<String>> getCommunityEmail(@RequestParam("city") String city) {
+		log.info("Request : get emails of people from this city : {}", city);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(personService.getCommunityEmail(city));
 	}
 

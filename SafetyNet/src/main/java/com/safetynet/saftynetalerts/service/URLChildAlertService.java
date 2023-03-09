@@ -8,15 +8,16 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 import com.safetynet.saftynetalerts.model.Person;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
 public class URLChildAlertService implements IURLChildAlertService {
-
+	
 	private final PersonService personService;
 
 	private final MedicalRecordService medicalRecordService;
@@ -28,7 +29,7 @@ public class URLChildAlertService implements IURLChildAlertService {
 
 	@Override
 	public List<DTOChildAlert> getChildAlert(String address)
-			throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException {
+			throws PersonNotFoundException, MedicalRecordNotFoundException {
 
 		List<DTOChildAlert> childAlertList = new ArrayList<DTOChildAlert>();
 
@@ -50,6 +51,7 @@ public class URLChildAlertService implements IURLChildAlertService {
 				dTOChild.setAge(ChronoUnit.YEARS.between(medicalRecords.get(0).getBirthdate(), LocalDate.now()));
 
 				// Membres de la famille
+
 				List<Person> familyMembers = personService.getPersonsByLastNameAndAddress(p.getLastName(),
 						p.getAddress());
 

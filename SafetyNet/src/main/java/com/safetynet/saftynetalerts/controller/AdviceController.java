@@ -14,9 +14,6 @@ import com.safetynet.saftynetalerts.exception.FirestationAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneFirestationFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
 import com.safetynet.saftynetalerts.exception.PersonAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 
@@ -54,14 +51,6 @@ public class AdviceController extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(MoreThanOnePersonFoundException.class)
-	public ResponseEntity<Object> moreThanOnePersonFoundExceptionHandler(MoreThanOnePersonFoundException ex, WebRequest request) {
-		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
-		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-	}
-
-	
 	@ExceptionHandler(MedicalRecordNotFoundException.class)
 	public ResponseEntity<Object> medicalRecordNotFoundExceptionHandler(MedicalRecordNotFoundException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
@@ -76,14 +65,6 @@ public class AdviceController extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(MoreThanOneMedicalRecordFoundException.class)
-	public ResponseEntity<Object> moreThanOneMedicalRecordFoundExceptionHandler(MoreThanOneMedicalRecordFoundException ex, WebRequest request) {
-		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
-		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-	}
-	
-	
 	@ExceptionHandler(FirestationNotFoundException.class)
 	public ResponseEntity<Object> firestationNotFoundExceptionHandler(FirestationNotFoundException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
@@ -97,11 +78,5 @@ public class AdviceController extends ResponseEntityExceptionHandler {
 		body.put("message : ", ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
-	
-	@ExceptionHandler(MoreThanOneFirestationFoundException.class)
-	public ResponseEntity<Object> moreThanOneFirestationFoundExceptionHandler(MoreThanOneFirestationFoundException ex, WebRequest request) {
-		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
-		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-	}
+
 }

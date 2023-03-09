@@ -22,7 +22,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
 import com.safetynet.saftynetalerts.exception.PersonAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
@@ -131,7 +130,7 @@ class PersonServiceTest {
 	}
 	
 	@Test
-	void getPersonsByFirstNameAndLastName_Success_Test() throws PersonNotFoundException, MoreThanOnePersonFoundException {
+	void getPersonsByFirstNameAndLastName_Success_Test() throws PersonNotFoundException {
 		
 		// GIVEN
 		when(persons.getPersonsByFirstNameAndLastName(anyString(), anyString())).thenReturn(listMock);
@@ -158,7 +157,7 @@ class PersonServiceTest {
 	}
 
 	@Test
-	void getPersonsByLasNameAndAddress_Success_Test() throws PersonNotFoundException, MoreThanOnePersonFoundException {
+	void getPersonsByLasNameAndAddress_Success_Test() throws PersonNotFoundException {
 		
 		// GIVEN
 		when(persons.getPersonsByLastNameAndAddress(anyString(), anyString())).thenReturn(listMock);

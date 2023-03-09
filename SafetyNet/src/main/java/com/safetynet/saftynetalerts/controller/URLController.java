@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
-import com.safetynet.saftynetalerts.model.DTOFirestationPerson;
 import com.safetynet.saftynetalerts.model.DTOFlood;
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.service.IURLChildAlertService;
@@ -27,6 +24,9 @@ import com.safetynet.saftynetalerts.service.IURLFloodService;
 import com.safetynet.saftynetalerts.service.IURLPersonInfoService;
 import com.safetynet.saftynetalerts.service.IURLPhoneAlertService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class URLController {
 
@@ -69,41 +69,47 @@ public class URLController {
 	@GetMapping("/firestation")
 	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId)
 			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
-		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED)
-				.body(uRLFirestationService.getFirestation(stationId));
-		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();
+//		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED)
+//				.body(uRLFirestationService.getFirestation(stationId));
+//		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();
+		log.info("Request : return a list of Persons living in the area covered by station id : {}", stationId);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLFirestationService.getFirestation(stationId));
 	}
 
 	@GetMapping("/childAlert")
 	public ResponseEntity<List<DTOChildAlert>> getChildAlert(@RequestParam("address") String address)
-			throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException {
+			throws PersonNotFoundException, MedicalRecordNotFoundException {
+		log.info("Request : return a list of children living at this address : {}, and their family members", address);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLChildAlertService.getChildAlert(address));
 	}
 
 	@GetMapping("/phoneAlert")
 	public ResponseEntity<Set<String>> getPhoneAlert(@RequestParam("firestation") int stationId)
 			throws PersonNotFoundException, FirestationNotFoundException {
+		log.info("Request : return a list of phone numbers of inhabitants in the area of a the firestation number {}", stationId);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLPhoneAlertService.getPhoneAlert(stationId));
 	}
 
 	@GetMapping("/fire")
 	public ResponseEntity<DTOFire> getFire(@RequestParam("address") String address) throws PersonNotFoundException,
-			MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException, FirestationNotFoundException {
+			MedicalRecordNotFoundException, FirestationNotFoundException {
+		log.info("Request : return a list of inhabitants at this address : {}, and the id of the firestation corresponding", address);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLFireService.getFire(address));
 	}
 
 	@GetMapping("/flood/stations")
 	public ResponseEntity<List<DTOFlood>> getFlood(@RequestParam("stations") List<Integer> stationIdList)
-			throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException,
+			throws PersonNotFoundException, MedicalRecordNotFoundException,
 			FirestationNotFoundException {
+		log.info("Request : return a list of families in the area of the firestation with the id : {}", stationIdList);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLFloodService.getFlood(stationIdList));
 	}
 
 	@GetMapping("/personInfo")
 	public ResponseEntity<List<DTOPersonInfo>> getPersonInfo(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName) throws PersonNotFoundException, MoreThanOnePersonFoundException,
-			MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException {
+			@RequestParam("lastName") String lastName) throws PersonNotFoundException,
+			MedicalRecordNotFoundException {
+		log.info("Request : return informations about the person named {} {}", firstName, lastName);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLPersonInfoService.getPersonInfo(firstName, lastName));
 	}
 

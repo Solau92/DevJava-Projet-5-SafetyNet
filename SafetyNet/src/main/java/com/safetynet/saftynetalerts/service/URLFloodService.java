@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFlood;
 import com.safetynet.saftynetalerts.model.DTOFloodPerson;
@@ -31,7 +30,7 @@ public class URLFloodService implements IURLFloodService {
 	}
 	
 	@Override
-	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException, FirestationNotFoundException  {
+	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException  {
 
 		List<DTOFlood> dtoFloodList = new ArrayList<DTOFlood>();
 		

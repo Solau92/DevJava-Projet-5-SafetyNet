@@ -16,6 +16,9 @@ import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 import com.safetynet.saftynetalerts.service.IMedicalRecordService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class MedicalRecordsController {
 
@@ -27,22 +30,26 @@ public class MedicalRecordsController {
 
 	@GetMapping("/medicalRecords")
 	public ResponseEntity<List<MedicalRecord>> getMedicalRecords() throws MedicalRecordNotFoundException {
+		log.info("Request : get all MedicalRecords");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicalRecordsService.getAllMedicalRecords());
 	}
 
 	@PostMapping("/medicalRecord")
 	public ResponseEntity<MedicalRecord> createMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordAlreadyExistsException {
+		log.info("Request : save medical record for person named {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
 		return ResponseEntity.status(HttpStatus.CREATED).body(medicalRecordsService.saveMedicalRecord(medicalRecord));
 	}
 
 	@PutMapping("/medicalRecord")
 	public ResponseEntity<MedicalRecord> updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) throws MedicalRecordNotFoundException {
+		log.info("Request : update medical record for person named {} {}", medicalRecord.getFirstName(), medicalRecord.getLastName());
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicalRecordsService.updateMedicalRecord(medicalRecord));
 	}
 
 	@DeleteMapping("/medicalRecord")
-	public ResponseEntity<String> deleteMedicalRecord(@RequestParam("firstName") String firstName,
+	public ResponseEntity<Void> deleteMedicalRecord(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName) throws MedicalRecordNotFoundException {
+		log.info("Request : delete medical record for person named {} {}", firstName, lastName);
 		medicalRecordsService.deleteMedicalRecord(firstName, lastName);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 

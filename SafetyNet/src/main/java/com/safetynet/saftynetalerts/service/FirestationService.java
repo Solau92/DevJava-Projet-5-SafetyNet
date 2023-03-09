@@ -9,6 +9,9 @@ import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class FirestationService implements IFirestationService {
 
@@ -21,8 +24,10 @@ public class FirestationService implements IFirestationService {
 	public List<Firestation> getAllFirestations() throws FirestationNotFoundException {
 		List<Firestation> list = firestations.getAllFirestations();
 		if (list.isEmpty()) {
+			log.error("No firestation found");
 			throw new FirestationNotFoundException("No firestation found");
 		}
+		log.debug("Answer : ok");
 		return list;
 	}
 
@@ -30,8 +35,11 @@ public class FirestationService implements IFirestationService {
 	public Firestation saveFirestation(Firestation firestation) throws FirestationAlreadyExistsException {
 		List<String> addresses = firestations.getAllAddresses();
 		if (addresses.contains(firestation.getAddress())) {
+			log.error("Answer : The firestation corresponding to this address : {} already exists",
+					firestation.getAddress());
 			throw new FirestationAlreadyExistsException("This address is already registred");
 		} else {
+			log.info("Answer : The firestation corresponding to this address : {} was saved", firestation.getAddress());
 			return firestations.save(firestation);
 		}
 	}
@@ -40,8 +48,10 @@ public class FirestationService implements IFirestationService {
 	public Firestation updateFirestation(Firestation firestation) throws FirestationNotFoundException {
 		List<String> addresses = firestations.getAllAddresses();
 		if (!addresses.contains(firestation.getAddress())) {
+			log.error("Answer : Firestation spot not found for this address : {}", firestation.getAddress());
 			throw new FirestationNotFoundException("Firestation spot not found for this address");
 		} else {
+			log.info("Answer : Firestation for this address : {} was updated", firestation.getAddress());
 			return firestations.update(firestation);
 		}
 	}
@@ -50,9 +60,11 @@ public class FirestationService implements IFirestationService {
 	public void deleteFirestationByAddress(String address) throws FirestationNotFoundException {
 		List<String> addresses = firestations.getAllAddresses();
 		if (!addresses.contains(address)) {
+			log.error("Answer : Firestation spot not found for this address : {}", address);
 			throw new FirestationNotFoundException("Firestation spot not found for this address");
 		} else {
-		firestations.deleteFirestation(address);
+			log.info("Answer : Firestation for this address : {} was deleted", address);
+			firestations.deleteFirestation(address);
 		}
 	}
 
@@ -62,25 +74,29 @@ public class FirestationService implements IFirestationService {
 //		firestations.deleteFirestation(stationId);
 //	}
 
-	
 	@Override
 	public List<String> getAddressesWithId(int stationId) throws FirestationNotFoundException {
 		List<String> list = firestations.getAddressesWithId(stationId);
-		if(list.isEmpty()) {
+		if (list.isEmpty()) {
+			log.error("Answer : No address found for the station : {}", stationId);
 			throw new FirestationNotFoundException("No address found for the station : " + stationId);
 		}
+		log.debug("Answer : One or more adresses were found for this station id : {}", stationId);
 		return list;
 	}
 
 	@Override
 	public int getIdWithAddress(String address) throws FirestationNotFoundException {
 		int id = firestations.getIdWithAddress(address);
-		if(id == 0) {
+		if (id == 0) {
+			log.error("Answer : Firestation id not found, this address : {} does not exists", address);
 			throw new FirestationNotFoundException("Station id not found, address does not exists");
 		}
-		return id ;
+		log.debug("Answer : Firestation id found for this address : {}", address);
+		return id;
 	}
 
+	// Quelles erreurs ? 
 	@Override
 	public List<String> getAllAddresses() {
 		return firestations.getAllAddresses();

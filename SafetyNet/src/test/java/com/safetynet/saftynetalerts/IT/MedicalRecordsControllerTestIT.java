@@ -1,4 +1,4 @@
-package com.safetynet.saftynetalerts.controller;
+package com.safetynet.saftynetalerts.IT;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MedicalRecordsControllerTest {
+public class MedicalRecordsControllerTestIT {
 	
 	@Autowired
 	private MockMvc mockMvc;

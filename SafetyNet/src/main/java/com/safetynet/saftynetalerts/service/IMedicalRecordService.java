@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.safetynet.saftynetalerts.exception.MedicalRecordAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 
 public interface IMedicalRecordService {
@@ -19,6 +18,6 @@ public interface IMedicalRecordService {
 
 	boolean isPersonAdult(String firstName, String lastName) throws MedicalRecordNotFoundException;
 
-	List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName) throws MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException;
+	List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName) throws MedicalRecordNotFoundException;
 
 }

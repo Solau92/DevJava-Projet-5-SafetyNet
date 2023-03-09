@@ -1,4 +1,4 @@
-package com.safetynet.saftynetalerts.controller;
+package com.safetynet.saftynetalerts.IT;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -16,7 +16,7 @@ import org.springframework.util.MultiValueMap;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class URLControllerTest {
+public class URLControllerTestIT {
 	
 	@Autowired
 	private MockMvc mockMvc;

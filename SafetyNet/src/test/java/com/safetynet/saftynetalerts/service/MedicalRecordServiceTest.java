@@ -23,12 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.safetynet.saftynetalerts.exception.MedicalRecordAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
-import com.safetynet.saftynetalerts.exception.PersonAlreadyExistsException;
-import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
-import com.safetynet.saftynetalerts.model.Person;
 import com.safetynet.saftynetalerts.repository.MedicalRecordsRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -199,7 +194,7 @@ public class MedicalRecordServiceTest {
 	}
 	
 	@Test
-	void getMedicalRecordsByFirstNameAndLastName_Success_Test() throws MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException {
+	void getMedicalRecordsByFirstNameAndLastName_Success_Test() throws MedicalRecordNotFoundException {
 		
 		// GIVEN
 		when(medicalRecords.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString())).thenReturn(listMock);

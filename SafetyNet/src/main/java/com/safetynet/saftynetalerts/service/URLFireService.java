@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOFire;
 import com.safetynet.saftynetalerts.model.DTOFirePerson;
@@ -32,7 +31,7 @@ public class URLFireService implements IURLFireService {
 	}
 	
 	@Override
-	public DTOFire getFire(String address) throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException, FirestationNotFoundException {
+	public DTOFire getFire(String address) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
 		
 		DTOFire dtoFire = new DTOFire();
 		List<DTOFirePerson> firePersonsList = new ArrayList<DTOFirePerson>();

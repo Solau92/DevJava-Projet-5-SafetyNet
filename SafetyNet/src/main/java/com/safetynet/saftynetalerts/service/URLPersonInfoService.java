@@ -8,8 +8,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOneMedicalRecordFoundException;
-import com.safetynet.saftynetalerts.exception.MoreThanOnePersonFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOPersonInfo;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
@@ -28,7 +26,7 @@ public class URLPersonInfoService implements IURLPersonInfoService {
 	}
 
 	@Override
-	public List<DTOPersonInfo> getPersonInfo(String firstName, String lastName) throws PersonNotFoundException, MedicalRecordNotFoundException, MoreThanOneMedicalRecordFoundException, MoreThanOnePersonFoundException {
+	public List<DTOPersonInfo> getPersonInfo(String firstName, String lastName) throws PersonNotFoundException, MedicalRecordNotFoundException {
 
 		List<DTOPersonInfo> personsInfoList = new ArrayList<DTOPersonInfo>();
 		
@@ -59,7 +57,7 @@ public class URLPersonInfoService implements IURLPersonInfoService {
 		 * medicalService.getMedicalRecordForAPerson(person); return
 		 * DTOPErsonInfoFactory.makeDto(person, record); })
 		 */
-		
+				
 		return personsInfoList;
 	}
 
