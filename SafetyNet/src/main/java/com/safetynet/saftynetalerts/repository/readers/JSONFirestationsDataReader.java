@@ -7,7 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 
 public class JSONFirestationsDataReader implements IDataFirestationsReader {
 
@@ -19,7 +19,7 @@ public class JSONFirestationsDataReader implements IDataFirestationsReader {
 	
 
 	@Override
-	public List<FirestationSpot> readFirestations() throws IOException {
+	public List<Firestation> readFirestations() throws IOException {
 		
 		File file = new File(filePath);
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -27,7 +27,7 @@ public class JSONFirestationsDataReader implements IDataFirestationsReader {
 
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		
-		return objectMapper2.readValue(firestationsNode.toString(), new TypeReference<List<FirestationSpot>>() {});
+		return objectMapper2.readValue(firestationsNode.toString(), new TypeReference<List<Firestation>>() {});
 	}
 
 }

@@ -22,7 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.safetynet.saftynetalerts.exception.FirestationAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,8 +37,8 @@ public class FirestationServiceTest {
 	@Mock
 	private List<String> addresses;
 
-	private static List<FirestationSpot> listMock = new ArrayList<>();
-	private static FirestationSpot firestationTest = new FirestationSpot();
+	private static List<Firestation> listMock = new ArrayList<>();
+	private static Firestation firestationTest = new Firestation();
 	private static List<String> listAddressesMock = new ArrayList<>();
 
 	@BeforeAll
@@ -56,7 +56,7 @@ public class FirestationServiceTest {
 		when(firestations.getAllFirestations()).thenReturn(listMock);
 		
 		// WHEN 
-		List<FirestationSpot> list = firestationService.getAllFirestations();
+		List<Firestation> list = firestationService.getAllFirestations();
 		
 		// THEN 
 		verify(firestations, Mockito.times(1)).getAllFirestations();
@@ -83,10 +83,10 @@ public class FirestationServiceTest {
 		// GIVEN
 		when(firestations.getAllAddresses()).thenReturn(new ArrayList<>());
 //		when(addresses.contains(anyString())).thenReturn(false);
-		when(firestations.save(any(FirestationSpot.class))).thenReturn(firestationTest);
+		when(firestations.save(any(Firestation.class))).thenReturn(firestationTest);
 
 		// WHEN 
-		FirestationSpot firestation = firestationService.saveFirestation(firestationTest);
+		Firestation firestation = firestationService.saveFirestation(firestationTest);
 		
 		// THEN 
 		assertEquals(firestationTest, firestation);
@@ -111,10 +111,10 @@ public class FirestationServiceTest {
 		
 		// GIVEN
 		when(firestations.getAllAddresses()).thenReturn(listAddressesMock);
-		when(firestations.update(any(FirestationSpot.class))).thenReturn(firestationTest);
+		when(firestations.update(any(Firestation.class))).thenReturn(firestationTest);
 
 		// WHEN 
-		FirestationSpot firestation = firestationService.updateFirestation(firestationTest);
+		Firestation firestation = firestationService.updateFirestation(firestationTest);
 		
 		// THEN 
 		assertEquals(firestationTest, firestation);		

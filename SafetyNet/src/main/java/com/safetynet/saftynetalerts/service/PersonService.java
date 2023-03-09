@@ -42,7 +42,7 @@ public class PersonService implements IPersonService {
 	public List<Person> getPersonsByAddress(String address) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByAddress(address);
 		if(list.isEmpty()) {
-			log.error("Nobody found at this address : {}", address);
+//			log.error("Nobody found at this address : {}", address);
 			throw new PersonNotFoundException("Nobody found at this address : " + address);
 		}
 		return list;

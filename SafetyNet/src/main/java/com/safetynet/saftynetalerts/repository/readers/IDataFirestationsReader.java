@@ -3,10 +3,10 @@ package com.safetynet.saftynetalerts.repository.readers;
 import java.io.IOException;
 import java.util.List;
 
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 
 public interface IDataFirestationsReader {
 
-	List<FirestationSpot> readFirestations() throws IOException;
+	List<Firestation> readFirestations() throws IOException;
 
 }

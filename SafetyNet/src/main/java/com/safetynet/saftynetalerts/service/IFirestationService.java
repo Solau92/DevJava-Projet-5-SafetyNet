@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.safetynet.saftynetalerts.exception.FirestationAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 
 public interface IFirestationService {
 
-	List<FirestationSpot> getAllFirestations() throws FirestationNotFoundException;
+	List<Firestation> getAllFirestations() throws FirestationNotFoundException;
 	
-	FirestationSpot saveFirestation(FirestationSpot firestation) throws FirestationAlreadyExistsException;
+	Firestation saveFirestation(Firestation firestation) throws FirestationAlreadyExistsException;
 	
-	FirestationSpot updateFirestation(FirestationSpot firestation) throws FirestationNotFoundException;
+	Firestation updateFirestation(Firestation firestation) throws FirestationNotFoundException;
 	
 	void deleteFirestationByAddress(String adress) throws FirestationNotFoundException;
 	

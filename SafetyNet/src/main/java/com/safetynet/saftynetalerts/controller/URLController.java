@@ -53,16 +53,25 @@ public class URLController {
 		this.uRLPersonInfoService = uRLPersonInfoService;
 	}
 
+//	@GetMapping("/firestation")
+//	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId)
+//			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
+//		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED)
+//				.body(uRLFirestationService.getFirestation(stationId));
+//		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();
+//		if (list.isEmpty()) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(uRLFirestationService.getFirestation(stationId));
+//
+//		}
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLFirestationService.getFirestation(stationId));
+//	}
+	
 	@GetMapping("/firestation")
 	public ResponseEntity<DTOFirestation> getFirestation(@RequestParam("stationNumber") int stationId)
 			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
 		ResponseEntity<DTOFirestation> response = ResponseEntity.status(HttpStatus.ACCEPTED)
 				.body(uRLFirestationService.getFirestation(stationId));
 		List<DTOFirestationPerson> list = response.getBody().getFirestationPersons();
-		if (list.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(uRLFirestationService.getFirestation(stationId));
-
-		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(uRLFirestationService.getFirestation(stationId));
 	}
 

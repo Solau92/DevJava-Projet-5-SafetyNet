@@ -13,7 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.model.Person;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,14 +22,14 @@ public class FirestationsRepositoryTest {
 	@InjectMocks
 	private FirestationsRepository firestationRepository;
 	
-	private static List<FirestationSpot> firestations = new ArrayList<>();
+	private static List<Firestation> firestations = new ArrayList<>();
 	
 	@BeforeEach
 	public void setUp() {
-		FirestationSpot firestation1 = new FirestationSpot();
+		Firestation firestation1 = new Firestation();
 		firestation1.setAddress("address1");
 		firestation1.setIdStation(1);
-		FirestationSpot firestation2 = new FirestationSpot();
+		Firestation firestation2 = new Firestation();
 		firestation2.setAddress("address2");
 		firestation2.setIdStation(2);
 		Collections.addAll(firestations, firestation1, firestation2);
@@ -47,7 +47,7 @@ public class FirestationsRepositoryTest {
 		// GIVEN 
 
 		// WHEN 
-		List<FirestationSpot> list = firestationRepository.getAllFirestations();
+		List<Firestation> list = firestationRepository.getAllFirestations();
 		
 		// THEN 
 		assertEquals(firestations, list);
@@ -57,12 +57,12 @@ public class FirestationsRepositoryTest {
 	public void save_Success_Test() {
 		
 		// GIVEN 
-		FirestationSpot firestation3 = new FirestationSpot();
+		Firestation firestation3 = new Firestation();
 		firestation3.setAddress("address3");
 		firestation3.setIdStation(3);
 
 		// WHEN 
-		FirestationSpot firestationSaved = firestationRepository.save(firestation3);
+		Firestation firestationSaved = firestationRepository.save(firestation3);
 		
 		// THEN 
 		assertEquals(firestationSaved, firestations.get(2));
@@ -72,12 +72,12 @@ public class FirestationsRepositoryTest {
 	void update_Succcess_Test() {
 		
 		// GIVEN 
-		FirestationSpot firestation3 = new FirestationSpot();
+		Firestation firestation3 = new Firestation();
 		firestation3.setAddress("address2");
 		firestation3.setIdStation(3);
 
 		// WHEN 
-		FirestationSpot firestationUpdated = firestationRepository.update(firestation3);
+		Firestation firestationUpdated = firestationRepository.update(firestation3);
 		
 		// THEN 
 		assertEquals(firestationUpdated, firestations.get(1));

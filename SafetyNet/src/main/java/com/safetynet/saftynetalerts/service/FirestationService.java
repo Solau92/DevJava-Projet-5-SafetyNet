@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.exception.FirestationAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
 
 @Service
@@ -18,8 +18,8 @@ public class FirestationService implements IFirestationService {
 		this.firestations = firestations;
 	}
 
-	public List<FirestationSpot> getAllFirestations() throws FirestationNotFoundException {
-		List<FirestationSpot> list = firestations.getAllFirestations();
+	public List<Firestation> getAllFirestations() throws FirestationNotFoundException {
+		List<Firestation> list = firestations.getAllFirestations();
 		if (list.isEmpty()) {
 			throw new FirestationNotFoundException("No firestation found");
 		}
@@ -27,7 +27,7 @@ public class FirestationService implements IFirestationService {
 	}
 
 	@Override
-	public FirestationSpot saveFirestation(FirestationSpot firestation) throws FirestationAlreadyExistsException {
+	public Firestation saveFirestation(Firestation firestation) throws FirestationAlreadyExistsException {
 		List<String> addresses = firestations.getAllAddresses();
 		if (addresses.contains(firestation.getAddress())) {
 			throw new FirestationAlreadyExistsException("This address is already registred");
@@ -37,7 +37,7 @@ public class FirestationService implements IFirestationService {
 	}
 
 	@Override
-	public FirestationSpot updateFirestation(FirestationSpot firestation) throws FirestationNotFoundException {
+	public Firestation updateFirestation(Firestation firestation) throws FirestationNotFoundException {
 		List<String> addresses = firestations.getAllAddresses();
 		if (!addresses.contains(firestation.getAddress())) {
 			throw new FirestationNotFoundException("Firestation spot not found for this address");

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.safetynet.saftynetalerts.exception.FirestationAlreadyExistsException;
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.service.IFirestationService;
 
 @RestController
@@ -26,17 +26,17 @@ public class FirestationsController {
 	}
 	
 	@GetMapping("/firestations")
-	public ResponseEntity<List<FirestationSpot>> getFirestations() throws FirestationNotFoundException {	
+	public ResponseEntity<List<Firestation>> getFirestations() throws FirestationNotFoundException {	
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(firestationService.getAllFirestations());	
 	}
 	
 	@PostMapping("/firestation")
-	public ResponseEntity<FirestationSpot> createFirestation(@RequestBody FirestationSpot firestation) throws FirestationAlreadyExistsException {
+	public ResponseEntity<Firestation> createFirestation(@RequestBody Firestation firestation) throws FirestationAlreadyExistsException {
 		return ResponseEntity.status(HttpStatus.CREATED).body(firestationService.saveFirestation(firestation));
 	}
 	
 	@PutMapping("/firestation")
-	public ResponseEntity<FirestationSpot> updateFirestation(@RequestBody FirestationSpot firestation) throws FirestationNotFoundException {
+	public ResponseEntity<Firestation> updateFirestation(@RequestBody Firestation firestation) throws FirestationNotFoundException {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(firestationService.updateFirestation(firestation));
 	}
 	

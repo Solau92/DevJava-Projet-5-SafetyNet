@@ -77,8 +77,8 @@ public class PersonsControllerTest {
 	@Test
 	void deletPerson_Ok_Test() throws Exception {
 		mockMvc.perform(delete("/person")
-				.param("firstName", "firstName")
-				.param("lastName", "lastName"))
+				.param("firstName", "John")
+				.param("lastName", "Boyd"))
 		.andExpect(status().isAccepted());
 	}
 	
@@ -99,15 +99,15 @@ public class PersonsControllerTest {
 	@Test
 	void getPersonByAddress_Ok_Test() throws Exception {
 		mockMvc.perform(get("/personByAddress")
-				.param("address", "address"))
-		.andExpect(status().isOk());
+				.param("address", "748 Townings Dr"))
+		.andExpect(status().isAccepted());
 	}
 	
 	@Test
 	void getCommunityEmail_Ok_Test() throws Exception {
 		mockMvc.perform(get("/communityEmail")
-				.param("city", "city"))
-		.andExpect(status().isOk());
+				.param("city", "Culver"))
+		.andExpect(status().isAccepted());
 	}
 	
 }

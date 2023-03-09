@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.safetynet.saftynetalerts.model.FirestationSpot;
+import com.safetynet.saftynetalerts.model.Firestation;
 
 import lombok.Data;
 
@@ -13,18 +13,18 @@ import lombok.Data;
 @Data
 public class FirestationsRepository {
 
-	private List<FirestationSpot> firestations;
+	private List<Firestation> firestations;
 
-	public List<FirestationSpot> getAllFirestations() {
+	public List<Firestation> getAllFirestations() {
 		return firestations;
 	}
 
-	public FirestationSpot save(FirestationSpot firestation) {
+	public Firestation save(Firestation firestation) {
 		firestations.add(firestation);
 		return firestation;
 	}
 
-	public FirestationSpot update(FirestationSpot firestation) {
+	public Firestation update(Firestation firestation) {
 		for (int i = 0; i < firestations.size(); i++) {
 			if (firestation.getAddress().equalsIgnoreCase(firestations.get(i).getAddress())) {
 				firestations.remove(firestations.get(i));
@@ -52,7 +52,7 @@ public class FirestationsRepository {
 
 	public List<String> getAddressesWithId(int stationId) {
 		List<String> addressesList = new ArrayList<>();
-		for (FirestationSpot f : firestations) {
+		for (Firestation f : firestations) {
 			if (f.getIdStation() == stationId) {
 				addressesList.add(f.getAddress());
 			}
@@ -61,7 +61,7 @@ public class FirestationsRepository {
 	}
 
 	public int getIdWithAddress(String address) {
-		for (FirestationSpot f : firestations) {
+		for (Firestation f : firestations) {
 			if (f.getAddress().equals(address)) {
 				return f.getIdStation();
 			}
@@ -71,7 +71,7 @@ public class FirestationsRepository {
 
 	public List<String> getAllAddresses() {
 		List<String> addressesList = new ArrayList<>();
-		for (FirestationSpot f : firestations) {
+		for (Firestation f : firestations) {
 			addressesList.add(f.getAddress());
 		}
 		return addressesList;
