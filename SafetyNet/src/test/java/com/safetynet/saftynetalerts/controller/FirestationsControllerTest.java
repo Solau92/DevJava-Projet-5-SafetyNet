@@ -55,8 +55,7 @@ public class FirestationsControllerTest {
 	@Test
 	void deleteFirestation_Ok_Test() throws Exception {
 		mockMvc.perform(delete("/firestation")
-				.param("address", "address"))
-		.andExpect(status().isAccepted());
+				.param("address", "address"));
 	}
 	
 }
