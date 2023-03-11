@@ -13,8 +13,6 @@ import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 import com.safetynet.saftynetalerts.model.Person;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
 public class URLChildAlertService implements IURLChildAlertService {
 	
@@ -31,7 +29,7 @@ public class URLChildAlertService implements IURLChildAlertService {
 	public List<DTOChildAlert> getChildAlert(String address)
 			throws PersonNotFoundException, MedicalRecordNotFoundException {
 
-		List<DTOChildAlert> childAlertList = new ArrayList<DTOChildAlert>();
+		List<DTOChildAlert> childAlertList = new ArrayList<>();
 
 		// Recherche des personnes à partir d'une adresse
 		List<Person> personList = personService.getPersonsByAddress(address);

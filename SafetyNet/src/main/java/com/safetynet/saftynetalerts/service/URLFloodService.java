@@ -32,10 +32,10 @@ public class URLFloodService implements IURLFloodService {
 	@Override
 	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException  {
 
-		List<DTOFlood> dtoFloodList = new ArrayList<DTOFlood>();
+		List<DTOFlood> dtoFloodList = new ArrayList<>();
 		
 		///// Récupérer liste des adresses desservies par les casernes
-		List<String> addressesList = new ArrayList<String>();
+		List<String> addressesList = new ArrayList<>();
 		
 		// Je parcours la liste des stations
 		for(Integer i : stationIdList) {
@@ -61,7 +61,7 @@ public class URLFloodService implements IURLFloodService {
 					
 					// Si la famille n'existe pas déjà, la créer  
 					if(!dtoFlood.getFamilyList().containsKey(p.getLastName())) {
-						dtoFlood.getFamilyList().put(p.getLastName(), new ArrayList<DTOFloodPerson>());
+						dtoFlood.getFamilyList().put(p.getLastName(), new ArrayList<>());
 					} 
 					// Dans tous les cas, rajouter la personne dans la liste
 					

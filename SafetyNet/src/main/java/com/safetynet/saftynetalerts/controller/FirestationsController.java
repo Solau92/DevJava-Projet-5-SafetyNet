@@ -53,13 +53,6 @@ public class FirestationsController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).build();	
 	}
 	
-//	// TODO : voir si je garde
-//	@DeleteMapping("/firestation/byId")
-//	public ResponseEntity<String> deleteFirestationById(@RequestParam("stationId") int stationId) { 
-//		firestationService.deleteFirestationById(stationId);
-//		return ResponseEntity.status(HttpStatus.ACCEPTED).build();	
-//	}
-	
 	@GetMapping("/firestationById")
 	public ResponseEntity<List<String>> getFirestationsAddressesById(@RequestParam("stationId") int stationId) throws FirestationNotFoundException {	
 		log.info("Request : get addresses corresponding to the station number {}" + stationId);

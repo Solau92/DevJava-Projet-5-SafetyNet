@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MedicalRecordsControllerTestIT {
+class MedicalRecordsControllerTestIT {
 	
 	@Autowired
 	private MockMvc mockMvc;

@@ -29,7 +29,7 @@ public class MedicalRecordsController {
 	}
 
 	@GetMapping("/medicalRecords")
-	public ResponseEntity<List<MedicalRecord>> getMedicalRecords() throws MedicalRecordNotFoundException {
+	public ResponseEntity<List<MedicalRecord>> getAllMedicalRecords() throws MedicalRecordNotFoundException {
 		log.info("Request : get all MedicalRecords");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(medicalRecordsService.getAllMedicalRecords());
 	}

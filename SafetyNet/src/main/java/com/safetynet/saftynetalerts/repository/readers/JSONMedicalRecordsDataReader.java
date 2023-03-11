@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
-import com.safetynet.saftynetalerts.model.Person;
 
 public class JSONMedicalRecordsDataReader implements IDataMedicalRecordsReader {
 

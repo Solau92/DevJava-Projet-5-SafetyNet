@@ -26,8 +26,8 @@ public class URLPhoneAlertService implements IURLPhoneAlertService {
 	@Override
 	public Set<String> getPhoneAlert(int stationId) throws PersonNotFoundException, FirestationNotFoundException {
 	
-		Set<String> phoneList = new HashSet<String>();
-		List<Person> personsList = new ArrayList<Person>();
+		Set<String> phoneList = new HashSet<>();
+		List<Person> personsList = new ArrayList<>();
 
 		// Avec la stationId --> liste d'adresses
 		List<String>addressesList = firestationService.getAddressesWithId(stationId);
@@ -39,7 +39,6 @@ public class URLPhoneAlertService implements IURLPhoneAlertService {
 
 		// récupérer les emails
 		for (Person p : personsList) {
-			// Gère pas les doublons de numéros de tél 
 			phoneList.add(p.getPhone());
 		}
 

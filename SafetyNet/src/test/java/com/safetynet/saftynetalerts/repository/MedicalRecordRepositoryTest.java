@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 
 @ExtendWith(MockitoExtension.class)
-public class MedicalRecordRepositoryTest {
+class MedicalRecordRepositoryTest {
 	
 	@InjectMocks
 	private MedicalRecordsRepository medicalRecordRepository;

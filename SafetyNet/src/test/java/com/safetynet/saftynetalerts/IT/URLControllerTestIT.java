@@ -16,7 +16,7 @@ import org.springframework.util.MultiValueMap;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class URLControllerTestIT {
+class URLControllerTestIT {
 	
 	@Autowired
 	private MockMvc mockMvc;

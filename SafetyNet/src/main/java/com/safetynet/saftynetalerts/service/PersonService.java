@@ -57,8 +57,6 @@ public class PersonService implements IPersonService {
 		if(list.isEmpty()) {
 			log.error("Answer : Nobody named {} {} was found", firstName, lastName);
 			throw new PersonNotFoundException(firstName + " " + lastName + " was not found");
-//		} else if(list.size() > 1) {
-//			throw new MoreThanOnePersonFoundException("There's more than one " + firstName + " " + lastName);
 		}
 		log.debug("Answer : Person(s) named {} {} were found", firstName, lastName);
 		return list;

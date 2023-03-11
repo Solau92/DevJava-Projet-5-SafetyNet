@@ -34,7 +34,7 @@ public class URLFireService implements IURLFireService {
 	public DTOFire getFire(String address) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
 		
 		DTOFire dtoFire = new DTOFire();
-		List<DTOFirePerson> firePersonsList = new ArrayList<DTOFirePerson>();
+		List<DTOFirePerson> firePersonsList = new ArrayList<>();
 		
 		// Récup liste personnes à une adresse
 		List<Person> personsList = personService.getPersonsByAddress(address);		

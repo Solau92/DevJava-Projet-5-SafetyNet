@@ -1,17 +1,13 @@
 package com.safetynet.saftynetalerts.service;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.saftynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
-import com.safetynet.saftynetalerts.model.DTOFirePerson;
 import com.safetynet.saftynetalerts.model.DTOFirestation;
 import com.safetynet.saftynetalerts.model.DTOFirestationPerson;
 import com.safetynet.saftynetalerts.model.Person;
@@ -35,7 +31,7 @@ public class URLFirestationService implements IURLFirestationService {
 	public DTOFirestation getFirestation(int stationId) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
 
 		DTOFirestation dTOFirestation = new DTOFirestation();
-		List<Person> personsList = new ArrayList<Person>();
+		List<Person> personsList = new ArrayList<>();
 
 		// numéro station --> liste immeubles
 		List<String> addressesList = firestationService.getAddressesWithId(stationId);
@@ -46,15 +42,15 @@ public class URLFirestationService implements IURLFirestationService {
 		}
 
 		// récupérer les infos des personnes
-		dTOFirestation.setFirestationPersons(new ArrayList<DTOFirestationPerson>());
+		dTOFirestation.setFirestationPersons(new ArrayList<>());
 
 		for (Person p : personsList) {
-			DTOFirestationPerson DTOPerson = new DTOFirestationPerson();
-			DTOPerson.setFirstName(p.getFirstName());
-			DTOPerson.setLastName(p.getLastName());
-			DTOPerson.setAddress(p.getAddress());
-			DTOPerson.setPhone(p.getPhone());
-			dTOFirestation.getFirestationPersons().add(DTOPerson);
+			DTOFirestationPerson dTOPerson = new DTOFirestationPerson();
+			dTOPerson.setFirstName(p.getFirstName());
+			dTOPerson.setLastName(p.getLastName());
+			dTOPerson.setAddress(p.getAddress());
+			dTOPerson.setPhone(p.getPhone());
+			dTOFirestation.getFirestationPersons().add(dTOPerson);
 
 			// Si personne majeure / mineure : incrémenter liste
 			// Pour ça, faut calculer âge, et donc faire appel à MedicalRecord

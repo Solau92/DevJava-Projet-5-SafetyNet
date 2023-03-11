@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.safetynet.saftynetalerts.model.Person;
 
 @ExtendWith(MockitoExtension.class)
-public class PersonsRepositoryTest {
+class PersonsRepositoryTest {
 	
 	@InjectMocks
 	private PersonsRepository personRepository;

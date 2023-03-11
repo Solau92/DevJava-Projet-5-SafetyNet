@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MedicalRecordService implements IMedicalRecordService {
 
 	private final MedicalRecordsRepository medicalRecords;
+	
+	private static final String MEDICAL_RECORD_NOT_FOUND = "Answer : {} {}'s medicalRecord was not found";
 
 	public MedicalRecordService(MedicalRecordsRepository medicalRecords) {
 		this.medicalRecords = medicalRecords;
@@ -50,7 +52,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 		if (medicalRecords
 				.getMedicalRecordsByFirstNameAndLastName(medicalRecord.getFirstName(), medicalRecord.getLastName())
 				.isEmpty()) {
-			log.error("Answer : {} {}'s medicalRecord was not found",  medicalRecord.getFirstName(), medicalRecord.getLastName());
+			log.error(MEDICAL_RECORD_NOT_FOUND,  medicalRecord.getFirstName(), medicalRecord.getLastName());
 			throw new MedicalRecordNotFoundException("No medical record found");
 		}
 		log.info("Answer : {} {}'s medicalRecord was updated",  medicalRecord.getFirstName(), medicalRecord.getLastName());
@@ -60,7 +62,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 	@Override
 	public void deleteMedicalRecord(String firstName, String lastName) throws MedicalRecordNotFoundException {
 		if (medicalRecords.getMedicalRecordsByFirstNameAndLastName(firstName, lastName).isEmpty()) {
-			log.error("Answer : {} {}'s medicalRecord was not found",  firstName, lastName);
+			log.error(MEDICAL_RECORD_NOT_FOUND,  firstName, lastName);
 			throw new MedicalRecordNotFoundException("No medical record found for " + firstName + " " + lastName);
 		} else {
 			log.info("Answer : {} {}'s medicalRecord was deleted", firstName, lastName);
@@ -71,7 +73,7 @@ public class MedicalRecordService implements IMedicalRecordService {
 	@Override
 	public boolean isPersonAdult(String firstName, String lastName) throws MedicalRecordNotFoundException {
 		if (medicalRecords.getMedicalRecordsByFirstNameAndLastName(firstName, lastName).isEmpty()) {
-			log.error("Answer : {} {}'s medicalRecord was not found",  firstName, lastName);
+			log.error(MEDICAL_RECORD_NOT_FOUND,  firstName, lastName);
 			throw new MedicalRecordNotFoundException("No medical record found for " + firstName + " " + lastName);
 		} else {
 			log.debug("Answer : {} {}'s medicalRecord was found", firstName, lastName);
@@ -84,10 +86,8 @@ public class MedicalRecordService implements IMedicalRecordService {
 			throws MedicalRecordNotFoundException {
 		List<MedicalRecord> list = medicalRecords.getMedicalRecordsByFirstNameAndLastName(firstName, lastName);
 		if (list.isEmpty()) {
-			log.error("Answer : {} {}'s medicalRecord was not found",  firstName, lastName);
+			log.error(MEDICAL_RECORD_NOT_FOUND,  firstName, lastName);
 			throw new MedicalRecordNotFoundException(firstName + " " + lastName + "'s medical record was not found");
-//		} else if (list.size() > 1) {
-//			throw new MoreThanOneMedicalRecordFoundException("There's more than one medical record for " + firstName + " " + lastName);
 		}
 		log.debug("Answer : {} {}'s medicalRecord was found", firstName, lastName);
 		return list;

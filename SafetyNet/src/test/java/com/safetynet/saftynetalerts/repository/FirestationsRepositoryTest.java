@@ -17,7 +17,7 @@ import com.safetynet.saftynetalerts.model.Firestation;
 import com.safetynet.saftynetalerts.model.Person;
 
 @ExtendWith(MockitoExtension.class)
-public class FirestationsRepositoryTest {
+class FirestationsRepositoryTest {
 	
 	@InjectMocks
 	private FirestationsRepository firestationRepository;
@@ -54,7 +54,7 @@ public class FirestationsRepositoryTest {
 	}
 	
 	@Test
-	public void save_Success_Test() {
+	void save_Success_Test() {
 		
 		// GIVEN 
 		Firestation firestation3 = new Firestation();

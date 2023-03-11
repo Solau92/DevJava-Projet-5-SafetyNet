@@ -27,7 +27,7 @@ public class FirestationService implements IFirestationService {
 			log.error("No firestation found");
 			throw new FirestationNotFoundException("No firestation found");
 		}
-		log.debug("Answer : ok");
+		log.debug("Answer : ok, firestation list not empty");
 		return list;
 	}
 
@@ -67,12 +67,6 @@ public class FirestationService implements IFirestationService {
 			firestations.deleteFirestation(address);
 		}
 	}
-
-//	// TODO : voir si je garde
-//	@Override
-//	public void deleteFirestationById(int stationId) {
-//		firestations.deleteFirestation(stationId);
-//	}
 
 	@Override
 	public List<String> getAddressesWithId(int stationId) throws FirestationNotFoundException {

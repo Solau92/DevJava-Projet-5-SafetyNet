@@ -18,6 +18,6 @@ public class DTOFlood {
 	private Map<String, List<DTOFloodPerson>> familyList;
 	
 	public DTOFlood() {
-		this.familyList =  new HashMap<String, List<DTOFloodPerson>>();
+		this.familyList =  new HashMap<>();
 	}
 }

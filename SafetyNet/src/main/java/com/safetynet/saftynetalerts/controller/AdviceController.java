@@ -20,6 +20,8 @@ import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 @ControllerAdvice
 public class AdviceController extends ResponseEntityExceptionHandler {
 	
+	private static final String MESSAGE = "message : ";
+	
 //	@ExceptionHandler(MyException.class) --> catch les exceptions de type MyException
 //	@ResponseStatus(HttpStatus.NOT_FOUND) --> retourne le code HTTP Not found
 //	public MyResponseType myExceptionHandler() {
@@ -40,42 +42,42 @@ public class AdviceController extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(PersonNotFoundException.class)
 	public ResponseEntity<Object> personNotFoundExceptionHandler(PersonNotFoundException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
+		body.put(MESSAGE, ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(PersonAlreadyExistsException.class)
 	public ResponseEntity<Object> personAlreadyExistsExceptionHandler(PersonAlreadyExistsException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
+		body.put(MESSAGE, ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(MedicalRecordNotFoundException.class)
 	public ResponseEntity<Object> medicalRecordNotFoundExceptionHandler(MedicalRecordNotFoundException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
+		body.put(MESSAGE, ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(MedicalRecordAlreadyExistsException.class)
 	public ResponseEntity<Object> medicalRecordAlreadyExistsExceptionnHandler(MedicalRecordAlreadyExistsException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
+		body.put(MESSAGE, ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(FirestationNotFoundException.class)
 	public ResponseEntity<Object> firestationNotFoundExceptionHandler(FirestationNotFoundException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
+		body.put(MESSAGE, ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(FirestationAlreadyExistsException.class)
 	public ResponseEntity<Object> firestationAlreadyExistsExceptionHandler(FirestationAlreadyExistsException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("message : ", ex.getMessage());
+		body.put(MESSAGE, ex.getMessage());
 		return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
 	}
 

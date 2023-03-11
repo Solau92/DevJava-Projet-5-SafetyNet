@@ -26,16 +26,16 @@ public class ObjectsCreator implements IObjectsCreator {
 	
 	private final MedicalRecordsRepository medicalRecordsList;
 	
-//	private final String filePath;
-	@Value("${com.safetynet.saftynetalerts.path}")
+//	@Value("${com.safetynet.saftynetalerts.path}")
+//	private String filePath;
+	
+	@Value("./src/main/resources/data.json")
 	private String filePath;
-
 	
 	public ObjectsCreator(PersonsRepository personsList, FirestationsRepository firestationsList, MedicalRecordsRepository medicalRecordsList) {
 		this.personsList = personsList;
 		this.firestationsList = firestationsList;
 		this.medicalRecordsList = medicalRecordsList;
-//		this.filePath = filePathProperties.getPath();
 	}
 
 	@Override

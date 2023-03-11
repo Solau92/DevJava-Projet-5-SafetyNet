@@ -48,7 +48,7 @@ public class PersonControllerTest {
 	}
 	
 	@Test
-	void getPersons_Test() throws PersonNotFoundException {
+	void getAllPersons_Test() throws PersonNotFoundException {
 		
 		// GIVEN
 		when(personService.getAllPersons()).thenReturn(listMock);

@@ -28,7 +28,7 @@ public class URLPersonInfoService implements IURLPersonInfoService {
 	@Override
 	public List<DTOPersonInfo> getPersonInfo(String firstName, String lastName) throws PersonNotFoundException, MedicalRecordNotFoundException {
 
-		List<DTOPersonInfo> personsInfoList = new ArrayList<DTOPersonInfo>();
+		List<DTOPersonInfo> personsInfoList = new ArrayList<>();
 		
 		// Je récupère la liste des personnes concernées 
 		List<Person> personsList = personService.getPersonsByFirstNameAndLastName(firstName, lastName);

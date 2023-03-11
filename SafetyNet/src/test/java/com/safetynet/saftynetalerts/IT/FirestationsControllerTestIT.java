@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class FirestationsControllerTestIT {
+class FirestationsControllerTestIT {
 
 	@Autowired
 	private MockMvc mockMvc;
