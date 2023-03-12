@@ -3,6 +3,7 @@ package com.safetynet.saftynetalerts.service;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import com.safetynet.saftynetalerts.repository.FirestationsRepository;
@@ -17,6 +18,7 @@ import com.safetynet.saftynetalerts.repository.readers.JSONPersonsDataReader;
 
 import jakarta.annotation.PostConstruct;
 
+@Configuration
 @Service
 public class ObjectsCreator implements IObjectsCreator {
 
@@ -26,10 +28,7 @@ public class ObjectsCreator implements IObjectsCreator {
 	
 	private final MedicalRecordsRepository medicalRecordsList;
 	
-//	@Value("${com.safetynet.saftynetalerts.path}")
-//	private String filePath;
-	
-	@Value("./src/main/resources/data.json")
+	@Value("${com.safetynet.saftynetalerts.path}")
 	private String filePath;
 	
 	public ObjectsCreator(PersonsRepository personsList, FirestationsRepository firestationsList, MedicalRecordsRepository medicalRecordsList) {

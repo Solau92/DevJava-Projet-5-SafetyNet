@@ -21,24 +21,7 @@ import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 public class AdviceController extends ResponseEntityExceptionHandler {
 	
 	private static final String MESSAGE = "message : ";
-	
-//	@ExceptionHandler(MyException.class) --> catch les exceptions de type MyException
-//	@ResponseStatus(HttpStatus.NOT_FOUND) --> retourne le code HTTP Not found
-//	public MyResponseType myExceptionHandler() {
-//		return new MyResponseType();		--> renvoie message de type MyReponseTYpe
-//	}
-	
-//	@ExceptionHandler(MyException.class) --> catch les exceptions de type MyException
-//	@ResponseStatus(HttpStatus.NOT_FOUND) --> retourne le code HTTP Not found
-//	public ResponseENtity<MyResponseType> myExceptionHandler() {
-//		return new ResponseEntity<> (new MyResponseType(, HTTTPStatus.NOT_FOUND));		--> renvoie message de type MyReponseTYpe
-//	}
-	
-//	@ExceptionHandler(NotFoundException.class)
-//	public ResponseEntity<NotFoundException> notFoundExceptionHandler(NotFoundException nfex) {
-//		return new ResponseEntity<>(new NotFoundException(), HttpStatus.NOT_FOUND);
-//	}
-	
+		
 	@ExceptionHandler(PersonNotFoundException.class)
 	public ResponseEntity<Object> personNotFoundExceptionHandler(PersonNotFoundException ex, WebRequest request) {
 		Map<String, Object> body = new LinkedHashMap<>();
