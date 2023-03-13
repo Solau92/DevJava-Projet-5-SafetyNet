@@ -1,6 +1,5 @@
 package com.safetynet.saftynetalerts.service;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -28,15 +27,15 @@ import junit.framework.AssertionFailedError;
 @ExtendWith(MockitoExtension.class)
 class URLChildAlertServiceTestTODO {
 	
-	@InjectMocks
-	private URLChildAlertService uRLChildAlertService;
-	
-	@Mock
-	private IPersonService personService;
-	
-	@Mock
-	private IMedicalRecordService medicalRecordService;
-	
+//	@InjectMocks
+//	private URLChildAlertService uRLChildAlertService;
+//	
+//	@Mock
+//	private IPersonService personService;
+//	
+//	@Mock
+//	private IMedicalRecordService medicalRecordService;
+//	
 //	@Test
 //	void getChildAlert_Success_Test() throws PersonNotFoundException, MedicalRecordNotFoundException {
 //		
@@ -44,14 +43,16 @@ class URLChildAlertServiceTestTODO {
 //		List<Person> personList = new ArrayList<>();
 //		Person personTest1 = new Person();
 //		personTest1.setFirstName("firstNameAdult");
-//		personTest1.setLastName("lastNameAdult");
+//		personTest1.setLastName("lastName");
 //		personTest1.setAddress("address");
-//		personList.add(personTest1);
 //		Person personTest2 = new Person();
 //		personTest2.setFirstName("firstNameChild");
-//		personTest2.setLastName("lastNameChild");
+//		personTest2.setLastName("lastName");
 //		personTest2.setAddress("address");
+//		personList.add(personTest1);
 //		personList.add(personTest2);
+//		
+//		System.out.println("personList : " + personList.toString());
 //		
 //		List<MedicalRecord> medicalRecordList1 = new ArrayList<>();
 //		MedicalRecord medicalRecordTest1 = new MedicalRecord();
@@ -60,6 +61,8 @@ class URLChildAlertServiceTestTODO {
 //		medicalRecordTest1.setBirthdate(LocalDate.now().minusYears(30));
 //		medicalRecordList1.add(medicalRecordTest1);
 //		
+//		System.out.println("medicalRecordList1 : " + medicalRecordList1.toString());
+//		
 //		List<MedicalRecord> medicalRecordList2 = new ArrayList<>();
 //		MedicalRecord medicalRecordTest2 = new MedicalRecord();
 //		medicalRecordTest2.setFirstName("firstNameChild");
@@ -67,16 +70,27 @@ class URLChildAlertServiceTestTODO {
 //		medicalRecordTest2.setBirthdate(LocalDate.now().minusYears(10));
 //		medicalRecordList2.add(medicalRecordTest2);
 //		
-//		when(personService.getPersonsByAddress(anyString())).thenReturn(personList);		
-//		when(medicalRecordService.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString())).thenReturn(medicalRecordList1, medicalRecordList2);
-//		when(medicalRecordService.isPersonAdult(anyString(), anyString())).thenReturn(true, false);
+//		System.out.println("medicalRecordList2 : " + medicalRecordTest2);
+//		
+//		when(personService.getPersonsByAddress(anyString())).thenReturn(personList);	
+//		
+//		when(medicalRecordService.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString())).thenReturn(medicalRecordList1).thenReturn(medicalRecordList2);
+//		when(medicalRecordService.isPersonAdult(anyString(), anyString())).thenReturn(true).thenReturn(false);
+//
+////		when(medicalRecordService.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString())).thenReturn(medicalRecordList1);
+////		when(medicalRecordService.isPersonAdult(anyString(), anyString())).thenReturn(true);
+////		when(medicalRecordService.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString())).thenReturn(medicalRecordList2);
+////		when(medicalRecordService.isPersonAdult(anyString(), anyString())).thenReturn(false);
+//		
 //		when(personService.getPersonsByLastNameAndAddress(anyString(), anyString())).thenReturn(personList);
 //		
 //		// WHEN 
 //		List<DTOChildAlert> childAlertList = uRLChildAlertService.getChildAlert("address");
+//		System.out.println(childAlertList.toString());
 //				
 //		// THEN 
-//		assertEquals("firstName1", childAlertList.get(0).getFirstName());
+//		assertEquals("firstNameChild", childAlertList.get(0).getFirstName());
+//		assertEquals("firstNameAdult", childAlertList.get(0).getFamilyMembers().get(0).getFirstName());
 //	}
 
 }
