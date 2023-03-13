@@ -37,7 +37,7 @@ public class URLFireService implements IURLFireService {
 		List<DTOFirePerson> firePersonsList = new ArrayList<>();
 		
 		// Récup liste personnes à une adresse
-		List<Person> personsList = personService.getPersonsByAddress(address);		
+		List<Person> personsList = personService.getPersonsByAddress(address);	
 		
 		// Ajout éléments dossier médical 
 		for (Person p : personsList) {

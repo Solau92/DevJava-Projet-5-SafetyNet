@@ -22,6 +22,7 @@ public class PersonService implements IPersonService {
 		this.persons = persons;
 	}
 	
+	@Override
 	public List<Person> getAllPersons() throws PersonNotFoundException {
 		List<Person> list = persons.getAllPersons();
 		if(list.isEmpty()) {
@@ -32,6 +33,7 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 	
+	@Override
 	public List<Person> getPersonsByLastName(String lastName) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByLastName(lastName);
 		if (list.isEmpty()) {
@@ -42,6 +44,7 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 
+	@Override
 	public List<Person> getPersonsByAddress(String address) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByAddress(address);
 		if(list.isEmpty()) {
@@ -52,6 +55,7 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 
+	@Override
 	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByFirstNameAndLastName(firstName, lastName);
 		if(list.isEmpty()) {
@@ -63,10 +67,12 @@ public class PersonService implements IPersonService {
 	}
 
 	// Quelles erreurs ? 
+	@Override
 	public Set<String> getCommunityEmail(String city) {
 		return persons.getCommunityEmail(city);
 	}
 
+	@Override
 	public Person savePerson(Person person) throws PersonAlreadyExistsException {	
 		if(!persons.getPersonsByFirstNameAndLastName(person.getFirstName(), person.getLastName()).isEmpty()) {
 			log.error("Answer : The person named {} {} already exists", person.getFirstName(), person.getLastName());
@@ -77,6 +83,7 @@ public class PersonService implements IPersonService {
 		}		
 	}
 
+	@Override
 	public Person updatePerson(Person person) throws PersonNotFoundException {		
 		if(persons.getPersonsByFirstNameAndLastName(person.getFirstName(), person.getLastName()).isEmpty()) {
 			log.error("Answer : The person named {} {} was not found", person.getFirstName(), person.getLastName());
@@ -87,6 +94,7 @@ public class PersonService implements IPersonService {
 		}
 	}
 
+	@Override
 	public void deletePerson(String firstName, String lastName) throws PersonNotFoundException {
 		if(persons.getPersonsByFirstNameAndLastName(firstName, lastName).isEmpty()) {
 			log.error("Answer : The person named {} {} was not found", firstName, lastName);
@@ -97,6 +105,7 @@ public class PersonService implements IPersonService {
 		}	
 	}
 
+	@Override
 	public List<Person> getPersonsByLastNameAndAddress(String lastName, String address) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByLastNameAndAddress(lastName, address);
 		if(list.isEmpty()) {

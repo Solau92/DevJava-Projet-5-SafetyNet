@@ -25,4 +25,6 @@ public interface IPersonService {
 
 	public void deletePerson(String firstName, String lastName) throws PersonNotFoundException;
 
+	List<Person> getPersonsByLastNameAndAddress(String lastName, String address) throws PersonNotFoundException;
+
 }

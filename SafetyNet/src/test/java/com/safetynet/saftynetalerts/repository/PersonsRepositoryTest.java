@@ -1,7 +1,11 @@
 package com.safetynet.saftynetalerts.repository;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.Person;
 
 @ExtendWith(MockitoExtension.class)
@@ -178,21 +183,37 @@ class PersonsRepositoryTest {
 		assertEquals("newEmail2", personUpdated.getEmail());
 	}
 	
-//	@Test
-//	void update_NoResult_Test() {
-//		
-//		// GIVEN 
-//		Person person3 = new Person();
-//		person3.setFirstName("firstName2");
-//		person3.setLastName("lastName3");
-//		person3.setEmail("newEmail2");
-//
-//		// WHEN 
-//		Person personUpdated = personRepository.update(person3);
-//		
-//		// THEN 
-//		// ?? 
-// 	}
+	@Test
+	void update_Fail_Test() {
+		
+		// GIVEN 
+		Person person3 = new Person();
+		person3.setFirstName("firstName");
+		person3.setLastName("lastName1");
+		person3.setEmail("newEmail1");
+
+		// WHEN 
+		Person personUpdated = personRepository.update(person3);
+		
+		// THEN 
+		assertNotEquals(personUpdated, persons.get(0));
+	}
+	
+	@Test
+	void update_Fail2_Test() {
+		
+		// GIVEN 
+		Person person3 = new Person();
+		person3.setFirstName("firstName1");
+		person3.setLastName("lastName");
+		person3.setEmail("newEmail1");
+
+		// WHEN 
+		Person personUpdated = personRepository.update(person3);
+		
+		// THEN 
+		assertNotEquals(personUpdated, persons.get(0));
+	}
 	
 	@Test
 	void delete_Success_Test() {

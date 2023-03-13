@@ -12,6 +12,7 @@ import com.safetynet.saftynetalerts.exception.PersonNotFoundException;
 import com.safetynet.saftynetalerts.model.DTOChildAlert;
 import com.safetynet.saftynetalerts.model.MedicalRecord;
 import com.safetynet.saftynetalerts.model.Person;
+import com.safetynet.saftynetalerts.repository.PersonsRepository;
 
 @Service
 public class URLChildAlertService implements IURLChildAlertService {
