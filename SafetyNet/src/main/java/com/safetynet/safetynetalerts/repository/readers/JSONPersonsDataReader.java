@@ -17,7 +17,11 @@ public class JSONPersonsDataReader implements IDataPersonsReader {
 		this.filePath = filePath;
 	}
 	
-
+	/**
+	 * Returns a list of persons extracted from a JSON file.
+	 * @return a list of persons extracted from a JSON file
+	 * @throws IOException
+	 */
 	@Override
 	public List<Person> readPersons() throws IOException {
 		

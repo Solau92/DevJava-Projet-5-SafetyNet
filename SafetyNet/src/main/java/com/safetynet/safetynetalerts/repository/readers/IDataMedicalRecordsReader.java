@@ -7,6 +7,11 @@ import com.safetynet.safetynetalerts.model.MedicalRecord;
 
 public interface IDataMedicalRecordsReader {
 
+	/**
+	 * Returns a list of medical records.
+	 * @return a list of medical records.
+	 * @throws IOException
+	 */
 	List<MedicalRecord> readMedicalRecords() throws IOException;
 
 }

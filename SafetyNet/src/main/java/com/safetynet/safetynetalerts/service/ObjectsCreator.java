@@ -22,36 +22,43 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class ObjectsCreator implements IObjectsCreator {
 
-	private final PersonsRepository personsList;
-	
-	private final FirestationsRepository firestationsList;
-	
-	private final MedicalRecordsRepository medicalRecordsList;
-	
+	private final PersonsRepository personsRepository;
+
+	private final FirestationsRepository firestationsRepository;
+
+	private final MedicalRecordsRepository medicalRecordsRepository;
+
 	@Value("${com.safetynet.saftynetalerts.path}")
 	private String filePath;
-	
-	public ObjectsCreator(PersonsRepository personsList, FirestationsRepository firestationsList, MedicalRecordsRepository medicalRecordsList) {
-		this.personsList = personsList;
-		this.firestationsList = firestationsList;
-		this.medicalRecordsList = medicalRecordsList;
+
+	public ObjectsCreator(PersonsRepository personsList, FirestationsRepository firestationsList,
+			MedicalRecordsRepository medicalRecordsList) {
+		this.personsRepository = personsList;
+		this.firestationsRepository = firestationsList;
+		this.medicalRecordsRepository = medicalRecordsList;
 	}
 
+	/**
+	 * Reads a JSON file and extracts and sets the person respository, the
+	 * firestation repository and the medical record repository.
+	 * 
+	 * @throws IOException
+	 */
 	@Override
 	@PostConstruct
 	public void run() throws IOException {
-		
+
 		// Persons //
 		IDataPersonsReader pReader = new JSONPersonsDataReader(filePath);
-		personsList.setPersons(pReader.readPersons());
-		
+		personsRepository.setPersons(pReader.readPersons());
+
 		// Firestations //
 		IDataFirestationsReader fsReader = new JSONFirestationsDataReader(filePath);
-		firestationsList.setFirestations(fsReader.readFirestations());
-		
+		firestationsRepository.setFirestations(fsReader.readFirestations());
+
 		// MedicalRecords //
 		IDataMedicalRecordsReader mrReader = new JSONMedicalRecordsDataReader(filePath);
-		medicalRecordsList.setMedicalRecords(mrReader.readMedicalRecords());
+		medicalRecordsRepository.setMedicalRecords(mrReader.readMedicalRecords());
 	}
 
 }

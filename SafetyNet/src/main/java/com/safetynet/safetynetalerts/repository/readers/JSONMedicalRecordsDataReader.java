@@ -17,6 +17,11 @@ public class JSONMedicalRecordsDataReader implements IDataMedicalRecordsReader {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Returns a list of medical records extracted from a JSON file.
+	 * @return a list of medical records extracted from a JSON file
+	 * @throws IOException
+	 */
 	@Override
 	public List<MedicalRecord> readMedicalRecords() throws IOException {
 		File file = new File(filePath);

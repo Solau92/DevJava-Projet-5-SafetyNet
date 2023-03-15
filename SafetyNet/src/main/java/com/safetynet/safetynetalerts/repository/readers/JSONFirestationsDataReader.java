@@ -15,9 +15,13 @@ public class JSONFirestationsDataReader implements IDataFirestationsReader {
 	
 	public JSONFirestationsDataReader(String filePath) {
 		this.filePath = filePath;
-	}
-	
+	}	
 
+	/**
+	 * Returns a list of firestations extracted from a JSON file.
+	 * @return a list of firestations extracted from a JSON file
+	 * @throws IOException
+	 */
 	@Override
 	public List<Firestation> readFirestations() throws IOException {
 		

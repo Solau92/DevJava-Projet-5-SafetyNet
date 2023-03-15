@@ -22,6 +22,11 @@ public class PersonService implements IPersonService {
 		this.persons = persons;
 	}
 	
+	/**
+	 * Returns the list of all persons
+	 * @return the list of all persons
+	 * @throws PersonNotFoundException if no person was found in the respository
+	 */
 	@Override
 	public List<Person> getAllPersons() throws PersonNotFoundException {
 		List<Person> list = persons.getAllPersons();
@@ -33,6 +38,12 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 	
+	/**
+	 * Returns the list of persons whose lastname is given in parameter.
+	 * @param lastName
+	 * @return 	the list of persons whose lastname is given in parameter.
+	 * @throws PersonNotFoundException if no person with this lastname was found in the repository
+	 */
 	@Override
 	public List<Person> getPersonsByLastName(String lastName) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByLastName(lastName);
@@ -44,6 +55,12 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 
+	/**
+	 * Returns a list of persons whose address is the one given in parameter.
+	 * @param address
+	 * @return a list of persons whose address is the one given in parameter
+	 * @throws PersonNotFoundException if no person was found at this address in the repository
+	 */
 	@Override
 	public List<Person> getPersonsByAddress(String address) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByAddress(address);
@@ -55,6 +72,13 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 
+	/**
+	 * Returns a list of persons whose firstname and lastname are given in parameter.
+	 * @param firstName
+	 * @param lastName
+	 * @return a list of persons whose firstname and lastname are given in parameter or an empty list if no person was found 
+	 * @throws PersonNotFoundException if no person was found in the repository with these firstname and lastname
+	 */
 	@Override
 	public List<Person> getPersonsByFirstNameAndLastName(String firstName, String lastName) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByFirstNameAndLastName(firstName, lastName);
@@ -66,12 +90,22 @@ public class PersonService implements IPersonService {
 		return list;
 	}
 
-	// Quelles erreurs ? 
+	/**
+	 * Returns a list of email of the persons living in a city given in parameter.
+	 * @param city
+	 * @return a set of email of the persons living in a city given in parameter or an empty set if no person was found in the repository
+	 */
 	@Override
 	public Set<String> getCommunityEmail(String city) {
 		return persons.getCommunityEmail(city);
 	}
 
+	/**
+	 * Saves in the repository the person given in parameter.
+	 * @param person
+	 * @return the person saved
+	 * @throws PersonAlreadyExistsException if a person already exists in the repository with the same firstname and lastname
+	 */
 	@Override
 	public Person savePerson(Person person) throws PersonAlreadyExistsException {	
 		if(!persons.getPersonsByFirstNameAndLastName(person.getFirstName(), person.getLastName()).isEmpty()) {
@@ -83,6 +117,12 @@ public class PersonService implements IPersonService {
 		}		
 	}
 
+	/**
+	 * Updates in the repository the person whose firstname and lastname are the same of the person given in parameter. 
+	 * @param person
+	 * @return the person updated
+	 * @throws PersonNotFoundException if no person was found in the repository with these firstname and lastname
+	 */
 	@Override
 	public Person updatePerson(Person person) throws PersonNotFoundException {		
 		if(persons.getPersonsByFirstNameAndLastName(person.getFirstName(), person.getLastName()).isEmpty()) {
@@ -94,6 +134,12 @@ public class PersonService implements IPersonService {
 		}
 	}
 
+	/**
+	 * Deletes in the repository the person whose firstname and lastname are given in parameter.
+	 * @param firstName
+	 * @param lastName
+	 * @throws PersonNotFoundException if no person was found in the repository with these firstname and lastname
+	 */
 	@Override
 	public void deletePerson(String firstName, String lastName) throws PersonNotFoundException {
 		if(persons.getPersonsByFirstNameAndLastName(firstName, lastName).isEmpty()) {
@@ -105,6 +151,13 @@ public class PersonService implements IPersonService {
 		}	
 	}
 
+	/**
+	 * Returns a list of persons whose lastname and address are given in parameter.
+	 * @param lastName
+	 * @param address
+	 * @return 	a list of persons whose lastname and address are given in parameter.
+	 * @throws PersonNotFoundException if no person was found in the repository with these lastname and address
+	 */
 	@Override
 	public List<Person> getPersonsByLastNameAndAddress(String lastName, String address) throws PersonNotFoundException {
 		List<Person> list = persons.getPersonsByLastNameAndAddress(lastName, address);

@@ -29,48 +29,43 @@ class PersonsControllerTestIT {
 		.andExpect(status().isAccepted())
 		.andExpect(jsonPath("$[0].firstName", is("John")))
 		.andExpect(jsonPath("$[1].firstName", is("Jacob")));
-	}
+	}	
 	
 	@Test
 	void postPerson_Ok_Test() throws Exception {
-		JSONObject toto = new JSONObject();
-		toto.put("firstname", "toto");
-		String jsonContent = toto.toString();
+		
+		JSONObject person = new JSONObject();
+		person.put("firstName", "Sophie");
+		person.put("lastName", "LAURENT");
+		person.put("address", "myAddress");
+		person.put("city", "myCity");
+		person.put("zip", "myZip");
+		person.put("phone", "myPhone");
+		person.put("email", "myEmail");
+		String jsonContent = person.toString();
+		
 		mockMvc.perform(post("/person")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content("{\r\n"
-						+ "  \"firstName\":\"Sophie\",\r\n"
-						+ "  \"lastName\":\"LAURENT\",\r\n"
-						+ "  \"address\":\"myAddress\",\r\n"
-						+ "  \"city\":\"myCity\",\r\n"
-						+ "  \"zip\":\"myZip\",\r\n"
-						+ "  \"phone\":\"myPhone\",\r\n"
-						+ "  \"email\":\"myEmail\"\r\n"
-						+ "}"))	
+				.content(jsonContent))
 		.andExpect(status().isCreated());
 	}
-
-//	@Test
-//	public void postPerson_null_Test() throws Exception {
-//		mockMvc.perform(post("/person")
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.content(null))	
-//		.andExpect(status().isBadRequest());
-//	}
 	
 	@Test
 	void putPerson_Ok_Test() throws Exception {
+		
+		JSONObject person = new JSONObject();
+		person.put("firstName", "Sophie");
+		person.put("lastName", "LAURENT");
+		person.put("address", "myAddress");
+		person.put("city", "myCity");
+		person.put("zip", "myZip");
+		person.put("phone", "myPhone");
+		person.put("email", "myEmail");
+		String jsonContent = person.toString();
+		
 		mockMvc.perform(put("/person")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content("{\r\n"
-						+ "  \"firstName\":\"Sophie\",\r\n"
-						+ "  \"lastName\":\"LAURENT\",\r\n"
-						+ "  \"address\":\"myAddress\",\r\n"
-						+ "  \"city\":\"myCity\",\r\n"
-						+ "  \"zip\":\"myZip\",\r\n"
-						+ "  \"phone\":\"myPhone\",\r\n"
-						+ "  \"email\":\"myEmail\"\r\n"
-						+ "}"))	
+				.content(jsonContent))	
 		.andExpect(status().isAccepted());
 	}
 	

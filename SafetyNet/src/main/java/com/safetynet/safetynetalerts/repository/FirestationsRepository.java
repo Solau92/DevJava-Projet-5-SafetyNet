@@ -15,15 +15,33 @@ public class FirestationsRepository {
 
 	private List<Firestation> firestations;
 
+	/**
+	 * Returns the list of all firestations in repository.
+	 * 
+	 * @return the list of all firestations in repository
+	 */
 	public List<Firestation> getAllFirestations() {
 		return firestations;
 	}
 
+	/**
+	 * Saves in the repository the firestation given in parameter.
+	 * 
+	 * @param firestation
+	 * @return the firestation saved
+	 */
 	public Firestation save(Firestation firestation) {
 		firestations.add(firestation);
 		return firestation;
 	}
 
+	/**
+	 * Updates in the repository the firestation which has the same address as the
+	 * one given in parameter.
+	 * 
+	 * @param firestation
+	 * @return the firestation updated
+	 */
 	public Firestation update(Firestation firestation) {
 		for (int i = 0; i < firestations.size(); i++) {
 			if (firestation.getAddress().equalsIgnoreCase(firestations.get(i).getAddress())) {
@@ -34,6 +52,12 @@ public class FirestationsRepository {
 		return firestation;
 	}
 
+	/**
+	 * Deletes in the repository the firestation which corresponds to the address
+	 * given in parameter.
+	 * 
+	 * @param address
+	 */
 	public void deleteFirestation(String address) {
 		for (int i = 0; i < firestations.size(); i++) {
 			if (firestations.get(i).getAddress().equalsIgnoreCase(address)) {
@@ -42,6 +66,12 @@ public class FirestationsRepository {
 		}
 	}
 
+	/**
+	 * Deletes in the repository the firestations which correspond to the station id
+	 * given in parameter.
+	 * 
+	 * @param stationId
+	 */
 	public void deleteFirestation(int stationId) {
 		for (int i = 0; i < firestations.size(); i++) {
 			if (firestations.get(i).getIdStation() == stationId) {
@@ -50,6 +80,13 @@ public class FirestationsRepository {
 		}
 	}
 
+	/**
+	 * Returns a list of the addresses corresponding to the given station id.
+	 * 
+	 * @param stationId
+	 * @return a list of the addresses corresponding to the given station id or an
+	 *         empty list if no address was found
+	 */
 	public List<String> getAddressesWithId(int stationId) {
 		List<String> addressesList = new ArrayList<>();
 		for (Firestation f : firestations) {
@@ -60,6 +97,14 @@ public class FirestationsRepository {
 		return addressesList;
 	}
 
+	/**
+	 * Returns the id of the station corresponding to the address given in
+	 * parameter.
+	 * 
+	 * @param address
+	 * @return the id of the station corresponding to the address given in
+	 *         parameter, or 0 if the address is not found
+	 */
 	public int getIdWithAddress(String address) {
 		for (Firestation f : firestations) {
 			if (f.getAddress().equals(address)) {
@@ -69,6 +114,12 @@ public class FirestationsRepository {
 		return 0;
 	}
 
+	/**
+	 * Returns all the addresses in the firestation repository.
+	 * 
+	 * @return all the addresses in the firestation repository or an empty list if
+	 *         no address was found
+	 */
 	public List<String> getAllAddresses() {
 		List<String> addressesList = new ArrayList<>();
 		for (Firestation f : firestations) {

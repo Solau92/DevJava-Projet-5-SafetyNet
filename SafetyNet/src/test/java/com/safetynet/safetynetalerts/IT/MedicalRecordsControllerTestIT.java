@@ -8,6 +8,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,8 +37,25 @@ class MedicalRecordsControllerTestIT {
 
 	@Test
 	void postMedicalRecored_Ok_Test() throws Exception {
+		
+		JSONObject medicalRecord = new JSONObject();
+		medicalRecord.put("firstName", "firstName");
+		medicalRecord.put("lastName", "lastName");
+		medicalRecord.put("birthdate", "07/14/1984");
+		List<String> medication = new ArrayList<>();
+		medication.add("medication1");
+		medication.add("medication2");
+		medicalRecord.put("medication", medication);
+		List<String> allergies = new ArrayList<>();
+		allergies.add("allergy1");
+		allergies.add("allergy2");
+		medicalRecord.put("allergies", allergies);
+		
+		String jsonContent = medicalRecord.toString();
+
 		mockMvc.perform(post("/medicalRecord")
 				.contentType(MediaType.APPLICATION_JSON)
+//				.content(jsonContent))
 				.content("{\r\n"
 						+ "  \"firstName\":\"firstName\",\r\n"
 						+ "  \"lastName\":\"lastName\",\r\n"

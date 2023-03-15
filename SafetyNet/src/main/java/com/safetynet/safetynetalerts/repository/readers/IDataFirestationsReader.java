@@ -7,6 +7,11 @@ import com.safetynet.safetynetalerts.model.Firestation;
 
 public interface IDataFirestationsReader {
 
+	/**
+	 * Returns a list of firestations.
+	 * @return a list of firestations
+	 * @throws IOException
+	 */
 	List<Firestation> readFirestations() throws IOException;
 
 }

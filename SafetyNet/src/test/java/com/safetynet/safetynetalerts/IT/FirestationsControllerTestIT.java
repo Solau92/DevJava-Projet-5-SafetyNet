@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,15 +32,27 @@ class FirestationsControllerTestIT {
 
 	@Test
 	void postFirestation_Ok_Test() throws Exception {
+		
+		JSONObject firestation = new JSONObject();
+		firestation.put("address", "building address");
+		firestation.put("station", "100");
+		String jsonContent = firestation.toString();
+		
 		mockMvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
-				.content("{\r\n" + "  \"address\":\"adresse immeuble\",\r\n" + "  \"station\": 100\r\n" + "}"))
+				.content(jsonContent))
 				.andExpect(status().isCreated());
 	}
 
 	@Test
 	void putFirestation_Ok_Test() throws Exception {
+		
+		JSONObject firestation = new JSONObject();
+		firestation.put("address", "building address");
+		firestation.put("station", "100");
+		String jsonContent = firestation.toString();
+		
 		mockMvc.perform(put("/firestation").contentType(MediaType.APPLICATION_JSON)
-				.content("{\r\n" + "  \"address\":\"adresse immeuble\",\r\n" + "  \"station\": 100\r\n" + "}"))
+				.content(jsonContent))
 				.andExpect(status().isAccepted());
 	}
 
