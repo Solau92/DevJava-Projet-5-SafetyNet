@@ -7,6 +7,20 @@ import com.safetynet.safetynetalerts.model.DTOFire;
 
 public interface IURLFireService {
 
-	DTOFire getFire(String address) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException;
+	/**
+	 * Returns an object including a list of inhabitants living at the given
+	 * address, and the firestation id corresponding.
+	 * 
+	 * @param address
+	 * @return a DTOFire
+	 * @throws PersonNotFoundException        if no person was found at the given
+	 *                                        address
+	 * @throws MedicalRecordNotFoundException if the medical record was not found
+	 *                                        for one person
+	 * @throws FirestationNotFoundException   if no id was found for the firestation
+	 *                                        corresponding to the given address
+	 */
+	DTOFire getFire(String address)
+			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException;
 
 }

@@ -19,6 +19,7 @@ public class MedicalRecordsRepository {
 
 	/**
 	 * Returns the list of all medical records.
+	 * 
 	 * @return the list of all medical records
 	 */
 	public List<MedicalRecord> getAllMedicalRecords() {
@@ -26,7 +27,9 @@ public class MedicalRecordsRepository {
 	}
 
 	/**
-	 * Saves in the medical records repository the medical record given in parameter.
+	 * Saves in the medical records repository the medical record given in
+	 * parameter.
+	 * 
 	 * @param medicalRecord
 	 * @return the medical record saved
 	 */
@@ -36,7 +39,9 @@ public class MedicalRecordsRepository {
 	}
 
 	/**
-	 * Updates in the repository the medical record which has the same firstname and lastname as the one given in parameter. 
+	 * Updates in the repository the medical record which has the same firstname and
+	 * lastname as the one given in parameter.
+	 * 
 	 * @param medicalRecord
 	 * @return the medical record updated
 	 */
@@ -52,7 +57,9 @@ public class MedicalRecordsRepository {
 	}
 
 	/**
-	 * Deletes in the repository the medical record which has the firstname and lastname given in parameter.
+	 * Deletes in the repository the medical record which has the firstname and
+	 * lastname given in parameter.
+	 * 
 	 * @param firstName
 	 * @param lastName
 	 */
@@ -66,14 +73,17 @@ public class MedicalRecordsRepository {
 	}
 
 	/**
-	 * Calculates the age of a person corresponding to a medical record, and returns the fact that this person is or not over 18.
+	 * Calculates the age of a person corresponding to a medical record, and returns
+	 * the fact that this person is or not over 18.
+	 * 
 	 * @param firstName
 	 * @param lastName
 	 * @return false if the person is 18 years old or under, true otherwise
 	 */
 	public boolean isPersonAdult(String firstName, String lastName) {
 		for (MedicalRecord medicalRecord : medicalRecords) {
-			if (medicalRecord.getFirstName().equalsIgnoreCase(firstName) && medicalRecord.getLastName().equalsIgnoreCase(lastName)) {
+			if (medicalRecord.getFirstName().equalsIgnoreCase(firstName)
+					&& medicalRecord.getLastName().equalsIgnoreCase(lastName)) {
 				return ChronoUnit.YEARS.between(medicalRecord.getBirthdate(), LocalDate.now()) > 18;
 			}
 		}
@@ -81,10 +91,13 @@ public class MedicalRecordsRepository {
 	}
 
 	/**
-	 * Returns a list of medical records, which correspond to a firstname and a lastname given in parameter. 
+	 * Returns a list of medical records, which correspond to a firstname and a
+	 * lastname given in parameter.
+	 * 
 	 * @param firstName
 	 * @param lastName
-	 * @return  list of medical records, which correspond to a firstname and a lastname given in parameter
+	 * @return list of medical records, which correspond to a firstname and a
+	 *         lastname given in parameter
 	 */
 	public List<MedicalRecord> getMedicalRecordsByFirstNameAndLastName(String firstName, String lastName) {
 		List<MedicalRecord> medicalRecordsList = new ArrayList<>();

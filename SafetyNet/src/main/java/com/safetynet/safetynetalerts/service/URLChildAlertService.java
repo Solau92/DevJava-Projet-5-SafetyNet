@@ -16,7 +16,7 @@ import com.safetynet.safetynetalerts.repository.PersonsRepository;
 
 @Service
 public class URLChildAlertService implements IURLChildAlertService {
-	
+
 	private final IPersonService personService;
 
 	private final IMedicalRecordService medicalRecordService;
@@ -26,47 +26,55 @@ public class URLChildAlertService implements IURLChildAlertService {
 		this.medicalRecordService = medicalRecordService;
 	}
 
+	/**
+	 * Returns a list of a list of children (person 18 years old or under) living at
+	 * a given address, the list must include child's firstname, lastname, age, and
+	 * a list of his household members.
+	 * 
+	 * @param address
+	 * @return a list of DTOChildAlert
+	 * @throws PersonNotFoundException        if no person was found in the
+	 *                                        repository at the given address
+	 * @throws MedicalRecordNotFoundException if the medical record of a person was
+	 *                                        not found in the repository
+	 */                                        
 	@Override
 	public List<DTOChildAlert> getChildAlert(String address)
 			throws PersonNotFoundException, MedicalRecordNotFoundException {
 
 		List<DTOChildAlert> childAlertList = new ArrayList<>();
 
-		// Recherche des personnes à partir d'une adresse
+		// List of persons living at the given address
 		List<Person> personList = personService.getPersonsByAddress(address);
 
-		// je parcours la liste des personnes
+		// For each person of the list 
 		for (Person p : personList) {
-			
-			System.out.println("Person dans méthode : " + p.toString());
 
+			// Get the medical record corresponding
 			List<MedicalRecord> medicalRecords = medicalRecordService
 					.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
-
-			System.out.println("MedicalRec dans méthode : " + medicalRecords.toString());
-			
-			System.out.println(!medicalRecordService.isPersonAdult(p.getFirstName(), p.getLastName()));
-			
-			// si mineur
+ 
+			// If the person is years old or under
 			if (!medicalRecordService.isPersonAdult(p.getFirstName(), p.getLastName())) {
-				
-				System.out.println("Person dans méthode dans la boucle : " + p.toString() + " dans la boucle");
-				
-				// Construction DTO
+
+				// Create a DTOChildAlert and sets the attributes with the informations of the Person and the MedicalRecord
 				DTOChildAlert dTOChild = new DTOChildAlert();
 				dTOChild.setFirstName(p.getFirstName());
 				dTOChild.setLastName(p.getLastName());
 				dTOChild.setAge(ChronoUnit.YEARS.between(medicalRecords.get(0).getBirthdate(), LocalDate.now()));
 
-				// Membres de la famille
+				// Creates the list of family members
 
 				List<Person> familyMembers = personService.getPersonsByLastNameAndAddress(p.getLastName(),
 						p.getAddress());
 
-				// Enlever l'enfant de la liste
+				// Remove the child from the list
 				familyMembers.remove(p);
 
+				// Set the list of family members of the DTOChildAlert
 				dTOChild.setFamilyMembers(familyMembers);
+				
+				// Add this DTOChildAlert to the list of all DTOChildAlert 
 				childAlertList.add(dTOChild);
 			}
 

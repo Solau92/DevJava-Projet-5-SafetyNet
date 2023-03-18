@@ -19,49 +19,68 @@ import com.safetynet.safetynetalerts.model.Person;
 public class URLFireService implements IURLFireService {
 
 	private final IPersonService personService;
-	
+
 	private final IFirestationService firestationService;
-	
+
 	private final IMedicalRecordService medicalRecordService;
 
-	public URLFireService(IPersonService personService, IFirestationService firestationService, IMedicalRecordService medicalRecordService) {
+	public URLFireService(IPersonService personService, IFirestationService firestationService,
+			IMedicalRecordService medicalRecordService) {
 		this.personService = personService;
 		this.firestationService = firestationService;
 		this.medicalRecordService = medicalRecordService;
 	}
-	
+
+	/**
+	 * Returns an object including a list of inhabitants living at the given
+	 * address, and the firestation id corresponding.
+	 * 
+	 * @param address
+	 * @return a DTOFire
+	 * @throws PersonNotFoundException        if no person was found in the
+	 *                                        repository at the given address
+	 * @throws MedicalRecordNotFoundException if the medical record was not found in
+	 *                                        the repository for one person
+	 * @throws FirestationNotFoundException   if no id was found in the repository
+	 *                                        for the firestation corresponding to
+	 *                                        the given address
+	 */
 	@Override
-	public DTOFire getFire(String address) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
-		
+	public DTOFire getFire(String address)
+			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
+
 		DTOFire dtoFire = new DTOFire();
 		List<DTOFirePerson> firePersonsList = new ArrayList<>();
-		
-		// Récup liste personnes à une adresse
-		List<Person> personsList = personService.getPersonsByAddress(address);	
-		
-		// Ajout éléments dossier médical 
+
+		// List of persons living at a given address
+		List<Person> personsList = personService.getPersonsByAddress(address);
+
+		// For each person in the list
 		for (Person p : personsList) {
-			
-			List<MedicalRecord> medicalRecord = medicalRecordService.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
-			
+
+			// Get his medical record
+			List<MedicalRecord> medicalRecord = medicalRecordService
+					.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+
+			// Create a DTOFirePerson and sets the attributs with the person and his medical
+			// record attributs
 			DTOFirePerson dTOPerson = new DTOFirePerson();
 			dTOPerson.setLastName(p.getLastName());
 			dTOPerson.setPhone(p.getPhone());
 			dTOPerson.setAge(ChronoUnit.YEARS.between(medicalRecord.get(0).getBirthdate(), LocalDate.now()));
 			dTOPerson.setMedications(medicalRecord.get(0).getMedications());
 			dTOPerson.setAllergies(medicalRecord.get(0).getAllergies());
-			firePersonsList.add(dTOPerson);			
+			// Add the DTOFirePerson the the firePersonsList 
+			firePersonsList.add(dTOPerson);
 		}
-		
+
+		// Set the firePersonsList of the DTOFire 
 		dtoFire.setPersonsInBuilding(firePersonsList);
-		
-		// Num caserne 
+
+		// Set the station id of the DTOFire
 		dtoFire.setStationId(firestationService.getIdWithAddress(address));
 
 		return dtoFire;
 	}
-	
-
-
 
 }

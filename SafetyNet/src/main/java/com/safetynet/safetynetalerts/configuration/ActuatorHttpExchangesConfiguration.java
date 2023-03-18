@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ActuatorHttpExchangesConfiguration {
 	
+	/**
+	 * Makes the HttpExchanges endpoint work in Spring Boot 3
+	 * @return a InMemoryHttpExchangeRepository
+	 */
 	@Bean
 	public HttpExchangeRepository httpTraceRepository() {
 		return new InMemoryHttpExchangeRepository();

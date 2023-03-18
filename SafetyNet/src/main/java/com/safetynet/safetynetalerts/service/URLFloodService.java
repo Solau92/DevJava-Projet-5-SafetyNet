@@ -16,76 +16,93 @@ import com.safetynet.safetynetalerts.model.Person;
 
 @Service
 public class URLFloodService implements IURLFloodService {
-	
+
 	private final IPersonService personService;
-	
+
 	private final IFirestationService firestationService;
-	
+
 	private final IMedicalRecordService medicalRecordService;
-	
-	public URLFloodService(IPersonService personService, IFirestationService firestationService, IMedicalRecordService medicalRecordService) {
+
+	public URLFloodService(IPersonService personService, IFirestationService firestationService,
+			IMedicalRecordService medicalRecordService) {
 		this.personService = personService;
 		this.firestationService = firestationService;
-		this.medicalRecordService = medicalRecordService;				
+		this.medicalRecordService = medicalRecordService;
 	}
-	
+
+	/**
+	 * Returns a list of families living in the area of a given firestation ; the
+	 * families must be grouped by address, and for each inhabitant you must have
+	 * the lastname, the phone number, the age, and the medical history (medication,
+	 * dosage and allergies).
+	 * 
+	 * @param stationIdList
+	 * @return a list of DTOFlood
+	 * @throws PersonNotFoundException        if no person was found in the
+	 *                                        repository at one address
+	 * @throws MedicalRecordNotFoundException if the medical record of a person is
+	 *                                        not found in the repository
+	 * @throws FirestationNotFoundException   if no address was found in the
+	 *                                        repository for the given firestation
+	 */
 	@Override
-	public List<DTOFlood> getFlood(List<Integer> stationIdList) throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException  {
+	public List<DTOFlood> getFlood(List<Integer> stationIdList)
+			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
 
 		List<DTOFlood> dtoFloodList = new ArrayList<>();
-		
-		///// Récupérer liste des adresses desservies par les casernes
-		List<String> addressesList = new ArrayList<>();
-		
-		// Je parcours la liste des stations
-		for(Integer i : stationIdList) {
-			
-			// Pour chaque station, je récupère la liste des adresses
-			List<String> address = firestationService.getAddressesWithId(i);		
-			addressesList.addAll(address);		// J'ai ma liste de toutes les adresses 
 
-			//TODO : résoudre : chaque adresse apparait plusieurs fois...
-		
-//		 Pour chaque adresse, récupérer la liste des foyers (DTOFloodFamily)
-		for (String s : addressesList) {
-			
-			// --> A chaque adresse j'ai un DTOFlood <adresse, families>
-			DTOFlood dtoFlood = new DTOFlood();
-			dtoFlood.setAddress(s);
-				
-			// Liste des personnes à cette adresse 
-			List<Person> personsList = personService.getPersonsByAddress(s);
-			
-				// Je parcours la liste des personnes
-				for(Person p : personsList) {
-					
-					// Si la famille n'existe pas déjà, la créer  
-					if(!dtoFlood.getFamilyList().containsKey(p.getLastName())) {
+		List<String> addressesList = new ArrayList<>();
+
+		// For each firestation id
+		for (Integer i : stationIdList) {
+
+			// List of all addresses corresponding to the station
+			List<String> address = firestationService.getAddressesWithId(i);
+			addressesList.addAll(address);
+
+			// For each address, get the list of families (DTOFloodFamily)
+			for (String s : addressesList) {
+
+				// For each address, I have a DTOFlood <adresse, families>
+				DTOFlood dtoFlood = new DTOFlood();
+				// Set the address of the DTOFlood
+				dtoFlood.setAddress(s);
+
+				// List of persons at the given address
+				List<Person> personsList = personService.getPersonsByAddress(s);
+
+				// For each person in the previous list
+				for (Person p : personsList) {
+
+					// If the family does not exist, create it
+					if (!dtoFlood.getFamilyList().containsKey(p.getLastName())) {
 						dtoFlood.getFamilyList().put(p.getLastName(), new ArrayList<>());
-					} 
-					// Dans tous les cas, rajouter la personne dans la liste
-					
-					// Créer ma DTOFloodPerson
+					}
+
+					// In both cas, add the person in the list
+
+					// Create a DTOFloodPerson, get his medical record, and sets attributes
 					DTOFloodPerson dtoPerson = new DTOFloodPerson();
 					dtoPerson.setLastName(p.getLastName());
 					dtoPerson.setPhone(p.getPhone());
 
-					List<MedicalRecord> medicalRecords = medicalRecordService.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
+					List<MedicalRecord> medicalRecords = medicalRecordService
+							.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
 					dtoPerson.setAge(ChronoUnit.YEARS.between(medicalRecords.get(0).getBirthdate(), LocalDate.now()));
 					dtoPerson.setAllergies(medicalRecords.get(0).getAllergies());
 					dtoPerson.setMedications(medicalRecords.get(0).getMedications());
-					
-					// Et l'ajouter à la liste 
+
+					// Add the DTOFloodPerson to the family
 					dtoFlood.getFamilyList().get(p.getLastName()).add(dtoPerson);
 
-					}
-				// Quand j'ai fini de parcourir la liste des personnes, toutes les personnes
-				// à cette adresse sont mentionnées 
-				// j'ajoute ma DTOFlood à la liste
-				dtoFloodList.add(dtoFlood);
 				}
-		}		
-						
+
+				// At the end of the loop, all persons at this address are in the list, I add my
+				// DTOFlood to the list
+				dtoFloodList.add(dtoFlood);
+			}
+		}
+
 		return dtoFloodList;
 	}
 
