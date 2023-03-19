@@ -62,6 +62,10 @@
 					<excludes>
 						<exclude>**/IT/*</exclude>
 						<exclude>**/model/*</exclude>
+						<exclude>**/exception/*</exclude>
+						<exclude>**/configuration/*</exclude>
+						<exclude>**/SafetyNetApplication.*</exclude>
+
 					</excludes>
 				</configuration>
 				<reportSets>
@@ -101,6 +105,10 @@
 					<excludes>
 						<exclude>**/IT/*</exclude>
 						<exclude>**/model/*</exclude>
+						<exclude>**/exception/*</exclude>
+						<exclude>**/configuration/*</exclude>
+						<exclude>**/SafetyNetApplication.*</exclude>
+
 					</excludes>
 					<outputDirectory>${project.build.directory}/jacoco</outputDirectory>
 				</configuration>
