@@ -1,25 +1,25 @@
 #**ReadMe** 
 
 
-##- **SafetyNetAlerts** 
+## - **SafetyNetAlerts** 
 
 An app for emergency services. </br>
 This app uses Java to run.
 
 
-##- **Getting Started**
+## - **Getting Started**
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 
-##- **Prerequisites**
+## - **Prerequisites**
 
 You need to install : 
 * Java 17
 * Maven 3.8.7
 
 
-##- **Installing** 
+## - **Installing** 
 
 * [Install Java](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html)
 * [Install Maven](https://maven.apache.org/install.html)
@@ -42,18 +42,18 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 
 
-##- **Running App** 
+## - **Running App** 
 
 Import the code into an IDE of your choice and run the SafetyNetApplication.java class to launch the application.
 
 
-##- **Documentation**
+## - **Documentation**
 
 You can access information in a webbrowser or in Postman. </br>
 Refer to the document named « *SafetyNetAlerts Documentation.pdf* » in the same folder as this ReadMe.
 
 
-##- **Testing**
+## - **Testing**
 
 The app has unit tests and integration tests written. </br>
 To run the tests from maven, go to the folder that contains the pom.xml file and execute the following command : *mvn test*. </br>
