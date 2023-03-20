@@ -38,20 +38,20 @@ class MedicalRecordsControllerTestIT {
 	@Test
 	void postMedicalRecored_Ok_Test() throws Exception {
 		
-		JSONObject medicalRecord = new JSONObject();
-		medicalRecord.put("firstName", "firstName");
-		medicalRecord.put("lastName", "lastName");
-		medicalRecord.put("birthdate", "07/14/1984");
-		List<String> medication = new ArrayList<>();
-		medication.add("medication1");
-		medication.add("medication2");
-		medicalRecord.put("medication", medication);
-		List<String> allergies = new ArrayList<>();
-		allergies.add("allergy1");
-		allergies.add("allergy2");
-		medicalRecord.put("allergies", allergies);
-		
-		String jsonContent = medicalRecord.toString();
+//		JSONObject medicalRecord = new JSONObject();
+//		medicalRecord.put("firstName", "firstName");
+//		medicalRecord.put("lastName", "lastName");
+//		medicalRecord.put("birthdate", "07/14/1984");
+//		List<String> medication = new ArrayList<>();
+//		medication.add("medication1");
+//		medication.add("medication2");
+//		medicalRecord.put("medication", medication.toString());
+//		List<String> allergies = new ArrayList<>();
+//		allergies.add("allergy1");
+//		allergies.add("allergy2");
+//		medicalRecord.put("allergies", allergies.toString());
+//		
+//		String jsonContent = medicalRecord.toString();
 
 		mockMvc.perform(post("/medicalRecord")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -77,8 +77,8 @@ class MedicalRecordsControllerTestIT {
 		mockMvc.perform(put("/medicalRecord")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\r\n"
-						+ "  \"firstName\":\"firstName\",\r\n"
-						+ "  \"lastName\":\"lastName\",\r\n"
+						+ "  \"firstName\":\"Jacob\",\r\n"
+						+ "  \"lastName\":\"Boyd\",\r\n"
 						+ "  \"birthdate\":\"07/14/1984\",\r\n"
 						+ "  \"medications\":[\r\n"
 						+ "            \"medication1\",\r\n"

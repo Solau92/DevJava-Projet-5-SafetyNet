@@ -81,7 +81,8 @@ class PersonsControllerTestIT {
 	void getPersonByLastName_Ok_Test() throws Exception {
 		mockMvc.perform(get("/person")
 				.param("lastName", "Boyd"))
-		.andExpect(status().isAccepted());
+		.andExpect(status().isAccepted())
+		.andExpect(jsonPath("$[0].lastName", is("Boyd")));
 	}
 	
 	@Test
@@ -95,7 +96,8 @@ class PersonsControllerTestIT {
 	void getPersonByAddress_Ok_Test() throws Exception {
 		mockMvc.perform(get("/personByAddress")
 				.param("address", "748 Townings Dr"))
-		.andExpect(status().isAccepted());
+		.andExpect(status().isAccepted())
+		.andExpect(jsonPath("$[0].address", is("748 Townings Dr")));
 	}
 	
 	@Test
