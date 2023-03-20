@@ -12,7 +12,6 @@ import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.DTOChildAlert;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.repository.PersonsRepository;
 
 @Service
 public class URLChildAlertService implements IURLChildAlertService {
@@ -37,7 +36,7 @@ public class URLChildAlertService implements IURLChildAlertService {
 	 *                                        repository at the given address
 	 * @throws MedicalRecordNotFoundException if the medical record of a person was
 	 *                                        not found in the repository
-	 */                                        
+	 */
 	@Override
 	public List<DTOChildAlert> getChildAlert(String address)
 			throws PersonNotFoundException, MedicalRecordNotFoundException {
@@ -47,34 +46,36 @@ public class URLChildAlertService implements IURLChildAlertService {
 		// List of persons living at the given address
 		List<Person> personList = personService.getPersonsByAddress(address);
 
-		// For each person of the list 
-		for (Person p : personList) {
+		// For each person of the list
+		for (int i = 0; i < personList.size(); i++) {
 
 			// Get the medical record corresponding
-			List<MedicalRecord> medicalRecords = medicalRecordService
-					.getMedicalRecordsByFirstNameAndLastName(p.getFirstName(), p.getLastName());
- 
-			// If the person is years old or under
-			if (!medicalRecordService.isPersonAdult(p.getFirstName(), p.getLastName())) {
+			List<MedicalRecord> medicalRecords = medicalRecordService.getMedicalRecordsByFirstNameAndLastName(
+					personList.get(i).getFirstName(), personList.get(i).getLastName());
 
-				// Create a DTOChildAlert and sets the attributes with the informations of the Person and the MedicalRecord
+			// If the person is years old or under
+			if (!medicalRecordService.isPersonAdult(personList.get(i).getFirstName(),
+					personList.get(i).getLastName())) {
+
+				// Create a DTOChildAlert and sets the attributes with the informations of the
+				// Person and the MedicalRecord
 				DTOChildAlert dTOChild = new DTOChildAlert();
-				dTOChild.setFirstName(p.getFirstName());
-				dTOChild.setLastName(p.getLastName());
+				dTOChild.setFirstName(personList.get(i).getFirstName());
+				dTOChild.setLastName(personList.get(i).getLastName());
 				dTOChild.setAge(ChronoUnit.YEARS.between(medicalRecords.get(0).getBirthdate(), LocalDate.now()));
 
 				// Creates the list of family members
 
-				List<Person> familyMembers = personService.getPersonsByLastNameAndAddress(p.getLastName(),
-						p.getAddress());
+				List<Person> familyMembers = personService.getPersonsByLastNameAndAddress(
+						personList.get(i).getLastName(), personList.get(i).getAddress());
 
 				// Remove the child from the list
-				familyMembers.remove(p);
+				familyMembers.remove(personList.get(i));
 
 				// Set the list of family members of the DTOChildAlert
 				dTOChild.setFamilyMembers(familyMembers);
-				
-				// Add this DTOChildAlert to the list of all DTOChildAlert 
+
+				// Add this DTOChildAlert to the list of all DTOChildAlert
 				childAlertList.add(dTOChild);
 			}
 

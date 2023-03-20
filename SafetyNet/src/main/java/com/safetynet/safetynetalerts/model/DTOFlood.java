@@ -14,6 +14,7 @@ public class DTOFlood {
 	@JsonProperty
 	private String address;
 	
+	// Key = lastName
 	@JsonProperty
 	private Map<String, List<DTOFloodPerson>> familyList;
 	

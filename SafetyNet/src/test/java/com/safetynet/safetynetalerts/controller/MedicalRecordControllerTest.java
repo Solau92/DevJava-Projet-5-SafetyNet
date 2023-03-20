@@ -1,7 +1,10 @@
 package com.safetynet.safetynetalerts.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -44,7 +47,7 @@ public class MedicalRecordControllerTest {
 	}
 	
 	@Test
-	void getMedicalRecords_Test() throws MedicalRecordNotFoundException {
+	void getMedicalRecords_Ok_Test() throws MedicalRecordNotFoundException {
 		
 		// GIVEN
 		when(medicalRecordService.getAllMedicalRecords()).thenReturn(listMock);
@@ -56,9 +59,20 @@ public class MedicalRecordControllerTest {
 		assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
 		assertEquals(listMock, result.getBody());
 	}
+	
+	@Test
+	void getMedicalRecords_NotFound_Test() throws MedicalRecordNotFoundException {
+		
+		// GIVEN
+		when(medicalRecordService.getAllMedicalRecords()).thenThrow(MedicalRecordNotFoundException.class);
+		
+		// WHEN 
+		// THEN 
+		assertThrows(MedicalRecordNotFoundException.class, ()->medicalRecordController.getAllMedicalRecords());
+	}
 
 	@Test
-	void createMedicalRecord_Test() throws MedicalRecordAlreadyExistsException {
+	void createMedicalRecord_Ok_Test() throws MedicalRecordAlreadyExistsException {
 		
 		// GIVEN
 		when(medicalRecordService.saveMedicalRecord(any(MedicalRecord.class))).thenReturn(medicalRecordTest);
@@ -71,7 +85,18 @@ public class MedicalRecordControllerTest {
 	}
 	
 	@Test
-	void updateMedicalRecord_Test() throws MedicalRecordNotFoundException {
+	void createMedicalRecord_AlreadyExists_Test() throws MedicalRecordAlreadyExistsException {
+		
+		// GIVEN
+		when(medicalRecordService.saveMedicalRecord(any(MedicalRecord.class))).thenThrow(MedicalRecordAlreadyExistsException.class);
+		
+		// WHEN 
+		// THEN 
+		assertThrows(MedicalRecordAlreadyExistsException.class, ()->medicalRecordController.createMedicalRecord(new MedicalRecord()));
+	}
+	
+	@Test
+	void updateMedicalRecord_Ok_Test() throws MedicalRecordNotFoundException {
 		
 		// GIVEN
 		when(medicalRecordService.updateMedicalRecord(any(MedicalRecord.class))).thenReturn(medicalRecordTest);
@@ -84,7 +109,19 @@ public class MedicalRecordControllerTest {
 	}
 	
 	@Test
-	void deleteMedicalRecord_Test() throws MedicalRecordNotFoundException {
+	void updateMedicalRecord_NotFound_Test() throws MedicalRecordNotFoundException {
+		
+		// GIVEN
+		when(medicalRecordService.updateMedicalRecord(any(MedicalRecord.class))).thenThrow(MedicalRecordNotFoundException.class);
+		
+		// WHEN 
+		
+		// THEN 
+		assertThrows(MedicalRecordNotFoundException.class, ()->medicalRecordController.updateMedicalRecord(new MedicalRecord()));
+	}
+	
+	@Test
+	void deleteMedicalRecord_Ok_Test() throws MedicalRecordNotFoundException {
 		
 		// GIVEN
 		
@@ -93,6 +130,18 @@ public class MedicalRecordControllerTest {
 		
 		// THEN 
 		assertEquals(HttpStatus.ACCEPTED, result.getStatusCode());
+	}
+	
+	@Test
+	void deleteMedicalRecord_NotFound_Test() throws MedicalRecordNotFoundException {
+		
+		// GIVEN
+		doThrow(MedicalRecordNotFoundException.class).when(medicalRecordService).deleteMedicalRecord(anyString(),anyString());
+		
+		// WHEN 
+		
+		// THEN 
+		assertThrows(MedicalRecordNotFoundException.class, ()->medicalRecordController.deleteMedicalRecord("firstNameNotFound", "lastNameNotFound"));
 	}
 
 }
