@@ -19,9 +19,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.safetynet.safetynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.service.IFirestationService;
-import com.safetynet.safetynetalerts.service.IPersonService;
-import com.safetynet.safetynetalerts.service.URLPhoneAlertService;
 
 @ExtendWith(MockitoExtension.class)
 class URLPhoneAlertServiceTest {

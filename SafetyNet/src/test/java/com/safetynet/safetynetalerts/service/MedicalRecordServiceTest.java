@@ -25,7 +25,6 @@ import com.safetynet.safetynetalerts.exception.MedicalRecordAlreadyExistsExcepti
 import com.safetynet.safetynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.repository.MedicalRecordsRepository;
-import com.safetynet.safetynetalerts.service.MedicalRecordService;
 
 @ExtendWith(MockitoExtension.class)
 public class MedicalRecordServiceTest {

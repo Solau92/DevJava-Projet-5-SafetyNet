@@ -26,7 +26,6 @@ import com.safetynet.safetynetalerts.exception.PersonAlreadyExistsException;
 import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.repository.PersonsRepository;
-import com.safetynet.safetynetalerts.service.PersonService;
 
 @ExtendWith(MockitoExtension.class)
 class PersonServiceTest {

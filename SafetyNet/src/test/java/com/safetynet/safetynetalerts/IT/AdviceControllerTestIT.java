@@ -1,6 +1,5 @@
 package com.safetynet.safetynetalerts.IT;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AdviceControllerTestIT {
+class AdviceControllerTestIT {
 
 	@Autowired
 	private MockMvc mockMvc;

@@ -20,7 +20,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.safetynet.safetynetalerts.controller.MedicalRecordsController;
 import com.safetynet.safetynetalerts.exception.MedicalRecordAlreadyExistsException;
 import com.safetynet.safetynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.safetynetalerts.model.MedicalRecord;

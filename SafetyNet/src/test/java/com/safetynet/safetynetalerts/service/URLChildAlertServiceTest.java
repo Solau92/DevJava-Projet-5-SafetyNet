@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.api.Fail;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,11 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.safetynet.safetynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.DTOChildAlert;
-import com.safetynet.safetynetalerts.model.DTOPersonInfo;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
-
-import junit.framework.AssertionFailedError;
 
 @ExtendWith(MockitoExtension.class)
 class URLChildAlertServiceTest {

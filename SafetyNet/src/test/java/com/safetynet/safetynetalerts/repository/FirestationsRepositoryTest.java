@@ -14,8 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.safetynet.safetynetalerts.model.Firestation;
-import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.repository.FirestationsRepository;
 
 @ExtendWith(MockitoExtension.class)
 class FirestationsRepositoryTest {

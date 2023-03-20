@@ -19,9 +19,6 @@ import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.DTOPersonInfo;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.service.IMedicalRecordService;
-import com.safetynet.safetynetalerts.service.IPersonService;
-import com.safetynet.safetynetalerts.service.URLPersonInfoService;
 
 @ExtendWith(MockitoExtension.class)
 class URLPersonInfoServiceTest {

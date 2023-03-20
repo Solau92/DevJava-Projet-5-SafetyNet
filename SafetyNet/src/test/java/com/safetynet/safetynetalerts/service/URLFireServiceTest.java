@@ -1,5 +1,5 @@
 package com.safetynet.safetynetalerts.service;
-import static org.junit.Assert.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -18,34 +18,30 @@ import com.safetynet.safetynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.safetynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.DTOFire;
-import com.safetynet.safetynetalerts.model.DTOPersonInfo;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.service.IFirestationService;
-import com.safetynet.safetynetalerts.service.IMedicalRecordService;
-import com.safetynet.safetynetalerts.service.IPersonService;
-import com.safetynet.safetynetalerts.service.URLFireService;
 
 @ExtendWith(MockitoExtension.class)
-public class URLFireServiceTest {
+class URLFireServiceTest {
 
 	@InjectMocks
 	private URLFireService uRLFireService;
-	
+
 	@Mock
 	private IPersonService personService;
-	
+
 	@Mock
 	private IMedicalRecordService medicalRecordService;
-	
+
 	@Mock
 	private IFirestationService firestationService;
-	
+
 	@Test
-	void getFire_Success_Test() throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
-		
-		// GIVEN 
-		
+	void getFire_Success_Test()
+			throws PersonNotFoundException, MedicalRecordNotFoundException, FirestationNotFoundException {
+
+		// GIVEN
+
 		List<Person> personsList = new ArrayList<>();
 		Person personTest1 = new Person();
 		personTest1.setFirstName("firstName1");
@@ -58,7 +54,7 @@ public class URLFireServiceTest {
 		personTest2.setAddress("address");
 		personsList.add(personTest2);
 		when(personService.getPersonsByAddress(anyString())).thenReturn(personsList);
-		
+
 		List<MedicalRecord> medicalRecordList1 = new ArrayList<>();
 		MedicalRecord medicalRecordTest1 = new MedicalRecord();
 		medicalRecordTest1.setFirstName("firstName1");
@@ -71,19 +67,15 @@ public class URLFireServiceTest {
 		medicalRecordTest2.setLastName("lastName2");
 		medicalRecordTest2.setBirthdate(LocalDate.now().minusYears(10));
 		medicalRecordList2.add(medicalRecordTest2);
-		when(medicalRecordService.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString())).thenReturn(medicalRecordList1, medicalRecordList2);
-		
-		// WHEN 
+		when(medicalRecordService.getMedicalRecordsByFirstNameAndLastName(anyString(), anyString()))
+				.thenReturn(medicalRecordList1).thenReturn(medicalRecordList2);
+
+		// WHEN
 		DTOFire dtoFire = uRLFireService.getFire("address");
-		
-		// THEN 
-		System.out.println(dtoFire.toString());
+
+		// THEN
 		assertEquals("lastName1", dtoFire.getPersonsInBuilding().get(0).getLastName());
 		assertEquals(10, dtoFire.getPersonsInBuilding().get(1).getAge());
-		
+
 	}
-	
-	
-	
-	
 }

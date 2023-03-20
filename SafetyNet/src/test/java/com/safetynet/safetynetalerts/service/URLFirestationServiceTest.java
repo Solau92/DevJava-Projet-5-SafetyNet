@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +19,6 @@ import com.safetynet.safetynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.DTOFirestation;
 import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.service.IFirestationService;
-import com.safetynet.safetynetalerts.service.IMedicalRecordService;
-import com.safetynet.safetynetalerts.service.IPersonService;
-import com.safetynet.safetynetalerts.service.URLFirestationService;
 
 @ExtendWith(MockitoExtension.class)
 class URLFirestationServiceTest {

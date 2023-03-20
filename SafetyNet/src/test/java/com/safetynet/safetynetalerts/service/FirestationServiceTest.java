@@ -24,7 +24,6 @@ import com.safetynet.safetynetalerts.exception.FirestationAlreadyExistsException
 import com.safetynet.safetynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.safetynetalerts.model.Firestation;
 import com.safetynet.safetynetalerts.repository.FirestationsRepository;
-import com.safetynet.safetynetalerts.service.FirestationService;
 
 @ExtendWith(MockitoExtension.class)
 public class FirestationServiceTest {

@@ -20,13 +20,8 @@ import com.safetynet.safetynetalerts.exception.FirestationNotFoundException;
 import com.safetynet.safetynetalerts.exception.MedicalRecordNotFoundException;
 import com.safetynet.safetynetalerts.exception.PersonNotFoundException;
 import com.safetynet.safetynetalerts.model.DTOFlood;
-import com.safetynet.safetynetalerts.model.DTOPersonInfo;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
 import com.safetynet.safetynetalerts.model.Person;
-import com.safetynet.safetynetalerts.service.IFirestationService;
-import com.safetynet.safetynetalerts.service.IMedicalRecordService;
-import com.safetynet.safetynetalerts.service.IPersonService;
-import com.safetynet.safetynetalerts.service.URLFloodService;
 
 @ExtendWith(MockitoExtension.class)
 class URLFloodServiceTest {
