@@ -5,15 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
-public class RequestLoggingConfig {
+public class RequestLoggingConfiguration {
 
 	@Bean
 	public CommonsRequestLoggingFilter logFilter() {
-		CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter();
+		RequestLoggingFilter filter = new RequestLoggingFilter();
 		filter.setIncludeQueryString(true);
 		filter.setIncludePayload(true);
 		filter.setMaxPayloadLength(10000);
-		filter.setIncludeHeaders(false);
+		filter.setIncludeHeaders(true);
 		return filter;
 	}
 
